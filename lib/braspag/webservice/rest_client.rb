@@ -10,7 +10,7 @@ module Braspag
                             :put => Net::HTTP::Put, :delete => Net::HTTP::Delete
                           }
       @@TIMEOUT = 10
-      @@URL = URI("https://www.google.com.br")
+      @@URL = URI("http://loja.nutriabc.com.br")
       @@DEFAULT_HEADER = {"Content-Type" => "application/json",
                                 "Accept" => "application/json",
                             "MerchantId" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -48,15 +48,16 @@ module Braspag
       end
 
       def request
-        send_request
+        res = send_request
+        res
       end
 
       private
       def https
         if @http.nil?
           @http = Net::HTTP.new(@@URL.host, @@URL.port)
-          @http.use_ssl = true
-          @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          # @http.use_ssl = true
+          # @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           @http.read_timeout = @@TIMEOUT
           @http
         else
