@@ -1,8 +1,8 @@
 require 'test/unit'
-require 'lib/braspag/object/default_credit_card'
+require 'lib/braspag/Model/credit_card'
 require 'lib/helpers/helpers'
 
-class DefaultCreditCardTest < Test::Unit::TestCase
+class CreditCardTest < Test::Unit::TestCase
   include Braspag::Helpers
 
   def test_should_throw_exception_if_card_number_class_different_of_string
@@ -202,11 +202,45 @@ class DefaultCreditCardTest < Test::Unit::TestCase
     assert_equal "Diners", c.brand
   end
 
-  def test_should_show_all_brands
-    assert_equal(Braspag::Object::DefaultCreditCard.all_brands.class, Hash)
+  def test_should_return_brand_equal_Discover
+    c = new_credit_card
+    c.brand = :discover
+    assert_equal "Discover", c.brand
   end
 
+  def test_should_convert_credit_card_to_braspag_hash_format
+    c = new_credit_card
+
+    card_number = "1111222233334444"
+    c.card_number = card_number
+
+    holder = "José da Silva"
+    c.holder = holder
+
+    expiration_date = "10/2020"
+    c.expiration_date = expiration_date
+
+    security_code = "123"
+    c.security_code = security_code
+
+    brand = :visa
+    c.brand = brand
+
+    braspag_hash = c.to_braspag_hash
+
+    assert_equal(card_number, braspag_hash["CardNumber"])
+    assert_equal(holder, braspag_hash['Holder'])
+    assert_equal(expiration_date, braspag_hash['ExpirationDate'])
+    assert_equal(security_code, braspag_hash['SecurityCode'])
+    assert_equal(Braspag::Model::CreditCard.all_brands[brand], braspag_hash['Brand'])
+  end
+
+  def test_should_show_all_brands
+    assert_equal(Braspag::Model::CreditCard.all_brands.class, Hash)
+  end
+
+private
   def new_credit_card
-    Braspag::Object::DefaultCreditCard.new
+    Braspag::Model::CreditCard.new
   end
 end

@@ -31,5 +31,13 @@ module Braspag
     def empty?(value)
       value.strip.empty?
     end
+
+    def valid?
+      instance_variables.each do | at |
+        at.gsub!('@','')
+        raise ArgumentError, msg_can_not_be_empty(at) if send(at).nil?
+      end
+      true
+    end
   end
 end

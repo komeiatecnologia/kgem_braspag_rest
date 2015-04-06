@@ -13,7 +13,7 @@ module Braspag
 
       end
 
-      def sale_with_frau_analysis(order)
+      def sale_with_fraud_analysis(order)
 
       end
 

@@ -1,8 +1,8 @@
 require 'test/unit'
-require 'lib/braspag/object/default_payment'
+require 'lib/braspag/Model/payment'
 require 'lib/helpers/helpers'
 
-class DefaultPaymentTest < Test::Unit::TestCase
+class PaymentTest < Test::Unit::TestCase
   include Braspag::Helpers
 
   def test_type_should_be_equal_Boleto
@@ -130,14 +130,14 @@ class DefaultPaymentTest < Test::Unit::TestCase
     end
   end
 
-  def test_should_convert_self_to_hash
+  def test_should_convert_self_to_braspag_hashash
     p = new_payment
     p.type = :credit_card
     p.amount = 10010
     p.provider = "Simulado"
     p.installments = 6
 
-    hash = p.to_h
+    hash = p.to_braspag_hash
     assert_equal("CreditCard", hash["Type"])
     assert_equal(10010, hash["Amount"])
     assert_equal("Simulado", hash["Provider"])
@@ -146,6 +146,6 @@ class DefaultPaymentTest < Test::Unit::TestCase
 
   private
   def new_payment
-    Braspag::Object::DefaultPayment.new
+    Braspag::Model::Payment.new
   end
 end

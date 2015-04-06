@@ -56,8 +56,8 @@ module Braspag
       def https
         if @http.nil?
           @http = Net::HTTP.new(@@URL.host, @@URL.port)
-          # @http.use_ssl = true
-          # @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          @http.use_ssl = true
+          @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           @http.read_timeout = @@TIMEOUT
           @http
         else
