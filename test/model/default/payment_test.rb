@@ -1,9 +1,33 @@
 require 'test/unit'
-require 'lib/braspag/Model/payment'
+require 'lib/braspag/model/default/payment'
 require 'lib/helpers/helpers'
 
 class PaymentTest < Test::Unit::TestCase
   include Braspag::Helpers
+
+  def test_type_receive_string_should_be_equal_Boleto
+    p = new_payment
+    p.type = "Boleto"
+    assert_equal("Boleto", p.type)
+  end
+
+  def test_type_receive_string_should_be_equal_CreditCard
+    p = new_payment
+    p.type = "CreditCard"
+    assert_equal("CreditCard", p.type)
+  end
+
+  def test_type_receive_string_should_be_equal_DebitCard
+    p = new_payment
+    p.type = "DebitCard"
+    assert_equal("DebitCard", p.type)
+  end
+
+  def test_type_receive_string_should_be_equal_EletronicTransfer
+    p = new_payment
+    p.type = "EletronicTransfer"
+    assert_equal("EletronicTransfer", p.type)
+  end
 
   def test_type_should_be_equal_Boleto
     p = new_payment
@@ -146,6 +170,6 @@ class PaymentTest < Test::Unit::TestCase
 
   private
   def new_payment
-    Braspag::Model::Payment.new
+    Braspag::Model::Default::Payment.new
   end
 end

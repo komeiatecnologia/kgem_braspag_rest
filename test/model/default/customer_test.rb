@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/braspag/Model/default_customer'
+require 'lib/braspag/model/default/customer'
 require 'lib/helpers/helpers'
 
 class DefaultCustomertTest < Test::Unit::TestCase
@@ -8,7 +8,7 @@ class DefaultCustomertTest < Test::Unit::TestCase
   def test_should_throw_exception_name_invalid_class_type
     c = new_customer
     begin
-      name = Model.new
+      name = Object.new
       c.name = name
     rescue Exception => e
       assert_equal msg_invalid_class(name, String), e.message
@@ -44,6 +44,6 @@ class DefaultCustomertTest < Test::Unit::TestCase
 
   private
   def new_customer
-    Braspag::Model::DefaultCustomer.new
+    Braspag::Model::Default::Customer.new
   end
 end

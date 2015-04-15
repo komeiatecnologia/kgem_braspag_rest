@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/braspag/Model/credit_card'
+require 'lib/braspag/model/default/credit_card'
 require 'lib/helpers/helpers'
 
 class CreditCardTest < Test::Unit::TestCase
@@ -140,13 +140,13 @@ class CreditCardTest < Test::Unit::TestCase
     assert_equal s, c.security_code
   end
 
-  def test_should_throw_exception_if_brand_class_different_of_symbol
+  def test_should_throw_exception_if_brand_class_different_of_string
     c = new_credit_card
     begin
-      b = "visa"
+      b = :visa
       c.brand = b
     rescue Exception => e
-      assert_equal msg_invalid_class(b, Symbol), e.message
+      assert_equal msg_invalid_class(b, String), e.message
     end
   end
 
@@ -162,49 +162,49 @@ class CreditCardTest < Test::Unit::TestCase
 
   def test_should_return_brand_equal_Visa
     c = new_credit_card
-    c.brand = :visa
+    c.brand = "Visa"
     assert_equal "Visa", c.brand
   end
 
   def test_should_return_brand_equal_Mastercard
     c = new_credit_card
-    c.brand = :mastercard
+    c.brand = "Mastercard"
     assert_equal "Mastercard", c.brand
   end
 
   def test_should_return_brand_equal_Amex
     c = new_credit_card
-    c.brand = :amex
+    c.brand = "Amex"
     assert_equal "Amex", c.brand
   end
 
   def test_should_return_brand_equal_Elo
     c = new_credit_card
-    c.brand =:elo
+    c.brand ="Elo"
     assert_equal "Elo", c.brand
   end
 
   def test_should_return_brand_equal_Auria
     c = new_credit_card
-    c.brand = :auria
+    c.brand = "Auria"
     assert_equal "Auria", c.brand
   end
 
   def test_should_return_brand_equal_JCB
     c = new_credit_card
-    c.brand = :jcb
+    c.brand = "JCB"
     assert_equal "JCB", c.brand
   end
 
   def test_should_return_brand_equal_Diners
     c = new_credit_card
-    c.brand = :diners
+    c.brand = "Diners"
     assert_equal "Diners", c.brand
   end
 
   def test_should_return_brand_equal_Discover
     c = new_credit_card
-    c.brand = :discover
+    c.brand = "Discover"
     assert_equal "Discover", c.brand
   end
 
@@ -223,7 +223,7 @@ class CreditCardTest < Test::Unit::TestCase
     security_code = "123"
     c.security_code = security_code
 
-    brand = :visa
+    brand = "Visa"
     c.brand = brand
 
     braspag_hash = c.to_braspag_hash
@@ -232,15 +232,15 @@ class CreditCardTest < Test::Unit::TestCase
     assert_equal(holder, braspag_hash['Holder'])
     assert_equal(expiration_date, braspag_hash['ExpirationDate'])
     assert_equal(security_code, braspag_hash['SecurityCode'])
-    assert_equal(Braspag::Model::CreditCard.all_brands[brand], braspag_hash['Brand'])
+    assert_equal("Visa", braspag_hash['Brand'])
   end
 
   def test_should_show_all_brands
-    assert_equal(Braspag::Model::CreditCard.all_brands.class, Hash)
+    assert_equal(Braspag::Model::Default::CreditCard.all_brands.class, Array)
   end
 
 private
   def new_credit_card
-    Braspag::Model::CreditCard.new
+    Braspag::Model::Default::CreditCard.new
   end
 end

@@ -9,11 +9,7 @@ module Braspag
         attr_reader :card_number, :holder, :expiration_date, :security_code, :brand
         @@EXPIRATION_DATE_REGEX = /^\d{1,2}\/\d{4}$/.freeze
         @@VALID_CARD_NUMBER_FORMAT = /^\d{16}$/.freeze
-        @@BRANDS = {
-                  :visa => 'Visa', :mastercard => 'Mastercard', :amex => 'Amex',
-                  :elo => 'Elo', :auria => 'Auria', :jcb => 'JCB',
-                  :diners => 'Diners', :discover => 'Discover'
-                 }.freeze
+        @@BRANDS = ['Visa', 'Mastercard', 'Amex', 'Elo', 'Auria', 'JCB', 'Diners', 'Discover'].freeze
 
         def initialize
           @card_number = nil
@@ -24,35 +20,23 @@ module Braspag
         end
 
         def card_number=(number)
-          raise TypeError, msg_invalid_class(number, String) if invalid_class_type?(number, String)
-          raise ArgumentError, msg_can_not_be_empty("card_number") if empty?(number)
-          raise ArgumentError, "Invalid card number format: #{number}, expected 1111222233334444(16 digits)" if invalid_card_number_format?(number)
-          @card_number = number
+          @card_number = number if valid_card_number?(number)
         end
 
         def holder=(holder)
-          raise ArgumentError, msg_invalid_class(holder, String) if invalid_class_type?(holder, String)
-          raise ArgumentError, msg_can_not_be_empty("holder") if empty?(holder)
-          @holder = holder
+          @holder = holder if valid_holder?(holder)
         end
 
         def expiration_date=(month_year)
-          raise TypeError, msg_invalid_class(month_year, String) if invalid_class_type?(month_year, String)
-          raise ArgumentError, msg_can_not_be_empty("expiration_date") if empty?(month_year)
-          raise ArgumentError, "Invalid date format: #{month_year}, expected XX/XXXX" if invalid_expiration_date?(month_year)
-          @expiration_date = month_year
+          @expiration_date = month_year if valid_expiration_date?(month_year)
         end
 
         def security_code=(security_code)
-          raise TypeError, msg_invalid_class(security_code, String) if invalid_class_type?(security_code, String)
-          raise ArgumentError, msg_can_not_be_empty("security_code") if empty?(security_code)
-          @security_code = security_code
+          @security_code = security_code if valid_security_code?(security_code)
         end
 
         def brand=(brand)
-          raise TypeError, msg_invalid_class(brand, Symbol) if invalid_class_type?(brand, Symbol)
-          raise ArgumentError, msg_invalid_parameter(brand, @@BRANDS) if brand_not_exist?(brand)
-          @brand = @@BRANDS[brand]
+          @brand = brand if valid_brand?(brand)
         end
 
         def self.all_brands
@@ -70,15 +54,34 @@ module Braspag
         end
 
         private
-        def invalid_card_number_format?(value)
-          value !~ @@VALID_CARD_NUMBER_FORMAT
-        end
-        def invalid_expiration_date?(month_year)
-          month_year !~ @@EXPIRATION_DATE_REGEX
+        def valid_brand?(brand)
+          valid_class_type?(brand, String) && parameter_exists?(brand, @@BRANDS)
         end
 
-        def brand_not_exist?(brand)
-          !@@BRANDS.key? brand
+        def valid_security_code?(security_code)
+          valid_class_type?(security_code, String) && present?(security_code, "security_code")
+        end
+
+        def valid_expiration_date?(month_year)
+          valid_class_type?(month_year, String) && present?(month_year, "expiration_date") && valid_expiration_date_format?(month_year)
+        end
+
+        def valid_holder?(holder)
+          valid_class_type?(holder, String) && present?(holder, 'holder')
+        end
+
+        def valid_card_number?(number)
+          valid_class_type?(number, String) && present?(number, "card_number") && valid_card_number_format?(number)
+        end
+
+        def valid_card_number_format?(value)
+          raise ArgumentError, "Invalid card number format: #{value}, expected 1111222233334444(16 digits)", "#{self.class}" if value !~ @@VALID_CARD_NUMBER_FORMAT
+          true
+        end
+
+        def valid_expiration_date_format?(month_year)
+          raise ArgumentError, "Invalid date format: #{month_year}, expected XX/XXXX", "#{self.class}" if month_year !~ @@EXPIRATION_DATE_REGEX
+          true
         end
       end
     end

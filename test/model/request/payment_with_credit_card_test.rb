@@ -1,13 +1,13 @@
 require 'test/unit'
-require 'lib/braspag/Model/payment_with_credit_card'
-require 'lib/braspag/Model/credit_card'
+require 'lib/braspag/model/request/payment_with_credit_card'
+require 'lib/braspag/model/default/credit_card'
 
 class PaymentWithCreditCardTest < Test::Unit::TestCase
 
   def test_should_return_payment_with_credit_card_class
     p = new_payment_with_credit_card
 
-    assert_equal Braspag::Model::CreditCard, p.credit_card.class
+    assert_equal Braspag::Model::Default::CreditCard, p.credit_card.class
   end
 
   def test_should_convert_payment_with_credit_card_to_braspag_hash_format
@@ -19,6 +19,6 @@ class PaymentWithCreditCardTest < Test::Unit::TestCase
 
   private
   def new_payment_with_credit_card
-    Braspag::Model::PaymentWithCreditCard.new
+    Braspag::Model::Request::PaymentWithCreditCard.new
   end
 end

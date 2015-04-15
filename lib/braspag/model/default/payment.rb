@@ -9,7 +9,8 @@ module Braspag
         include Braspag::Helpers
 
         attr_reader :type, :amount, :provider, :installments
-        @@TYPES = {:credit_card => "CreditCard", :debit_card => "DebitCard", :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"}
+        @@TYPES = {:credit_card => "CreditCard", :debit_card => "DebitCard", :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"}.freeze
+        @@LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
 
         def initialize
           @type = nil
@@ -19,26 +20,21 @@ module Braspag
         end
 
         def type=(type)
-          raise TypeError, msg_invalid_class(type, Symbol) if invalid_class_type?(type, Symbol)
-          raise ArgumentError, msg_invalid_parameter(type, @@TYPES) if type_not_exist?(type)
-          @type = @@TYPES[type]
+          type = type_to_symbol_valid(type) if type.kind_of? String
+          @type = @@TYPES[type] if valid_type?(type)
         end
 
         def amount=(amount)
           amount = standardize_amount(amount)
-          raise ArgumentError, msg_less_or_equal_zero(amount) if less_or_equal_zero?(amount)
-          @amount = amount
+          @amount = amount if valid_amount?(amount)
         end
 
         def provider=(provider)
-          raise ArgumentError, msg_invalid_class(provider, String) if invalid_class_type?(provider, String)
-          @provider = provider
+          @provider = provider if valid_provider?(provider)
         end
 
         def installments=(installments)
-          raise TypeError, msg_invalid_class(installments, Integer) if invalid_class_type?(installments, Integer)
-          raise ArgumentError, msg_less_or_equal_zero(installments) if less_or_equal_zero?(installments)
-          @installments = installments
+          @installments = installments if valid_installments?(installments)
         end
 
         def to_braspag_hash
@@ -50,21 +46,21 @@ module Braspag
           }
         end
 
-        # def valid?
-        #   instance_variables.each do | at |
-        #     at.gsub!('@','')
-        #     raise ArgumentError, msg_can_not_be_empty(at) if send(at).nil?
-        #   end
-        #   true
-        # end
-
         private
-        def type_not_exist?(type)
-          !@@TYPES.key? type
+        def valid_type?(type)
+          valid_class_type?(type, Symbol) && parameter_exists?(type, @@TYPES)
         end
 
-        def less_or_equal_zero?(value)
-          value <= 0
+        def valid_amount?(amount)
+          greater_than_zero?(amount)
+        end
+
+        def valid_provider?(provider)
+          valid_class_type?(provider, String)
+        end
+
+        def valid_installments?(installments)
+          valid_class_type?(installments, Integer) && greater_than_zero?(installments)
         end
 
         def standardize_amount(value)
@@ -90,8 +86,23 @@ module Braspag
         end
 
         def insert_last_decimal_place(value)
-          value << '0' unless value !~ /^.*\d+[\,|\.]\d{1}$/
+          value << '0' unless value !~ @@LAST_DECIMAL_PLACE
           value
+        end
+
+        def type_to_symbol_valid(type)
+          type == "Boleto" ? :payment_slip : type_to_symbol(type)
+        end
+
+        def type_to_symbol(type)
+          while !(type !~ /([a-z])([A-Z])/)
+            type = camelcase_to_snake_case(type, $1, $2)
+          end
+          type.downcase.to_sym
+        end
+
+        def camelcase_to_snake_case(type, a, b)
+          type.gsub("#{a}#{b}", "#{a}_#{b}")
         end
       end
     end

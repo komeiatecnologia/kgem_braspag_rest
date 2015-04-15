@@ -4,18 +4,28 @@ module Braspag
       require 'net/http'
       require 'net/https'
       require 'openssl'
-      require 'klog'
+      # require 'Klog'
+      require 'lib/helpers/configuration'
+
+      extend Braspag::Configuration
 
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
                             :put => Net::HTTP::Put, :delete => Net::HTTP::Delete
                           }
-      @@TIMEOUT = 10
-      @@URL = URI("http://loja.nutriabc.com.br")
+
+      define_setting :TIMEOUT, 10
+      define_setting :PAYMENT_URL, URI("https://apisandbox.braspag.com.br")
+      define_setting :QUERY_URL, URI("https://apiquerysandbox.braspag.com.br")
+      define_setting :MERCHANT_ID, "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      define_setting :MERCHANT_KEY, "0123456789012345678901234567890123456789"
+      define_setting :REQUEST_ID, "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      define_setting :CONNECTION_ATTEMPTS, 3
+
       @@DEFAULT_HEADER = {"Content-Type" => "application/json",
                                 "Accept" => "application/json",
-                            "MerchantId" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                           "MerchantKey" => "0123456789012345678901234567890123456789",
-                             "RequestId" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                            "MerchantId" => @@MERCHANT_ID,
+                           "MerchantKey" => @@MERCHANT_KEY,
+                             "RequestId" => @@REQUEST_ID
                           }
 
       def initialize
@@ -55,7 +65,7 @@ module Braspag
       private
       def https
         if @http.nil?
-          @http = Net::HTTP.new(@@URL.host, @@URL.port)
+          @http = Net::HTTP.new(@@PAYMENT_URL.host, @@PAYMENT_URL.port)
           @http.use_ssl = true
           @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           @http.read_timeout = @@TIMEOUT
@@ -69,12 +79,25 @@ module Braspag
         uri = URI(resource)
         @req = @@DEFAULT_METHODS[method].new(uri.path, @@DEFAULT_HEADER)
         @req.body = params.to_json if params
-        logger.log_request(@req, "#{@@URL}#{uri.path}")
+        logger.log_request(@req, "#{@@PAYMENT_URL}#{uri.path}")
       end
 
       def send_request
+        @@CONNECTION_ATTEMPTS.times do |i|
+          logger.log "Tentativa de requisição #{i}"
+          begin
+            request
+            break
+          rescue Exception => e
+            logger.log e.message
+          end
+        end
+      end
+
+      def request
         res = https.request(@req)
         logger.log_response(res)
+        raise "Falha na conexão" if res.kind_of? Net::HTTPError
         res
       end
 

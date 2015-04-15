@@ -1,6 +1,8 @@
 require 'test/unit'
-require 'lib/braspag/Model/default_request'
-require 'helpers/helpers'
+require 'lib/braspag/model/default/request'
+require 'lib/braspag/model/default/payment'
+require 'lib/braspag/model/default/customer'
+require 'lib/helpers/helpers'
 
 class DefaultRequestTest < Test::Unit::TestCase
   include Braspag::Helpers
@@ -104,14 +106,14 @@ class DefaultRequestTest < Test::Unit::TestCase
 
   private
   def new_request
-    Braspag::Model::DefaultRequest.new
+    Braspag::Model::Default::Request.new
   end
 
   def payment_class
-    Braspag::Model::Payment
+    Braspag::Model::Default::Payment
   end
 
   def customer_class
-    Braspag::Model::DefaultCustomer
+    Braspag::Model::Default::Customer
   end
 end
