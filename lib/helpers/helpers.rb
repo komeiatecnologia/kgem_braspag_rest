@@ -59,6 +59,24 @@ module Braspag
       "#{attribute}: can't be empty"
     end
 
+    def camelcase_to_snakecase(string)
+      while !(string !~ /([a-z])([A-Z])/)
+        string = string.gsub("#{$1}#{$2}", "#{$1}_#{$2}")
+      end
+      string.downcase
+    end
+
+    def snakecase_to_camelcase(string)
+      while !(string !~ /([a-z])(_)([a-z])/)
+        string = string.gsub("#{$1}#{$2}#{$3}", "#{$1}" + "#{$3}".upcase)
+      end
+      string
+    end
+
+    def snakecase_to_braspagcase(string)
+      snakecase_to_camelcase(string.capitalize)
+    end
+
   private
     def element_exists_in_hash?(key, hash)
       raise ArgumentError, "Not exists #{key} in: #{hash_to_sentence(hash)}" unless hash.key? key

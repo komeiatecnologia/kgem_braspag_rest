@@ -3,17 +3,17 @@ require 'test/fake_object/fake_link'
 require 'test/fake_object/fake_credit_card'
 
 class FakePaymentWithCreditCard
-  def initialize_hash
-    @@initialize_hash ||= build_hash
+  def default_hash
+    @@default_hash ||= build_hash
   end
 
   private
   def build_hash
-    hash = FakePayment.new.initialize_hash
+    hash = FakePayment.new.default_hash
     hash['AcquirerTransactionId'] = "0305023644309"
     hash['Authenticate'] = false
     hash['Capture'] = false
-    hash['CreditCard'] = FakeCreditCard.new.initialize_hash
+    hash['CreditCard'] = FakeCreditCard.new.default_hash
     hash['Installments'] = 1
     hash['Interest'] = "ByMerchant"
     hash['Links'] = FakeLink.array_of_hash

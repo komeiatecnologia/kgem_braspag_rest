@@ -1,6 +1,6 @@
 class FakeCreditCard
-  def initialize_hash
-    @@initialize_hash ||= build_hash
+  def default_hash
+    @@default_hash ||= build_hash
   end
 
   private

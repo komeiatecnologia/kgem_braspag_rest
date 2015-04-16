@@ -3,7 +3,6 @@ require 'lib/braspag/model/default/request'
 require 'lib/braspag/model/default/customer'
 require 'lib/braspag/model/request/payment_with_credit_card'
 require 'lib/braspag/model/request/simplified_credit_card'
-require 'test/fake_object/fake_simplified_credit_card'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
 
@@ -25,8 +24,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
 
   private
   def new_scc
-    hash = FakeSimplifiedCreditCard.new.initialize_hash
-    Braspag::Model::Request::SimplifiedCreditCard.new(hash)
+    Braspag::Model::Request::SimplifiedCreditCard.new
   end
 
   def correct_payment_class
@@ -39,5 +37,9 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
 
   def correct_ancestor_class
     Braspag::Model::Default::Request
+  end
+
+  def create_default_hash_parameter
+    FakeSimplifiedCreditCard.new.default_hash
   end
 end

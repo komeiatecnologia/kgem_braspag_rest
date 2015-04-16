@@ -95,14 +95,7 @@ module Braspag
         end
 
         def type_to_symbol(type)
-          while !(type !~ /([a-z])([A-Z])/)
-            type = camelcase_to_snake_case(type, $1, $2)
-          end
-          type.downcase.to_sym
-        end
-
-        def camelcase_to_snake_case(type, a, b)
-          type.gsub("#{a}#{b}", "#{a}_#{b}")
+          camelcase_to_snakecase(type).to_sym
         end
       end
     end

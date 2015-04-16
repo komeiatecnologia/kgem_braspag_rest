@@ -1,12 +1,12 @@
 class FakePayment
 
-  def initialize_hash
-    @@initialize_hash ||= build_hash
+  def default_hash
+    @@default_hash ||= build_hash
   end
 
   private
   def build_hash
-   {
+   {  "Type" => "CreditCard",
       'Amount' => "15700",
       "Country" => "BRA",
       "Currency" => "BRL",
