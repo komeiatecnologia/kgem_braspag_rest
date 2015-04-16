@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/braspag/payment/simplified_credit_card'
+require 'lib/payment/simplified_credit_card'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
   def test_should_convert_to_braspag_hash_format
@@ -11,6 +11,6 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
 
   private
   def new_scc
-    Braspag::Payment::SimplifiedCreditCard.new
+    KBraspag::Payment::SimplifiedCreditCard.new
   end
 end

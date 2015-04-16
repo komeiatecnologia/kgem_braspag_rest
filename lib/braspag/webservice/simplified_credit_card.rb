@@ -1,16 +1,16 @@
-module Braspag
+module KBraspag
   module WebService
     require 'lib/braspag/webservice/rest_client'
-    require 'lib/braspag/model/response/simplified_credit_card'
+    require 'lib/braspag/response/simplified_credit_card'
     require 'lib/helpers/configuration'
 
     class SimplifiedCreditCard
-      extend Braspag::Configuration
+      extend KBraspag::Configuration
 
       define_setting :SIMPLIFIED_CREDIT_CARD_RESOURCE, "/v2/sales/"
 
       def initialize
-        @rest_client = Braspag::WebService::RestClient.new
+        @rest_client = KBraspag::WebService::RestClient.new
       end
 
       def send_request(scc_request)

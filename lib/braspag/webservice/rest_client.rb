@@ -1,4 +1,4 @@
-module Braspag
+module KBraspag
   module WebService
     class RestClient
       require 'net/http'
@@ -7,7 +7,7 @@ module Braspag
       # require 'Klog'
       require 'lib/helpers/configuration'
 
-      extend Braspag::Configuration
+      extend KBraspag::Configuration
 
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
                             :put => Net::HTTP::Put, :delete => Net::HTTP::Delete

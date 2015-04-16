@@ -1,4 +1,4 @@
-module Braspag
+module KBraspag
   module Configuration
     def configuration
       yield self

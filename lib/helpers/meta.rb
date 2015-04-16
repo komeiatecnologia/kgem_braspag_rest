@@ -1,4 +1,4 @@
-module Braspag
+module KBraspag
   module Meta
     def create_get_method(name, value)
       instance_variable_set("@#{name}".to_sym, value)

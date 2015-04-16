@@ -1,4 +1,4 @@
-module Braspag
+module KBraspag
   module Error
     module Pagador
 
