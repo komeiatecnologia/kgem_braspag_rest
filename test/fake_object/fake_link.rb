@@ -18,4 +18,8 @@ class FakeLink
       }
     ]
   end
+
+  def self.default_hash
+    array_of_hash[Time.now.to_i % 3]
+  end
 end

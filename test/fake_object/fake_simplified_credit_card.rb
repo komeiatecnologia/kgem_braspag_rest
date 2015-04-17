@@ -9,7 +9,7 @@ class FakeSimplifiedCreditCard
   private
   def build_hash
     h = {
-          'Customer' => FakeCustomer.default_hash,
+          'Customer' => FakeCustomer.new.default_hash,
           'MerchantOrderId' => "2014111706",
           'Payment' => FakePaymentWithCreditCard.new.default_hash
         }

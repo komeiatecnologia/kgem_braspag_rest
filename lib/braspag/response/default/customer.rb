@@ -1,5 +1,5 @@
 module KBraspag
-  module Responde
+  module Response
     module Default
       class Customer
         attr_reader :name

@@ -2,12 +2,12 @@ module KBraspag
   module Response
     module Default
       class Link
-        attr_reader :method, :rel, :h_ref
+        attr_reader :method, :rel, :href
 
         def initialize(h)
-          @method = h[:method]
-             @rel = h[:rel]
-           @h_ref = h[:h_ref]
+          @method = h["Method"]
+             @rel = h["Rel"]
+           @href = h["Href"]
         end
 
         def self.build_array(array)
