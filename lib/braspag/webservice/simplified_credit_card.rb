@@ -14,7 +14,7 @@ module KBraspag
       end
 
       def send_request(scc_request)
-        res = @rest_client.post(@@SIMPLIFIED_CREDIT_CARD_RESOURCE, scc_request.to_braspag_hash).request
+        @rest_client.post(@@SIMPLIFIED_CREDIT_CARD_RESOURCE, scc_request.to_braspag_hash).request
       end
     end
   end

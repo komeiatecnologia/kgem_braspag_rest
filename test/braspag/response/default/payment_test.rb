@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'braspag/response/default/payment'
-require 'test/fake_object/fake_payment'
+require 'test/fake_object/response/fake_payment'
 require 'test/helpers/test_helper'
 
 class PaymentTest < Test::Unit::TestCase

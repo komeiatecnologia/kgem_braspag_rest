@@ -38,8 +38,4 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
   def correct_ancestor_class
     KBraspag::Request::Default::Request
   end
-
-  def create_default_hash_parameter
-    FakeSimplifiedCreditCard.new.default_hash
-  end
 end

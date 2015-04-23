@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
-require 'test/fake_object/fake_link'
+require 'test/fake_object/response/fake_link'
 require 'lib/braspag/response/default/link'
 
 class LinkTest < Test::Unit::TestCase

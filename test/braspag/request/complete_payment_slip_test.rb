@@ -1,0 +1,40 @@
+require 'test/unit'
+require 'lib/braspag/request/default/payment_with_complete_payment_slip'
+require 'lib/braspag/request/default/customer'
+require 'lib/braspag/request/default/request'
+require 'lib/braspag/request/complete_payment_slip'
+
+class CompletePaymentSlipTest < Test::Unit::TestCase
+
+  def test_should_return_valid_instance_of_complete_payment_slip
+    cps = new_cps
+    assert_equal(correct_payment_class, cps.payment.class)
+    assert_equal(correct_customer_class, cps.customer.class)
+    assert_equal(true, cps.kind_of?(correct_ancestor_class))
+  end
+
+  def test_should_convert_to_braspag_hash_format
+    cps = new_cps
+    hash = cps.to_braspag_hash
+    assert_equal(Hash, hash['Customer'].class)
+    assert_equal(Hash, hash['Payment'].class)
+    assert_equal(true, hash.key?('MerchantOrderId'))
+  end
+
+  private
+  def new_cps
+    KBraspag::Request::CompletePaymentSlip.new
+  end
+
+  def correct_payment_class
+    KBraspag::Request::Default::PaymentWithCompletePaymentSlip
+  end
+
+  def correct_customer_class
+    KBraspag::Request::Default::Customer
+  end
+
+  def correct_ancestor_class
+    KBraspag::Request::Default::Request
+  end
+end

@@ -1,5 +1,7 @@
 module KBraspag
   module Helpers
+    require 'date'
+
     def valid_class_type?(value, expected_class)
       raise TypeError, msg_invalid_class(value, expected_class), "#{self.class}" if !value.kind_of? expected_class
       true
@@ -75,6 +77,13 @@ module KBraspag
 
     def snakecase_to_braspagcase(string)
       snakecase_to_camelcase(string.capitalize)
+    end
+
+    def greater_than_current_date?(day_month_year, format="%d/%m/%Y")
+      raise ArgumentError, "#{day_month_year}: invalid format date, expected xx/xx/xxxx", "#{self.class}" if day_month_year !~ /(\d{1,2})\/(\d{1,2})\/(\d{4})/
+      current = Time.now
+      raise ArgumentError, "The date is less than current date" if Date.strptime("#{current.day}/#{current.month}/#{current.year}", format) > Date.strptime(day_month_year, format)
+      true
     end
 
   private

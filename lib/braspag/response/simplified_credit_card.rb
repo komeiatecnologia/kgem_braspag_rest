@@ -1,9 +1,9 @@
 module KBraspag
   module Response
-    require 'braspag/response/default/customer'
-    require 'braspag/response/default/response'
-    require 'braspag/response/payment_with_credit_card'
-    require 'braspag/pagador/pagador'
+    require 'lib/braspag/response/default/customer'
+    require 'lib/braspag/response/default/response'
+    require 'lib/braspag/response/payment_with_credit_card'
+    require 'lib/braspag/pagador/pagador'
 
     class SimplifiedCreditCard < KBraspag::Response::Default::Response
       include KBraspag::Pagador

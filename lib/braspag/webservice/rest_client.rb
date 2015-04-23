@@ -1,11 +1,13 @@
 module KBraspag
   module WebService
     class RestClient
+      # encoding: UTF-8
       require 'net/http'
       require 'net/https'
       require 'openssl'
-      # require 'Klog'
+      require 'klog'
       require 'lib/helpers/configuration'
+      require 'json'
 
       extend KBraspag::Configuration
 
@@ -16,8 +18,8 @@ module KBraspag
       define_setting :TIMEOUT, 10
       define_setting :PAYMENT_URL, URI("https://apisandbox.braspag.com.br")
       define_setting :QUERY_URL, URI("https://apiquerysandbox.braspag.com.br")
-      define_setting :MERCHANT_ID, "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-      define_setting :MERCHANT_KEY, "0123456789012345678901234567890123456789"
+      define_setting :MERCHANT_ID, "36e40208-98b1-4fce-8445-157736ab63f1"
+      define_setting :MERCHANT_KEY, "RCEOZQYFUPEMDJWNHODXFFPHORVZULAWERZXKZQL"
       define_setting :REQUEST_ID, "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       define_setting :CONNECTION_ATTEMPTS, 3
 
@@ -58,8 +60,7 @@ module KBraspag
       end
 
       def request
-        res = send_request
-        res
+        send_request
       end
 
       private
@@ -84,9 +85,8 @@ module KBraspag
 
       def send_request
         @@CONNECTION_ATTEMPTS.times do |i|
-          logger.log "Tentativa de requisição #{i}"
           begin
-            request
+            try_connect
             break
           rescue Exception => e
             logger.log e.message
@@ -94,7 +94,7 @@ module KBraspag
         end
       end
 
-      def request
+      def try_connect
         res = https.request(@req)
         logger.log_response(res)
         raise "Falha na conexão" if res.kind_of? Net::HTTPError

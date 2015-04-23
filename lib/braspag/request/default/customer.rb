@@ -21,6 +21,10 @@ module KBraspag
           }
         end
 
+        # def to_braspag_json
+        #   "{\"Name\":\"#{@name}\"}"
+        # end
+
         private
         def valid_name?(name)
           valid_class_type?(name, String) && present?(name, "name")

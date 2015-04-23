@@ -1,6 +1,6 @@
-require 'test/fake_object/fake_payment'
-require 'test/fake_object/fake_link'
-require 'test/fake_object/fake_credit_card'
+require 'test/fake_object/response/fake_payment'
+require 'test/fake_object/response/fake_link'
+require 'test/fake_object/response/fake_credit_card'
 
 class FakePaymentWithCreditCard
   def default_hash

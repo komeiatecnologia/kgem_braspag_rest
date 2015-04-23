@@ -1,0 +1,139 @@
+require 'test/unit'
+require 'lib/braspag/request/default/payment_with_complete_payment_slip'
+
+class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
+
+  TARGET_METHODS = [
+                  :address=, :assignor=, :demonstrative=, :expiration_date=,
+                  :identification=, :instructions=, :payment_slip_number=
+                ]
+
+  def test_should_not_exist_installment_variable_and_get_set_methods
+    p = new_pwps
+    assert_equal(false, p.instance_variables.include?("@installments"))
+    assert_equal(false, p.respond_to?(:installments))
+    assert_equal(false, p.respond_to?(:installments=))
+  end
+
+  def test_type_should_return_Boleto
+    p = new_pwps
+    p.type = :payment_slip
+    assert_equal "Boleto", p.type
+  end
+
+  def test_should_return_invalid_class_type_exception_message
+    p = new_pwps
+    TARGET_METHODS.each do |method|
+      begin
+        ad = :nao_sou_de_uma_string
+        p.send(method, ad)
+      rescue Exception => e
+        assert_equal("#{ad.class}: Invalid class type, expected String.class", e.message)
+      end
+    end
+  end
+
+  def test_should_return_cant_be_empty_exception_message
+    p = new_pwps
+    TARGET_METHODS.each do |method|
+      begin
+        ad = ""
+        p.send(method, ad)
+      rescue Exception => e
+        assert_equal("#{method.to_s.gsub('=','')}: can't be empty", e.message)
+      end
+    end
+  end
+
+  def test_address_should_return_minha_rua_numero_10_centro_londrina
+    p = new_pwps
+    ad = "Rua: Minha Rua, número:12, Centro - Londrina/PR"
+    p.address = ad
+    assert_equal ad, p.address
+  end
+
+  def test_assignor_should_return_nome_da_empresa
+    p = new_pwps
+    ass  = "Nome da Empresa"
+    p.assignor = ass
+    assert_equal ass, p.assignor
+  end
+
+  def test_demonstrative_should_return_demonstrativo_da_empresa
+    p = new_pwps
+    dem = "Demonstrativo da Empresa"
+    p.demonstrative = dem
+    assert_equal dem, p.demonstrative
+  end
+
+  def test_expiration_date_should_return_invalid_date_format_exception_message
+    p = new_pwps
+    ed = "2014-10-11"
+    begin
+      p.expiration_date = ed
+    rescue Exception => e
+      assert_equal("#{ed}: invalid format date, expected xx/xx/xxxx", e.message)
+    end
+  end
+
+  def test_expiration_date_should_return_invalid_date_exception_message
+    p = new_pwps
+    ed = "31/02/2016"
+    begin
+      p.expiration_date = ed
+    rescue Exception => e
+      assert_equal("invalid date", e.message)
+    end
+  end
+
+  def test_expiration_date_should_return_20_10_2016
+    p = new_pwps
+    ed = "20/10/2016"
+    p.expiration_date = ed
+    assert_equal ed, p.expiration_date
+  end
+
+  def test_identification_should_return_123456789
+    p = new_pwps
+    id = "123456789"
+    p.identification = id
+    assert_equal id, p.identification
+  end
+
+  def test_instructions_should_return_aceitar_somente_ate_a_data_de_vencimento_apos_essa_data_juros_de_1_porcento_dia
+    p = new_pwps
+    ins = "Aceitar somente até a data de vencimento, após essa data juros de 1% dia."
+    p.instructions = ins
+    assert_equal ins, p.instructions
+  end
+
+  def test_payment_slip_number_should_return_12345
+    p = new_pwps
+    pn = "12345"
+    p.payment_slip_number = pn
+    assert_equal pn, p.payment_slip_number
+  end
+
+  def test_should_braspag_hash_keys
+    p = new_pwps
+    hash = new_pwps.to_braspag_hash
+
+    assert_equal(true, hash.key?('Type'))
+    assert_equal(true, hash.key?('Amount'))
+    assert_equal(true, hash.key?('Provider'))
+    assert_equal(false, hash.key?('Installments'))
+
+    assert_equal(true, hash.key?('Address'))
+    assert_equal(true, hash.key?('BoletoNumber'))
+    assert_equal(true, hash.key?('Assignor'))
+    assert_equal(true, hash.key?('Demonstrative'))
+    assert_equal(true, hash.key?('ExpirationDate'))
+    assert_equal(true, hash.key?('Identification'))
+    assert_equal(true, hash.key?('Instructions'))
+  end
+
+  private
+  def new_pwps
+    KBraspag::Request::Default::PaymentWithCompletePaymentSlip.new
+  end
+end

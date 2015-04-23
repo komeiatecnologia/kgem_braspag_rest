@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
-require 'test/fake_object/fake_response'
+require 'test/fake_object/response/fake_response'
 require 'lib/braspag/response/default/response'
 
 class ResponseTest < Test::Unit::TestCase

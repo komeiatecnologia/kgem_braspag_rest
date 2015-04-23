@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
-require 'test/fake_object/fake_customer'
+require 'test/fake_object/response/fake_customer'
 require 'braspag/response/default/customer'
 
 class CustomerTest < Test::Unit::TestCase

@@ -53,6 +53,17 @@ module KBraspag
           }
         end
 
+        # def to_braspag_json
+        #   j = "{"
+        #   j << "\"CardNumber\":\"#{@card_number}\","
+        #   j << "\"Holder\":\"#{@holder}\","
+        #   j << "\"ExpirationDate\":\"#{@expiration_date}\","
+        #   j << "\"SecurityCode\":\"#{@security_code}\","
+        #   j << "\"Brand\":\"#{@brand}\""
+        #   j << "}"
+        #   j
+        # end
+
         private
         def valid_brand?(brand)
           valid_class_type?(brand, String) && parameter_exists?(brand, @@BRANDS)
