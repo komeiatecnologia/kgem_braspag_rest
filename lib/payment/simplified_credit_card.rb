@@ -5,21 +5,11 @@ module KBraspag
 
     class SimplifiedCreditCard < KBraspag::Request::SimplifiedCreditCard
 
-      def initialize
-        super
-        @http_success = false
-        # @http_error = nil
-      end
-
       def pay
         send_request if valid_for_send?
       end
 
       private
-      def response_format(response)
-        KBraspag::Response::SimplifiedCreditCard.new(response.body)
-      end
-
       def valid_for_send?
         @payment.valid? && @customer.valid?
       end

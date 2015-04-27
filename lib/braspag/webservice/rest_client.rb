@@ -15,11 +15,11 @@ module KBraspag
                             :put => Net::HTTP::Put, :delete => Net::HTTP::Delete
                           }
 
-      define_setting :TIMEOUT, 10
+      define_setting :TIMEOUT, 5
       define_setting :PAYMENT_URL, URI("https://apisandbox.braspag.com.br")
       define_setting :QUERY_URL, URI("https://apiquerysandbox.braspag.com.br")
-      define_setting :MERCHANT_ID, "36e40208-98b1-4fce-8445-157736ab63f1"
-      define_setting :MERCHANT_KEY, "RCEOZQYFUPEMDJWNHODXFFPHORVZULAWERZXKZQL"
+      define_setting :MERCHANT_ID, "ba5908fb-87d1-4011-a158-02bec105aa15"
+      define_setting :MERCHANT_KEY, "GRGYVAUUNUWGIGSQKTNKNCFDKQVVGBYBDERAFHOG"
       define_setting :REQUEST_ID, "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       define_setting :CONNECTION_ATTEMPTS, 3
 
@@ -65,40 +65,36 @@ module KBraspag
 
       private
       def https
-        if @http.nil?
-          @http = Net::HTTP.new(@@PAYMENT_URL.host, @@PAYMENT_URL.port)
-          @http.use_ssl = true
-          @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-          @http.read_timeout = @@TIMEOUT
-          @http
-        else
-          @http
-        end
+       @http ||= new_http
       end
 
       def build_request(method, resource, params = nil)
         uri = URI(resource)
-        @req = @@DEFAULT_METHODS[method].new(uri.path, @@DEFAULT_HEADER)
+        @req = new_request(method, uri)
         @req.body = params.to_json if params
         logger.log_request(@req, "#{@@PAYMENT_URL}#{uri.path}")
       end
 
       def send_request
+        response = nil
         @@CONNECTION_ATTEMPTS.times do |i|
-          begin
-            try_connect
-            break
-          rescue Exception => e
-            logger.log e.message
-          end
+          response = https.request(@req)
+          logger.log_response(response)
+          break unless response.nil?
         end
+        response
       end
 
-      def try_connect
-        res = https.request(@req)
-        logger.log_response(res)
-        raise "Falha na conexão" if res.kind_of? Net::HTTPError
-        res
+      def new_request(method, uri)
+        @@DEFAULT_METHODS[method].new(uri.path, @@DEFAULT_HEADER)
+      end
+
+      def new_http
+        @http = Net::HTTP.new(@@PAYMENT_URL.host, @@PAYMENT_URL.port)
+        @http.use_ssl = true
+        @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        @http.read_timeout = @@TIMEOUT
+        @http
       end
 
       def logger

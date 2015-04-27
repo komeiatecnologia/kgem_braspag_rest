@@ -3,16 +3,13 @@ module KBraspag
     require 'lib/braspag/webservice/complete_payment_slip'
     require 'lib/braspag/request/complete_payment_slip'
 
+
     class CompletePaymentSlip < KBraspag::Request::CompletePaymentSlip
       def pay
         send_request if valid_for_send?
       end
 
       private
-      def response_format(response)
-        KBraspag::Response::CompletePaymentSlip.new(response.body)
-      end
-
       def valid_for_send?
         @payment.valid? && @customer.valid?
       end

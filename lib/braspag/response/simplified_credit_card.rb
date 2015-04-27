@@ -3,12 +3,9 @@ module KBraspag
     require 'lib/braspag/response/default/customer'
     require 'lib/braspag/response/default/response'
     require 'lib/braspag/response/payment_with_credit_card'
-    require 'lib/braspag/pagador/pagador'
 
     class SimplifiedCreditCard < KBraspag::Response::Default::Response
-      include KBraspag::Pagador
-
-      attr_reader :payment, :customer
+      attr_reader :payment, :customer, :errors
 
       def initialize(hash)
         super(hash)
@@ -20,13 +17,16 @@ module KBraspag
         @payment.create_get_method("provider_return_message", hash['ProviderReturnMessage'])
       end
 
-      def success?
-        operation_success?(@payment.status)
-      end
+      # def success?
+      #   @success ||= operation_success?(@payment.status)
+      # end
 
-      def message
-        REASON_MESSAGE[@payment.reason_code]
-      end
+      # def errors
+      #   @errors ||= [
+      #               REASON_MESSAGE[@payment.reason_code],
+      #               "#{@payment.provider_return_code} - #{@payment.provider_return_message}"
+      #             ]
+      # end
     end
   end
 end
