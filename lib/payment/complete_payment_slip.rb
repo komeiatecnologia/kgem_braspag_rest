@@ -15,7 +15,7 @@ module KBraspag
       end
 
       def send_request
-        @ws_client ||= KBraspag::Webservice::CompletePaymentSlip.new
+        @ws_client ||= KBraspag::WebService::CompletePaymentSlip.new
         @ws_client.send_request(self)
       end
     end

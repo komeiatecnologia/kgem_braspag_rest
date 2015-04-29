@@ -16,9 +16,9 @@ module KBraspag
           @assignor = nil
           @demonstrative = nil
           @expiration_date = nil
-          @identification = nil
+          @identification = nil #CPF ou RG sem pontos e traços
           @instructions = nil
-          @payment_slip_number = nil
+          @payment_slip_number = nil # Nosso número
         end
 
         def address=(address)
@@ -63,15 +63,15 @@ module KBraspag
 
         private
         def valid_address?(address)
-          valid_class_type?(address, String) && present?(address, "address")
+          valid_class_type?(address, String) && present?(address, "address") && valid_string_size?(address, "address", 255)
         end
 
         def valid_assignor?(assignor)
-          valid_class_type?(assignor, String) && present?(assignor, "assignor")
+          valid_class_type?(assignor, String) && present?(assignor, "assignor") && valid_string_size?(assignor, "assignor", 200)
         end
 
         def valid_demonstrative?(demonstrative)
-          valid_class_type?(demonstrative, String) && present?(demonstrative, "demonstrative")
+          valid_class_type?(demonstrative, String) && present?(demonstrative, "demonstrative") && valid_string_size?(demonstrative, "demonstrative", 450)
         end
 
         def valid_expiration_date?(expiration_date)
@@ -82,12 +82,24 @@ module KBraspag
           valid_class_type?(identification, String) && present?(identification, "identification")
         end
 
+        def valid_identification_format?(identification)
+          @@VALID_IDENTIFICATION ||= /^\d{1,10}$/
+          raise ArgumentError, "Invalid identification, expected string with max 10 numeric characters(CPF/CPNJ)" if identification !~ @@VALID_IDENTIFICATION
+          true
+        end
+
         def valid_instructions?(instructions)
-          valid_class_type?(instructions, String) && present?(instructions, "instructions")
+          valid_class_type?(instructions, String) && present?(instructions, "instructions") && valid_string_size?(instructions, "instructions", 450)
         end
 
         def valid_payment_slip_number?(payment_slip_number)
-          valid_class_type?(payment_slip_number, String) && present?(payment_slip_number, "payment_slip_number")
+          valid_class_type?(payment_slip_number, String) && present?(payment_slip_number, "payment_slip_number") && valid_payment_slip_format?(payment_slip_number)
+        end
+
+        def valid_payment_slip_format?(payment_slip_number)
+          @@VALID_PAYMENT_SLIP_NUMBER ||= /^\d{1,50}$/
+          raise ArgumentError, "Invalid payment slip number, expected max string with 1..50 numeric characters", "#{self.class}" if payment_slip_number !~ @@VALID_PAYMENT_SLIP_NUMBER
+          true
         end
       end
     end

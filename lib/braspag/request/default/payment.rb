@@ -4,12 +4,18 @@ module KBraspag
       require 'bigdecimal'
       require 'bigdecimal/util'
       require 'lib/helpers/helpers'
+      require 'lib/helpers/configuration'
 
       class Payment
         include KBraspag::Helpers
+        extend KBraspag::Configuration
 
         attr_reader :type, :amount, :provider, :installments
-        @@TYPES = {:credit_card => "CreditCard", :debit_card => "DebitCard", :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"}.freeze
+        define_setting :PAYMENT_TYPES, {
+                                        :credit_card => "CreditCard", :debit_card => "DebitCard",
+                                        :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"
+                                       }.freeze
+
         @@LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
 
         def initialize
@@ -21,7 +27,7 @@ module KBraspag
 
         def type=(type)
           type = type_to_symbol_valid(type) if type.kind_of? String
-          @type = @@TYPES[type] if valid_type?(type)
+          @type = @@PAYMENT_TYPES[type] if valid_type?(type)
         end
 
         def amount=(amount)
@@ -48,7 +54,7 @@ module KBraspag
 
         private
         def valid_type?(type)
-          valid_class_type?(type, Symbol) && parameter_exists?(type, @@TYPES)
+          valid_class_type?(type, Symbol) && parameter_exists?(type, @@PAYMENT_TYPES)
         end
 
         def valid_amount?(amount)

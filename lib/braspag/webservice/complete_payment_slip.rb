@@ -19,7 +19,7 @@ module KBraspag
       end
 
       def format_response(response)
-        KBraspag::Response::CompletePaymentSlip.new.build_response(response)
+        KBraspag::Response::CompletePaymentSlip.build_response(response)
       end
     end
   end

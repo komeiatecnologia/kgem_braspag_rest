@@ -2,14 +2,21 @@ module KBraspag
   module Request
     module Default
       require 'lib/helpers/helpers'
+      require 'lib/helpers/configuration'
 
       class CreditCard
         include KBraspag::Helpers
+        extend KBraspag::Configuration
 
-        attr_reader :card_number, :holder, :expiration_date, :security_code, :brand
         @@EXPIRATION_DATE_REGEX = /^\d{1,2}\/\d{4}$/.freeze
         @@VALID_CARD_NUMBER_FORMAT = /^\d{16}$/.freeze
-        @@BRANDS = ['Visa', 'Mastercard', 'Amex', 'Elo', 'Auria', 'JCB', 'Diners', 'Discover'].freeze
+        define_setting :BRANDS, {
+                                  :visa => 'Visa', :mastercard => 'Mastercard',
+                                  :amex => 'Amex', :elo => 'Elo', :auria => 'Auria',
+                                  :jcb => 'JCB', :diners => 'Diners', :discover => 'Discover'
+                                }.freeze
+
+        attr_reader :card_number, :holder, :expiration_date, :security_code, :brand
 
         def initialize
           @card_number = nil
@@ -36,11 +43,7 @@ module KBraspag
         end
 
         def brand=(brand)
-          @brand = brand if valid_brand?(brand)
-        end
-
-        def self.all_brands
-          @@BRANDS
+          @brand = @@BRANDS[brand] if valid_brand?(brand)
         end
 
         def to_braspag_hash
@@ -53,20 +56,9 @@ module KBraspag
           }
         end
 
-        # def to_braspag_json
-        #   j = "{"
-        #   j << "\"CardNumber\":\"#{@card_number}\","
-        #   j << "\"Holder\":\"#{@holder}\","
-        #   j << "\"ExpirationDate\":\"#{@expiration_date}\","
-        #   j << "\"SecurityCode\":\"#{@security_code}\","
-        #   j << "\"Brand\":\"#{@brand}\""
-        #   j << "}"
-        #   j
-        # end
-
         private
         def valid_brand?(brand)
-          valid_class_type?(brand, String) && parameter_exists?(brand, @@BRANDS)
+          valid_class_type?(brand, Symbol) && parameter_exists?(brand, @@BRANDS)
         end
 
         def valid_security_code?(security_code)

@@ -21,6 +21,31 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal(true, hash.key?('MerchantOrderId'))
   end
 
+  def test_should_throw_invalid_address_size
+    cps = new_cps
+    begin
+      cps.payment.address = "Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres
+       Sou maior que 255 caracteres"
+    rescue Exception => e
+      assert_equal("address longer than 255 characters", e.message)
+    end
+  end
+
+  def test_should_throw_invalid_payment_slip_number
+    cps = new_cps
+    begin
+      cps.payment.payment_slip_number = "abc"
+    rescue Exception => e
+      assert_equal("Invalid payment slip number, expected max string with 1..50 numeric characters", e.message)
+    end
+  end
+
   private
   def new_cps
     KBraspag::Request::CompletePaymentSlip.new

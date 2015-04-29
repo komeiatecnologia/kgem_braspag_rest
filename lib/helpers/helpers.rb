@@ -86,6 +86,11 @@ module KBraspag
       true
     end
 
+    def valid_string_size?(value, attribute, size)
+      raise ArgumentError, "#{attribute} longer than #{size} characters", "#{self.class}" if value.size > size
+      true
+    end
+
   private
     def element_exists_in_hash?(key, hash)
       raise ArgumentError, "Not exists #{key} in: #{hash_to_sentence(hash)}" unless hash.key? key
