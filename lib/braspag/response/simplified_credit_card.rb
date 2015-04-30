@@ -17,16 +17,6 @@ module KBraspag
         @payment.create_get_method("provider_return_message", hash['ProviderReturnMessage'])
       end
 
-      # def success?
-      #   @success ||= operation_success?(@payment.status)
-      # end
-
-      # def errors
-      #   @errors ||= [
-      #               REASON_MESSAGE[@payment.reason_code],
-      #               "#{@payment.provider_return_code} - #{@payment.provider_return_message}"
-      #             ]
-      # end
     end
   end
 end

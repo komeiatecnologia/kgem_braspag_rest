@@ -7,10 +7,11 @@ module KBraspag
       class Response
         include KBraspag::Pagador
 
-        attr_reader :merchant_order_id
+        attr_reader :merchant_order_id, :request_id
 
         def initialize(hash)
           @merchant_order_id = hash['MerchantOrderId']
+          @request_id = hash['RequestId']
         end
 
         def success?
@@ -25,11 +26,13 @@ module KBraspag
         end
 
         def self.build_response(response)
-          hash = body_to_hash(response.body)
+          body = eval(response.body)
           if response.kind_of? Net::HTTPSuccess
-            build_sucess_response(hash)
+            body['RequestId'] = response['RequestId']
+            build_sucess_response(body)
           else
-            build_error_response(hash)
+            body << response['RequestId']
+            build_error_response(body)
           end
         end
 
@@ -42,9 +45,6 @@ module KBraspag
           KBraspag::Response::Default::Errors.new(response_array)
         end
 
-        def self.body_to_hash(body)
-          eval(body)
-        end
       end
     end
   end

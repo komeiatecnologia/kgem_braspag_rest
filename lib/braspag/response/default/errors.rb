@@ -7,10 +7,10 @@ module KBraspag
 
         def initialize(array)
           @errors = []
+          @request_id = array.last
           array.each do |error|
             @errors << "#{error['Code']} - #{error['Message']}"
           end
-          @errors
         end
 
         def success?

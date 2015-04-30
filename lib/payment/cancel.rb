@@ -1,7 +1,7 @@
 module Brapag
   module Payment
     class Cancel
-      def cancel_sale(payment_id, amount)
+      def cancel(payment_id, amount)
 
       end
     end
