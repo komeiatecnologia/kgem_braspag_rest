@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/braspag/request/payment_with_credit_card'
+require 'lib/braspag/request/default/payment_with_credit_card'
 require 'lib/braspag/request/default/credit_card'
 
 class PaymentWithCreditCardTest < Test::Unit::TestCase
@@ -19,6 +19,6 @@ class PaymentWithCreditCardTest < Test::Unit::TestCase
 
   private
   def new_payment_with_credit_card
-    KBraspag::Request::PaymentWithCreditCard.new
+    KBraspag::Request::Default::PaymentWithCreditCard.new
   end
 end

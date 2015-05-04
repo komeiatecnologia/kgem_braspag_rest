@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'lib/braspag/request/default/request'
 require 'lib/braspag/request/default/customer'
-require 'lib/braspag/request/payment_with_credit_card'
+require 'lib/braspag/request/default/payment_with_credit_card'
 require 'lib/braspag/request/simplified_credit_card'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
@@ -28,7 +28,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
   end
 
   def correct_payment_class
-    KBraspag::Request::PaymentWithCreditCard
+    KBraspag::Request::Default::PaymentWithCreditCard
   end
 
   def correct_customer_class

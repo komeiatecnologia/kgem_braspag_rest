@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_payment_with_credit_card'
-require 'braspag/response/payment_with_credit_card'
+require 'braspag/response/default/payment_with_credit_card'
 
 class PaymentWithCreditCardTest < Test::Unit::TestCase
   include TestHelper

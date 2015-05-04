@@ -5,11 +5,12 @@ module KBraspag
     require 'lib/braspag/response/default/payment_with_payment_slip'
 
     class CompletePaymentSlip < KBraspag::Response::Default::Response
+      attr_reader :payment, :customer
 
       def initialize(hash)
-        @payment = KBraspag::Response::Default::PaymentWithPaymentSlip.new(hash['Payment'])
-        @customer =KBraspag::Response::Default::Customer.new(hash['Customer'])
-        send(:merchant_order_id, hash['MerchantOrderID'])
+        super(hash)
+        @payment = Default::PaymentWithPaymentSlip.new(hash['Payment'])
+        @customer = Default::Customer.new(hash['Customer'])
       end
 
     end

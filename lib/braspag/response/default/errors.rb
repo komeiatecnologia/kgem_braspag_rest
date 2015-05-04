@@ -1,9 +1,8 @@
 module KBraspag
   module Response
     module Default
-      # require 'lib/braspag/response/default/error'
       class Errors
-        attr_reader :errors
+        attr_reader :errors, :request_id
 
         def initialize(array)
           @errors = []
