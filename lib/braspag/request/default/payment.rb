@@ -1,8 +1,6 @@
 module KBraspag
   module Request
     module Default
-      require 'bigdecimal'
-      require 'bigdecimal/util'
       require 'lib/helpers/helpers'
 
       class Payment

@@ -1,8 +1,11 @@
 module KBraspag
   module Payment
+    require 'lib/braspag/request/cancel'
+    require 'lib/braspag/webservice/cancel'
+
     class Cancel < KBraspag::Request::Cancel
 
-      def cancel(payment_id, amount = nil)
+      def cancel
         send_request if valid?
       end
 

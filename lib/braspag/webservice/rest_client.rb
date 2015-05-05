@@ -5,8 +5,8 @@ module KBraspag
       require 'net/https'
       require 'openssl'
       require 'securerandom'
-      # require 'klog'
-      # require 'json'
+      require 'klog'
+      require 'json'
 
       @@REGEX_UUID = /^(.{8})(.{4})(.{4})(.{4})(.{12}).*/.freeze
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
@@ -51,7 +51,7 @@ module KBraspag
         uri = URI(resource)
         @https = new_https(uri)
         @req = new_request(method, uri)
-        @req.body = params.to_json if params
+        params ? @req.body = params.to_json : @req.body = ""
         logger.log_request(@req, uri)
       end
 

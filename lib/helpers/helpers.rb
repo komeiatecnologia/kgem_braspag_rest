@@ -1,6 +1,8 @@
 module KBraspag
   module Helpers
     require 'date'
+    require 'bigdecimal'
+    require 'bigdecimal/util'
 
     LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
 
