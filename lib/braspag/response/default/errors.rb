@@ -1,14 +1,19 @@
 module KBraspag
   module Response
     module Default
+      require 'lib/braspag/pagador/pagador'
+
       class Errors
         attr_reader :messages, :request_id
+
+        include KBraspag::Pagador
 
         def initialize(array)
           @messages = []
           @request_id = array.last
+          array.delete array.last
           array.each do |error|
-            @messages << "#{error['Code']} - #{error['Message']}"
+            @messages << build_error_message(error)
           end
         end
 
@@ -16,6 +21,12 @@ module KBraspag
           @success ||= false
         end
 
+        private
+        def build_error_message(error)
+          code = error['Code']
+          return ERROR_MESSAGE[code] if ERROR_MESSAGE.key? code
+          "#{code} - #{error['Message']}"
+        end
       end
     end
   end

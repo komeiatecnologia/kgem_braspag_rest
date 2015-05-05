@@ -19,7 +19,7 @@ module KBraspag
       end
 
       def self.build_response(response)
-        body = JSON.parse(response.body)
+        body = eval(response.body)
         if response.kind_of? Net::HTTPSuccess
           body['RequestId'] = response['RequestId']
           build_sucess_response(body)

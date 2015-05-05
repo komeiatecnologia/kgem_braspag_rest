@@ -51,7 +51,7 @@ module KBraspag
         uri = URI(resource)
         @https = new_https(uri)
         @req = new_request(method, uri)
-        params ? @req.body = params.to_json : @req.body = ""
+        params ? @req.body = params.to_json : @req.body = "{}"
         logger.log_request(@req, uri)
       end
 
@@ -79,7 +79,7 @@ module KBraspag
 
       def header
         @HEADER ||= {
-         'Content-Type' =>'text/json',
+         "Content-Type" => "text/json",
          "MerchantId" => KBraspag.merchant_id,
          "MerchantKey" => KBraspag.merchant_key
         }
