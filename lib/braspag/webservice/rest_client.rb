@@ -1,13 +1,12 @@
 module KBraspag
   module WebService
     class RestClient
-      # encoding: UTF-8
       require 'net/http'
       require 'net/https'
       require 'openssl'
-      require 'klog'
       require 'securerandom'
-      require 'json'
+      # require 'klog'
+      # require 'json'
 
       @@REGEX_UUID = /^(.{8})(.{4})(.{4})(.{4})(.{12}).*/.freeze
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
@@ -28,12 +27,12 @@ module KBraspag
         self
       end
 
-      def put(resource, params)
+      def put(resource, params = nil)
         build_request(:put, resource, params)
         self
       end
 
-      def patch(resource, params)
+      def patch(resource, params = nil)
         build_request(:patch, resource, params)
         self
       end
@@ -48,7 +47,7 @@ module KBraspag
       end
 
       private
-      def build_request(method, resource, params = nil)
+      def build_request(method, resource, params)
         uri = URI(resource)
         @https = new_https(uri)
         @req = new_request(method, uri)
@@ -80,8 +79,7 @@ module KBraspag
 
       def header
         @HEADER ||= {
-         "Content-Type" => "application/json",
-         "Accept" => "application/json",
+         'Content-Type' =>'text/json',
          "MerchantId" => KBraspag.merchant_id,
          "MerchantKey" => KBraspag.merchant_key
         }

@@ -16,7 +16,7 @@ class FakePaymentWithCreditCard
     hash['CreditCard'] = FakeCreditCard.new.default_hash
     hash['Installments'] = 1
     hash['Interest'] = "ByMerchant"
-    hash['Links'] = FakeLink.array_of_hash
+    hash['Links'] = FakeLink.default_hash_array
     hash['PaymentId'] = "24bc8366-fc31-4d6c-8555-17049a836a07"
     hash['ReasonCode'] = 0
     hash['ReasonMessage'] = "Successful"

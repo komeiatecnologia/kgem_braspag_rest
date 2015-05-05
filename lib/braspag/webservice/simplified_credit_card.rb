@@ -14,13 +14,13 @@ module KBraspag
         format_response(req.request)
       end
 
-      def format_response(response)
-        KBraspag::Response::SimplifiedCreditCard.build_response(response)
-      end
-
       private
       def url
         @@URL ||= KBraspag.payment_url + KBraspag.simplified_credit_card_resource
+      end
+
+      def format_response(response)
+        KBraspag::Response::SimplifiedCreditCard.build_response(response)
       end
     end
   end

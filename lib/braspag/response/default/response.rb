@@ -18,15 +18,17 @@ module KBraspag
           @success ||= operation_success?(@payment.status)
         end
 
-        def errors
-          @errors ||= [
-                        REASON_MESSAGE[@payment.reason_code],
-                        "#{@payment.provider_return_code} - #{@payment.provider_return_message}"
-                      ]
+        def messages
+          unless @messages
+            @messages = []
+            @messages << reason_message
+            @messages << provider_message if provider_message
+          end
+          @messages
         end
 
         def self.build_response(response)
-          body = eval(response.body)
+          body = JSON.parse(response.body)
           if response.kind_of? Net::HTTPSuccess
             body['RequestId'] = response['RequestId']
             build_sucess_response(body)
@@ -43,6 +45,14 @@ module KBraspag
 
         def self.build_error_response(response_array)
           KBraspag::Response::Default::Errors.new(response_array)
+        end
+
+        def reason_message
+          REASON_MESSAGE[@payment.reason_code]
+        end
+
+        def provider_message
+          "#{@payment.provider_return_code} - #{@payment.provider_return_message}" if @payment.provider_return_code
         end
 
       end

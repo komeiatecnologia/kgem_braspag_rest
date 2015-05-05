@@ -2,13 +2,13 @@ module KBraspag
   module Response
     module Default
       class Errors
-        attr_reader :errors, :request_id
+        attr_reader :messages, :request_id
 
         def initialize(array)
-          @errors = []
+          @messages = []
           @request_id = array.last
           array.each do |error|
-            @errors << "#{error['Code']} - #{error['Message']}"
+            @messages << "#{error['Code']} - #{error['Message']}"
           end
         end
 

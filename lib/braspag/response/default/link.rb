@@ -13,7 +13,7 @@ module KBraspag
         def self.build_array(array)
           ary = []
           array.each do |link|
-            ary << Link.new(link)
+            ary << new(link)
           end
           ary
         end

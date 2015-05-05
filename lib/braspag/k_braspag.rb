@@ -9,6 +9,12 @@ module KBraspag
 
   extend KBraspag::Configuration
 
+  ## PAYMENT METHODS AVAILABLE
+  define_setting :payment_types, {
+                                  :credit_card => "CreditCard", :debit_card => "DebitCard",
+                                  :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"
+                                 }
+
   ## CREDIT CARD BRANDS AVAILABLE
   define_setting :brands, {
                             :visa => 'Visa', :mastercard => 'Mastercard',
@@ -50,4 +56,5 @@ module KBraspag
   ##RESOURCES
   define_setting :complete_payment_slip_resource, "/v2/sales/"
   define_setting :simplified_credit_card_resource, "/v2/sales/"
+  define_setting :cancel_resource, "/v2/sales/"
 end

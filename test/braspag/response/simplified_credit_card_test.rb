@@ -9,19 +9,34 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
   IGNORED_CLASS = [
                     KBraspag::Response::PaymentWithCreditCard,
                     KBraspag::Response::Default::Customer
-                  ].freeze
+                  ]
 
   def test_should_convert_default_hash_to_simplified_credit_card_object
-    fake = FakeSimplifiedCreditCard.new.default_hash
-    scc = KBraspag::Response::SimplifiedCreditCard.new(fake)
-
-    each_expected_and_returned(fake, scc) do |expected, returned|
+    each_expected_and_returned(fake_hash, fake_object) do |expected, returned|
       assert_equal(expected, returned) if verify_class?(returned)
     end
+  end
+
+  def test_should_return_correct_payment_with_credit_card_class
+    pwcc = fake_object.payment
+    assert_equal(IGNORED_CLASS[0], pwcc.class)
+  end
+
+  def test_should_return_correct_customer_class
+    c = fake_object.customer
+    assert_equal(IGNORED_CLASS[1], c.class)
   end
 
   private
   def verify_class?(returned)
     !IGNORED_CLASS.include? returned.class
+  end
+
+  def fake_hash
+    FakeSimplifiedCreditCard.new.default_hash
+  end
+
+  def fake_object
+    KBraspag::Response::SimplifiedCreditCard.new(fake_hash)
   end
 end

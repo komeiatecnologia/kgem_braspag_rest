@@ -1,9 +1,5 @@
 module KBraspag
   module Pagador
-    def operation_success?(status)
-      status == 1 || status == 2
-    end
-
     STATUS = {
        0 => 'Not Finished',
        1 => 'Authorized',
@@ -20,7 +16,7 @@ module KBraspag
        1 => 'Autorizada',
        2 => 'Pagamento confirmado',
        3 => 'Negado',
-      10 => 'Anulado',
+      10 => 'Cancelado',
       11 => 'Reembolsado',
       12 => 'Pendente',
       13 => 'Abortado'
@@ -53,5 +49,10 @@ module KBraspag
       98 => 'Requisição inválida',
       99 => 'Erro desconhecido'
     }.freeze
+
+    protected
+    def operation_success?(status)
+      [1,2,10,11].include? status
+    end
   end
 end

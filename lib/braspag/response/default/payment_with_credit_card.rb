@@ -2,6 +2,7 @@ module KBraspag
   module Response
     require 'lib/braspag/response/default/payment'
     require 'lib/braspag/response/default/credit_card'
+    require 'lib/braspag/response/default/link'
 
     class PaymentWithCreditCard < KBraspag::Response::Default::Payment
       attr_accessor :acquirer_transaction_id, :authenticate, :capture, :credit_card, :installments, :interest, :links, :payment_id, :reason_code, :reason_message, :service_tax_amount
@@ -14,7 +15,7 @@ module KBraspag
         @credit_card = KBraspag::Response::Default::CreditCard.new(hash['CreditCard'])
         @installments = hash['Installments']
         @interest = hash['Interest']
-        @links = hash['Links']
+        @links = KBraspag::Response::Default::Link.build_array(hash['Links'])
         @payment_id = hash['PaymentId']
         @reason_code = hash['ReasonCode']
         @reason_message = hash['ReasonMessage']

@@ -5,7 +5,7 @@ module KBraspag
     require 'lib/braspag/response/default/payment_with_credit_card'
 
     class SimplifiedCreditCard < KBraspag::Response::Default::Response
-      attr_reader :payment, :customer, :errors
+      attr_reader :payment, :customer
 
       def initialize(hash)
         super(hash)
