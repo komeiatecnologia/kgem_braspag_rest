@@ -2,6 +2,8 @@ module KBraspag
   module Helpers
     require 'date'
 
+    LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
+
     def valid_class_type?(value, expected_class)
       raise TypeError, msg_invalid_class(value, expected_class), "#{self.class}" if !value.kind_of? expected_class
       true
@@ -89,6 +91,34 @@ module KBraspag
     def valid_string_size?(value, attribute, size)
       raise ArgumentError, "#{attribute} longer than #{size} characters", "#{self.class}" if value.size > size
       true
+    end
+
+    # Money manipulation
+    def standardize_amount(value)
+      value = string_to_integer(value) if value.kind_of? String
+      value = bigdecimal_to_integer(value) if value.kind_of? BigDecimal
+      value = float_to_integer(value) if value.kind_of? Float
+      value
+    end
+
+    def string_to_integer(value)
+      value = insert_last_decimal_place(value)
+      value.gsub(/\D/, '').to_i
+    end
+
+    def bigdecimal_to_integer(value)
+      value = value.to_digits
+      string_to_integer(value)
+    end
+
+    def float_to_integer(value)
+      value = value.to_s
+      string_to_integer(value)
+    end
+
+    def insert_last_decimal_place(value)
+      value << '0' unless value !~ LAST_DECIMAL_PLACE
+      value
     end
 
   private

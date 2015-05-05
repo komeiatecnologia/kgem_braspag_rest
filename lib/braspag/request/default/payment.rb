@@ -10,8 +10,6 @@ module KBraspag
 
         attr_reader :type, :amount, :provider, :installments
 
-        @@LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
-
         def initialize
           @type = nil
           @amount = nil
@@ -61,33 +59,6 @@ module KBraspag
 
         def valid_installments?(installments)
           valid_class_type?(installments, Integer) && greater_than_zero?(installments)
-        end
-
-        def standardize_amount(value)
-          value = string_to_integer(value) if value.kind_of? String
-          value = bigdecimal_to_integer(value) if value.kind_of? BigDecimal
-          value = float_to_integer(value) if value.kind_of? Float
-          value
-        end
-
-        def string_to_integer(value)
-          value = insert_last_decimal_place(value)
-          value.gsub(/\D/, '').to_i
-        end
-
-        def bigdecimal_to_integer(value)
-          value = value.to_digits
-          string_to_integer(value)
-        end
-
-        def float_to_integer(value)
-          value = value.to_s
-          string_to_integer(value)
-        end
-
-        def insert_last_decimal_place(value)
-          value << '0' unless value !~ @@LAST_DECIMAL_PLACE
-          value
         end
 
         def type_to_symbol_valid(type)
