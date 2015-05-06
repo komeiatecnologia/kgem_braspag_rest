@@ -94,9 +94,6 @@ class PaymentTest < Test::Unit::TestCase
   def test_amount_should_be_integer_when_receives_a_string
     p = new_payment
 
-    p.amount = "R$ 100,00"
-    assert_equal 10000, p.amount
-
     p.amount= "1.00"
     assert_equal(100, p.amount)
 

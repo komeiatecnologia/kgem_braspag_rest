@@ -11,7 +11,6 @@ module KBraspag
 
         def initialize
           super
-          send(:type=, :payment_slip)
           @address = nil
           @assignor = nil
           @demonstrative = nil

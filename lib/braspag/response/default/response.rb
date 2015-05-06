@@ -37,6 +37,7 @@ module KBraspag
             body['RequestId'] = response['RequestId']
             build_sucess_response(body)
           else
+            body = [] if body.nil?
             body << response['RequestId']
             build_error_response(body)
           end

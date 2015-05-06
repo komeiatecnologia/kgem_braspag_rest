@@ -36,6 +36,14 @@ module KBraspag
           }
         end
 
+        def valid?
+          present?(@merchant_order_id, "merchant_order_id")
+          present?(@customer, "customer")
+          @customer.valid?
+          present?(@payment, "payment")
+          @payment.valid?
+        end
+
         private
         def valid_payment?(payment)
           valid_class_type?(payment, payment_class)

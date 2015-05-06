@@ -47,8 +47,8 @@ module KBraspag
 
   ##REQUEST SETTINGS
   define_setting :timeout, 5
-  define_setting :merchant_id, "ebccb72f-144f-4495-ab84-d4f16133fc4f"
-  define_setting :merchant_key, "ALDDEDYXPQQFHUYQLXZMXPQLYBLOOWENOZHYDGLK"
+  define_setting :merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
+  define_setting :merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
   define_setting :connection_attempts, 3
 
   ##URLs

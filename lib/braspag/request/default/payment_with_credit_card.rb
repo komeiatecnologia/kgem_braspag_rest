@@ -17,6 +17,11 @@ module KBraspag
           h['CreditCard'] = @credit_card.to_braspag_hash
           h
         end
+
+        def valid?
+          super
+          @credit_card.valid?
+        end
       end
     end
   end

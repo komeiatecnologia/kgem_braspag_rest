@@ -5,6 +5,7 @@ class FakeCompletePaymentSlip
   def self.default!(cps)
     FakeCustomer.default_name!(cps.customer)
     FakePaymentWithPaymentSlip.default!(cps.payment)
+    cps.merchant_order_id = '2014111703'
     cps.payment.address = "Rua Teste"
     cps.payment.payment_slip_number = "123"
     cps.payment.assignor = "Empresa Teste"

@@ -10,6 +10,7 @@ module KBraspag
 
         def initialize
           super
+          send(:type=, :payment_slip)
           remove_instance_variable :@installments #remove a variável de instancia herdada
         end
 

@@ -21,7 +21,7 @@ module KBraspag
       end
 
       def valid?
-        valid_payment_id?(@payment_id)
+        present?(payment_id, "payment_id")
       end
 
       private
@@ -30,9 +30,14 @@ module KBraspag
       end
 
       def valid_payment_id?(payment_id)
-        if payment_id !~ /^.{8}-.{4}-.{4}-.{4}-.{12}$/
-          raise ArgumentError, "Invalid payment_id, expected xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", self.class.to_s
-        end
+        valid_class_type?(payment_id, String)
+        valid_payment_id_format?(payment_id)
+      end
+
+      def valid_payment_id_format?(payment_id)
+        raise(ArgumentError,
+              "Invalid payment_id, expected xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              self.class.to_s) if payment_id !~ /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
         true
       end
     end

@@ -5,10 +5,10 @@ module KBraspag
       require 'net/https'
       require 'openssl'
       require 'securerandom'
-      require 'klog'
-      require 'json'
+      # require 'klog'
+      # require 'json'
 
-      @@REGEX_UUID = /^(.{8})(.{4})(.{4})(.{4})(.{12}).*/.freeze
+      @@REGEX_UUID = /^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12}).*/.freeze
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
                             :put => Net::HTTP::Put, :delete => Net::HTTP::Delete
                           }

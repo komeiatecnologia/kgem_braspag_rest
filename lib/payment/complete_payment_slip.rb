@@ -6,14 +6,10 @@ module KBraspag
 
     class CompletePaymentSlip < KBraspag::Request::CompletePaymentSlip
       def pay
-        send_request if valid_for_send?
+        send_request if valid?
       end
 
       private
-      def valid_for_send?
-        @payment.valid? && @customer.valid?
-      end
-
       def send_request
         @ws_client ||= KBraspag::WebService::CompletePaymentSlip.new
         @ws_client.send_request(self)

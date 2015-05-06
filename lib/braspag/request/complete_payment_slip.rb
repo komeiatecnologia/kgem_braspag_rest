@@ -10,7 +10,6 @@ module KBraspag
         send(:customer=, KBraspag::Request::Default::Customer.new)
         send(:payment=, KBraspag::Request::Default::PaymentWithCompletePaymentSlip.new)
       end
-
     end
   end
 end

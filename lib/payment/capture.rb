@@ -1,7 +1,7 @@
 module KBraspag
   module Payment
     class Capture
-      def verify(payment_id)
+      def capture(payment_id)
 
       end
     end

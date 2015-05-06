@@ -45,7 +45,8 @@ module KBraspag
     end
 
     def present?(value, attribute)
-      raise ArgumentError, msg_can_not_be_empty(attribute), "#{self.class}" if value.strip.empty?
+      empty_string = value.strip.empty? if value.kind_of? String
+      raise ArgumentError, msg_can_not_be_empty(attribute), "#{self.class}" if value.nil? || empty_string
       true
     end
 
@@ -97,6 +98,7 @@ module KBraspag
 
     # Money manipulation
     def standardize_amount(value)
+      greater_than_zero?(value.to_i)
       value = string_to_integer(value) if value.kind_of? String
       value = bigdecimal_to_integer(value) if value.kind_of? BigDecimal
       value = float_to_integer(value) if value.kind_of? Float
