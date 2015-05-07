@@ -32,7 +32,7 @@ module KBraspag
         end
 
         def self.build_response(response)
-          body = eval(response.body.gsub("\":\"", "\"=>\"").gsub("null", "nil"))
+          body = body_parse(response.body)
           if response.kind_of? Net::HTTPSuccess
             body['RequestId'] = response['RequestId']
             build_sucess_response(body)
@@ -44,6 +44,11 @@ module KBraspag
         end
 
         private
+        def self.body_parse(body)
+          return JSON.parse(body) if body !~ /=>\{|=> \{|=>\"|=> \"|=>\[|=> \[/
+          eval(body)
+        end
+
         def self.build_sucess_response(response_hash)
           send(:new, response_hash)
         end
