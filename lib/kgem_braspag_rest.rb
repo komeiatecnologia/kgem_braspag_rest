@@ -1,4 +1,4 @@
-require 'lib/braspag/default_configuration'
+require 'braspag/default_configuration'
 require 'lib/payment/complete_payment_slip'
 require 'lib/payment/simplified_credit_card'
 require 'lib/payment/cancel'
