@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'json_pure', '~> 1.6', '<= 1.6.4'
 
   s.platform              = Gem::Platform::RUBY
-  s.required_ruby_version = Gem::Requirement.new("= 1.8.7")
+  s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
 
   s.post_install_message = "****\nPara alterar as configurações default da gem leia o README localizado no root path da gem\n****"
 end
