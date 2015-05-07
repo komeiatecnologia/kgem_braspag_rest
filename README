@@ -1,3 +1,27 @@
+Caso deseje alterar alguma dessas variáveis basta seguir os exemplos abaixo e modificar o que for necessário.
+
+Exemplos:
+
+1 - Desejo alterar somente o timeout de 5 segundos para 15 segundos.
+
+    KBraspag.configuration { |config| config.timeout = 15 }
+
+2 - Desejo incluir mais um gerador de boleto
+
+    KBraspag.configuration { |config| config.payment_slip_providers[:santander] = "Santander" }
+
+3 - Desejo substituir todas operadores de cartões
+
+    kBraspag.configuration do |config|
+      config.credit_card_providers = {
+                                       :operadora1 => 'Operadora 1',
+                                       :operadora2 => 'Operadora 2'
+                                     }
+    end
+
+
+Abaixo está listado todas as configurações disponíveis e os valores default
+
 KBraspag.configuration do |config|
   ## PAYMENT METHODS AVAILABLE
   config.payment_types, {

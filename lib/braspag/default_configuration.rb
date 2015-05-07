@@ -1,14 +1,5 @@
+require 'lib/helpers/configuration'
 module KBraspag
-  require 'lib/helpers/configuration'
-  require 'lib/payment/complete_payment_slip'
-  require 'lib/payment/simplified_credit_card'
-  require 'lib/payment/cancel'
-
-  SCC = Payment::SimplifiedCreditCard
-  CPS = Payment::CompletePaymentSlip
-  C = Payment::Cancel
-  # autoload :SimplifiedCreditCard, 'lib/payment/simplified_credit_card'
-
   extend KBraspag::Configuration
 
   ## PAYMENT METHODS AVAILABLE
