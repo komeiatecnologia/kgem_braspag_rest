@@ -1,7 +1,7 @@
 require './lib/braspag/version'
 
 Gem::Specification.new do |s|
-  s.name          = "kbraspag-rest-client"
+  s.name          = "kgem_braspag_rest"
   s.version       = KBraspag::VERSION
   s.description   = "Cliente Braspag Pagador API REST que funciona no ruby 1.8 e atende as necessidades especiais da Komeia"
   s.summary       = "API Pagamentos"
