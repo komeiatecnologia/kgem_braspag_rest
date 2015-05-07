@@ -1,6 +1,6 @@
 module KBraspag
   module Pagador
-    STATUS ||= {
+    STATUS = {
        0 => 'Not Finished',
        1 => 'Authorized',
        2 => 'Payment Confirmed',
@@ -11,7 +11,7 @@ module KBraspag
       13 => 'Aborted'
     }
 
-    STATUS_MESSAGE ||= {
+    STATUS_MESSAGE = {
        0 => 'Não finalizada',
        1 => 'Autorizada',
        2 => 'Pagamento confirmado',
@@ -22,7 +22,7 @@ module KBraspag
       13 => 'Abortado'
     }
 
-    REASON_MESSAGE ||= {
+    REASON_MESSAGE = {
        0 => 'Sucesso',
        1 => 'Afiliação não encontrada',
        2 => 'Saldo insuficiênte',
@@ -50,7 +50,7 @@ module KBraspag
       99 => 'Erro desconhecido'
     }
 
-    ERROR_MESSAGE ||= {
+    ERROR_MESSAGE = {
       309 => "O cancelamento não está disponível para essa transação",
       100 => "RequestId é obrigatório",
       101 => "MerchantId é obrigatório",
