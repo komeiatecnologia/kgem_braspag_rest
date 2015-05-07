@@ -32,7 +32,7 @@ module KBraspag
         end
 
         def self.build_response(response)
-          body = eval(response.body)
+          body = eval(response.body.gsub("\":\"", "\"=>\"").gsub("null", "nil"))
           if response.kind_of? Net::HTTPSuccess
             body['RequestId'] = response['RequestId']
             build_sucess_response(body)
