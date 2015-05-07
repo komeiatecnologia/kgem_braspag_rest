@@ -52,7 +52,7 @@ require 'payment/simplified_credit_card'
 
 
 module KBraspag
-  extend KBraspag::Configuration
+  extend Configuration
 
   SimplifiedCreditCard = Payment::SimplifiedCreditCard
   SCC = SimplifiedCreditCard
