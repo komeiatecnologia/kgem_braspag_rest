@@ -1,7 +1,7 @@
 module KBraspag
   module Response
     module Default
-      require 'lib/helpers/meta'
+      # require 'lib/helpers/meta'
 
       class Payment
         include KBraspag::Meta

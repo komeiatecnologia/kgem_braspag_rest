@@ -1,6 +1,6 @@
 require 'test/unit'
-require 'lib/braspag/request/default/payment_with_credit_card'
-require 'lib/braspag/request/default/credit_card'
+# require 'lib/braspag/request/default/payment_with_credit_card'
+# require 'lib/braspag/request/default/credit_card'
 
 class PaymentWithCreditCardTest < Test::Unit::TestCase
 

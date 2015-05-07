@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'lib/braspag/request/default/customer'
-require 'lib/helpers/helpers'
+# require 'lib/braspag/request/default/customer'
+# require 'lib/helpers/helpers'
 
 class DefaultCustomertTest < Test::Unit::TestCase
-  include KBraspag::Helpers
+  # include KBraspag::Helpers
 
   def test_should_throw_exception_name_invalid_class_type
     c = new_customer
@@ -11,7 +11,7 @@ class DefaultCustomertTest < Test::Unit::TestCase
       name = Object.new
       c.name = name
     rescue Exception => e
-      assert_equal msg_invalid_class(name, String), e.message
+      assert_equal c.msg_invalid_class(name, String), e.message
     end
   end
 
@@ -20,7 +20,7 @@ class DefaultCustomertTest < Test::Unit::TestCase
     begin
       c.name = ""
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("name"), e.message
+      assert_equal c.msg_can_not_be_empty("name"), e.message
     end
   end
 

@@ -1,16 +1,17 @@
 require 'test/unit'
-require 'lib/helpers/helpers'
-require 'lib/braspag/request/cancel'
+# require 'lib/helpers/helpers'
+# require 'lib/braspag/request/cancel'
+# require 'test/test_helper'
 
 class CancelTest < Test::Unit::TestCase
-  include KBraspag::Helpers
+  # include KBraspag::Helpers
 
   def test_should_throw_invalid_payment_id_when_receive_nil
     cancel = new_cancel
     begin
       cancel.payment_id = nil
     rescue Exception => e
-      assert_equal msg_invalid_class(nil, String), e.message
+      assert_equal cancel.msg_invalid_class(nil, String), e.message
     end
   end
 
@@ -19,7 +20,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.payment_id = 12345678
     rescue Exception => e
-      assert_equal msg_invalid_class(12345678, String), e.message
+      assert_equal cancel.msg_invalid_class(12345678, String), e.message
     end
   end
 
@@ -53,7 +54,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.amount  = 0
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(0), e.message
+      assert_equal cancel.msg_less_or_equal_zero(0), e.message
     end
   end
 
@@ -62,7 +63,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.amount = -1
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(-1), e.message
+      assert_equal cancel.msg_less_or_equal_zero(-1), e.message
     end
   end
 
@@ -71,7 +72,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.amount = "1"
     rescue Exception => e
-      assert_equal msg_invalid_class("1", Numeric), e.message
+      assert_equal cancel.msg_invalid_class("1", Numeric), e.message
     end
   end
 
@@ -134,7 +135,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.amount = "-1"
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero("-1"), e.message
+      assert_equal cancel.msg_less_or_equal_zero("-1"), e.message
     end
   end
 

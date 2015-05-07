@@ -1,8 +1,8 @@
 module KBraspag
   module Response
     module Default
-      require 'lib/braspag/pagador/pagador'
-      require 'lib/braspag/response/default/errors'
+      # require 'lib/braspag/pagador/pagador'
+      # require 'lib/braspag/response/default/errors'
 
       class Response
         include KBraspag::Pagador
@@ -22,7 +22,7 @@ module KBraspag
           unless @messages
             @messages = []
             @messages << reason_message
-            @messages << provider_message if provider_message
+            @messages << provider_message if exists_provider_message?
           end
           @messages
         end
@@ -57,9 +57,12 @@ module KBraspag
         end
 
         def provider_message
-          "#{@payment.provider_return_code} - #{@payment.provider_return_message}" if @payment.provider_return_code
+          "#{@payment.provider_return_code} - #{@payment.provider_return_message}"
         end
 
+        def exists_provider_message?
+          @payment.respond_to?(:provider_return_code) && @payment.provider_return_code
+        end
       end
     end
   end

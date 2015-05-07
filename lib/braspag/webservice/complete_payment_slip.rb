@@ -1,7 +1,7 @@
 module KBraspag
   module WebService
-    require 'lib/braspag/webservice/rest_client'
-    require 'lib/braspag/response/complete_payment_slip'
+    # require 'lib/braspag/webservice/rest_client'
+    # require 'lib/braspag/response/complete_payment_slip'
 
     class CompletePaymentSlip
 

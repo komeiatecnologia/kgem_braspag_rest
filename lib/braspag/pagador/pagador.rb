@@ -1,6 +1,6 @@
 module KBraspag
   module Pagador
-    STATUS = {
+    STATUS ||= {
        0 => 'Not Finished',
        1 => 'Authorized',
        2 => 'Payment Confirmed',
@@ -9,9 +9,9 @@ module KBraspag
       11 => 'Refunded',
       12 => 'Pending',
       13 => 'Aborted'
-    }.freeze
+    }
 
-    STATUS_MESSAGE = {
+    STATUS_MESSAGE ||= {
        0 => 'Não finalizada',
        1 => 'Autorizada',
        2 => 'Pagamento confirmado',
@@ -20,9 +20,9 @@ module KBraspag
       11 => 'Reembolsado',
       12 => 'Pendente',
       13 => 'Abortado'
-    }.freeze
+    }
 
-    REASON_MESSAGE = {
+    REASON_MESSAGE ||= {
        0 => 'Sucesso',
        1 => 'Afiliação não encontrada',
        2 => 'Saldo insuficiênte',
@@ -48,9 +48,9 @@ module KBraspag
       22 => 'Conexão expirou',
       98 => 'Requisição inválida',
       99 => 'Erro desconhecido'
-    }.freeze
+    }
 
-    ERROR_MESSAGE = {
+    ERROR_MESSAGE ||= {
       309 => "O cancelamento não está disponível para essa transação",
       100 => "RequestId é obrigatório",
       101 => "MerchantId é obrigatório",
@@ -118,7 +118,7 @@ module KBraspag
       164 => "Return Url é inválida",
       166 => "AuthorizeNow é obrigatório",
       167 => "Antifraude não configurado"
-    }.freeze
+    }
 
     protected
     def operation_success?(status)

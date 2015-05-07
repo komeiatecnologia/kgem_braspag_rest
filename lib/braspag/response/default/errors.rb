@@ -1,8 +1,7 @@
 module KBraspag
   module Response
     module Default
-      require 'lib/braspag/pagador/pagador'
-
+      # require 'lib/braspag/pagador/pagador'
       class Errors
         attr_reader :messages, :request_id
 

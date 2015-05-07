@@ -1,20 +1,11 @@
 module KBraspag
   module Request
     module Default
-      require 'lib/helpers/helpers'
-      require 'lib/helpers/configuration'
-
       class CreditCard
         include KBraspag::Helpers
-        extend KBraspag::Configuration
 
         @@EXPIRATION_DATE_REGEX = /^\d{1,2}\/\d{4}$/.freeze
         @@VALID_CARD_NUMBER_FORMAT = /^\d{16}$/.freeze
-        define_setting :BRANDS, {
-                                  :visa => 'Visa', :mastercard => 'Mastercard',
-                                  :amex => 'Amex', :elo => 'Elo', :auria => 'Auria',
-                                  :jcb => 'JCB', :diners => 'Diners', :discover => 'Discover'
-                                }.freeze
 
         attr_reader :card_number, :holder, :expiration_date, :security_code, :brand
 
@@ -43,7 +34,7 @@ module KBraspag
         end
 
         def brand=(brand)
-          @brand = @@BRANDS[brand] if valid_brand?(brand)
+          @brand = KBraspag.brands[brand] if valid_brand?(brand)
         end
 
         def to_braspag_hash
@@ -58,7 +49,7 @@ module KBraspag
 
         private
         def valid_brand?(brand)
-          valid_class_type?(brand, Symbol) && parameter_exists?(brand, @@BRANDS)
+          valid_class_type?(brand, Symbol) && parameter_exists?(brand, KBraspag.brands)
         end
 
         def valid_security_code?(security_code)

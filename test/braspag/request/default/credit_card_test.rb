@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'lib/braspag/request/default/credit_card'
-require 'lib/helpers/helpers'
+# require 'lib/braspag/request/default/credit_card'
+# require 'lib/helpers/helpers'
 
 class CreditCardTest < Test::Unit::TestCase
-  include KBraspag::Helpers
+  # include KBraspag::Helpers
 
   def test_should_throw_exception_if_card_number_class_different_of_string
     c = new_credit_card
@@ -11,14 +11,14 @@ class CreditCardTest < Test::Unit::TestCase
       n = 1234566
       c.card_number = n
     rescue Exception => e
-      assert_equal msg_invalid_class(n,String), e.message
+      assert_equal c.msg_invalid_class(n,String), e.message
     end
 
     begin
       n = 1.2
       c.card_number =n
     rescue Exception => e
-      assert_equal msg_invalid_class(n,String), e.message
+      assert_equal c.msg_invalid_class(n,String), e.message
     end
   end
 
@@ -35,7 +35,7 @@ class CreditCardTest < Test::Unit::TestCase
       n = ""
       c.card_number = n
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("card_number"), e.message
+      assert_equal c.msg_can_not_be_empty("card_number"), e.message
     end
   end
 
@@ -51,7 +51,7 @@ class CreditCardTest < Test::Unit::TestCase
       h = :teste
       c.holder = h
     rescue Exception => e
-      assert_equal msg_invalid_class(h, String), e.message
+      assert_equal c.msg_invalid_class(h, String), e.message
     end
 
     begin
@@ -59,7 +59,7 @@ class CreditCardTest < Test::Unit::TestCase
       h = 234234
       c.holder = h
     rescue Exception => e
-      assert_equal msg_invalid_class(h,String), e.message
+      assert_equal c.msg_invalid_class(h,String), e.message
     end
   end
 
@@ -68,7 +68,7 @@ class CreditCardTest < Test::Unit::TestCase
       c = new_credit_card
       c.holder = ""
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("holder"), e.message
+      assert_equal c.msg_can_not_be_empty("holder"), e.message
     end
   end
 
@@ -85,7 +85,7 @@ class CreditCardTest < Test::Unit::TestCase
       d = Time.now
       c.expiration_date = d
     rescue Exception => e
-      assert_equal msg_invalid_class(d, String), e.message
+      assert_equal c.msg_invalid_class(d, String), e.message
     end
   end
 
@@ -95,7 +95,7 @@ class CreditCardTest < Test::Unit::TestCase
       a = ""
       c.expiration_date = a
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("expiration_date"), e.message
+      assert_equal c.msg_can_not_be_empty("expiration_date"), e.message
     end
   end
 
@@ -119,7 +119,7 @@ class CreditCardTest < Test::Unit::TestCase
       s = 123
       c.security_code = 123
     rescue Exception => e
-      assert_equal msg_invalid_class(s, String), e.message
+      assert_equal c.msg_invalid_class(s, String), e.message
     end
   end
 
@@ -129,7 +129,7 @@ class CreditCardTest < Test::Unit::TestCase
       s = ""
       c.security_code = s
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("security_code"), e.message
+      assert_equal c.msg_can_not_be_empty("security_code"), e.message
     end
   end
 
@@ -146,7 +146,7 @@ class CreditCardTest < Test::Unit::TestCase
       b = "visa"
       c.brand = b
     rescue Exception => e
-      assert_equal msg_invalid_class(b, Symbol), e.message
+      assert_equal c.msg_invalid_class(b, Symbol), e.message
     end
   end
 

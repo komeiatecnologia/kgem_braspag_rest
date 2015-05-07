@@ -1,10 +1,7 @@
 module KBraspag
   module Helpers
-    require 'date'
-    require 'bigdecimal'
-    require 'bigdecimal/util'
 
-    LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/.freeze
+    LAST_DECIMAL_PLACE ||= /^.*\d+[\,|\.]\d{1}$/
 
     def valid_class_type?(value, expected_class)
       raise TypeError, msg_invalid_class(value, expected_class), "#{self.class}" if !value.kind_of? expected_class

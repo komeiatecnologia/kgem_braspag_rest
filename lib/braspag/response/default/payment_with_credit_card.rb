@@ -1,8 +1,8 @@
 module KBraspag
   module Response
-    require 'lib/braspag/response/default/payment'
-    require 'lib/braspag/response/default/credit_card'
-    require 'lib/braspag/response/default/link'
+    # require 'lib/braspag/response/default/payment'
+    # require 'lib/braspag/response/default/credit_card'
+    # require 'lib/braspag/response/default/link'
 
     class PaymentWithCreditCard < KBraspag::Response::Default::Payment
       attr_accessor :acquirer_transaction_id, :authenticate, :capture, :credit_card, :installments, :interest, :links, :payment_id, :reason_code, :reason_message, :service_tax_amount

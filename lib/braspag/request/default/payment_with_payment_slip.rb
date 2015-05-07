@@ -1,12 +1,12 @@
 module KBraspag
   module Request
     module Default
-      require 'lib/braspag/request/default/payment'
+      # require 'lib/braspag/request/default/payment'
 
       class PaymentWithPaymentSlip < KBraspag::Request::Default::Payment
-        # Remove os métodos herdados
-        undef_method :installments
-        undef_method :installments=
+        # # Remove os métodos herdados
+        # undef_method :installments
+        # undef_method :installments=
 
         def initialize
           super

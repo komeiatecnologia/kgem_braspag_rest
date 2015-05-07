@@ -1,7 +1,8 @@
 require 'test/unit'
 require 'test/fake_object/request/fake_simplified_credit_card'
-require 'lib/payment/simplified_credit_card'
-require 'lib/helpers/helpers'
+# require 'lib/payment/simplified_credit_card'
+# require 'lib/helpers/helpers'
+
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
   include KBraspag::Helpers
@@ -12,7 +13,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("merchant_order_id"), e.message
+      assert_equal scc.msg_can_not_be_empty("merchant_order_id"), e.message
     end
   end
 
@@ -22,7 +23,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("name"), e.message
+      assert_equal scc.msg_can_not_be_empty("name"), e.message
     end
   end
 
@@ -32,7 +33,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("installments"), e.message
+      assert_equal scc.msg_can_not_be_empty("installments"), e.message
     end
   end
 
@@ -60,7 +61,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.valid?
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("payment"), e.message
+      assert_equal scc.msg_can_not_be_empty("payment"), e.message
     end
   end
 
@@ -70,7 +71,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.valid?
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("customer"), e.message
+      assert_equal scc.msg_can_not_be_empty("customer"), e.message
     end
   end
 
@@ -80,7 +81,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("payment"), e.message
+      assert_equal scc.msg_can_not_be_empty("payment"), e.message
     end
   end
 
@@ -90,7 +91,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("payment"), e.message
+      assert_equal scc.msg_can_not_be_empty("payment"), e.message
     end
   end
 
@@ -100,7 +101,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     begin
       scc.pay
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("customer"), e.message
+      assert_equal scc.msg_can_not_be_empty("customer"), e.message
     end
   end
 

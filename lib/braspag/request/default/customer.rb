@@ -1,7 +1,6 @@
 module KBraspag
   module Request
     module Default
-      require 'lib/helpers/helpers'
       class Customer
         include KBraspag::Helpers
 

@@ -1,10 +1,10 @@
 require 'test/unit'
-require 'lib/braspag/request/default/payment'
-require 'lib/helpers/helpers'
-require 'lib/kbraspag-rest-client'
+# require 'lib/braspag/request/default/payment'
+# require 'lib/helpers/helpers'
+# require 'lib/kgem_braspag_rest'
 
 class PaymentTest < Test::Unit::TestCase
-  include KBraspag::Helpers
+  # include KBraspag::Helpers
 
   def test_type_receive_string_should_be_equal_Boleto
     p = new_payment
@@ -68,7 +68,7 @@ class PaymentTest < Test::Unit::TestCase
       p = new_payment
       p.amount = 0
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(0), e.message
+      assert_equal p.msg_less_or_equal_zero(0), e.message
     end
   end
 
@@ -77,7 +77,7 @@ class PaymentTest < Test::Unit::TestCase
       p = new_payment
       p.amount = -1
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(-1), e.message
+      assert_equal p.msg_less_or_equal_zero(-1), e.message
     end
   end
 
@@ -122,13 +122,13 @@ class PaymentTest < Test::Unit::TestCase
     begin
       p.installments = -1
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(-1), e.message
+      assert_equal p.msg_less_or_equal_zero(-1), e.message
     end
 
     begin
       p.installments = 0
     rescue Exception => e
-      assert_equal msg_less_or_equal_zero(0), e.message
+      assert_equal p.msg_less_or_equal_zero(0), e.message
     end
   end
 
@@ -138,7 +138,7 @@ class PaymentTest < Test::Unit::TestCase
     begin
       p.installments = installments
     rescue Exception => e
-      assert_equal msg_invalid_class(installments,Integer), e.message
+      assert_equal p.msg_invalid_class(installments,Integer), e.message
     end
   end
 
@@ -148,7 +148,7 @@ class PaymentTest < Test::Unit::TestCase
     begin
       p.provider = provider
     rescue Exception => e
-      assert_equal msg_invalid_class(provider, String), e.message
+      assert_equal p.msg_invalid_class(provider, String), e.message
     end
   end
 

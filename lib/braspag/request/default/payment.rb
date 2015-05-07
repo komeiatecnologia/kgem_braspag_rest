@@ -1,8 +1,6 @@
 module KBraspag
   module Request
     module Default
-      require 'lib/helpers/helpers'
-
       class Payment
         include KBraspag::Helpers
 

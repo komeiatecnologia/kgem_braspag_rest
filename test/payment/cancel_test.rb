@@ -1,7 +1,8 @@
 require 'test/unit'
 require 'test/fake_object/request/fake_cancel'
-require 'lib/payment/cancel'
-require 'lib/helpers/helpers'
+# require 'lib/payment/cancel'
+# require 'lib/helpers/helpers'
+# require 'test/test_helper'
 
 class CancelTest < Test::Unit::TestCase
   include KBraspag::Helpers
@@ -12,7 +13,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.valid?
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("payment_id"), e.message
+      assert_equal cancel.msg_can_not_be_empty("payment_id"), e.message
     end
   end
 
@@ -22,7 +23,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.cancel
     rescue Exception => e
-      assert_equal msg_can_not_be_empty("payment_id"), e.message
+      assert_equal cancel.msg_can_not_be_empty("payment_id"), e.message
     end
   end
 

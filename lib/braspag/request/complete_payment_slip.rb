@@ -1,8 +1,8 @@
 module KBraspag
   module Request
-    require 'lib/braspag/request/default/request'
-    require 'lib/braspag/request/default/customer'
-    require 'lib/braspag/request/default/payment_with_complete_payment_slip'
+    # require 'lib/braspag/request/default/request'
+    # require 'lib/braspag/request/default/customer'
+    # require 'lib/braspag/request/default/payment_with_complete_payment_slip'
 
     class CompletePaymentSlip < KBraspag::Request::Default::Request
 

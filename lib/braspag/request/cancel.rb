@@ -1,6 +1,6 @@
 module KBraspag
   module Request
-    require 'lib/helpers/helpers'
+    # require 'lib/helpers/helpers'
     class Cancel
       include KBraspag::Helpers
 
