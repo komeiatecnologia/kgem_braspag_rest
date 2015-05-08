@@ -62,15 +62,15 @@ module KBraspag
 
         private
         def valid_address?(address)
-          valid_class_type?(address, String) && present?(address, "address") && valid_string_size?(address, "address", 255)
+          valid_class_type?(address, String) && present?(address, "address")
         end
 
         def valid_assignor?(assignor)
-          valid_class_type?(assignor, String) && present?(assignor, "assignor") && valid_string_size?(assignor, "assignor", 200)
+          valid_class_type?(assignor, String) && present?(assignor, "assignor")
         end
 
         def valid_demonstrative?(demonstrative)
-          valid_class_type?(demonstrative, String) && present?(demonstrative, "demonstrative") && valid_string_size?(demonstrative, "demonstrative", 450)
+          valid_class_type?(demonstrative, String) && present?(demonstrative, "demonstrative")
         end
 
         def valid_expiration_date?(expiration_date)
@@ -78,7 +78,7 @@ module KBraspag
         end
 
         def valid_identification?(identification)
-          valid_class_type?(identification, String) && present?(identification, "identification")
+          valid_class_type?(identification, String) && present?(identification, "identification") && valid_identification_format?(identification)
         end
 
         def valid_identification_format?(identification)
@@ -88,7 +88,7 @@ module KBraspag
         end
 
         def valid_instructions?(instructions)
-          valid_class_type?(instructions, String) && present?(instructions, "instructions") && valid_string_size?(instructions, "instructions", 450)
+          valid_class_type?(instructions, String) && present?(instructions, "instructions")
         end
 
         def valid_payment_slip_number?(payment_slip_number)

@@ -81,10 +81,10 @@ module KBraspag
       snakecase_to_camelcase(string.capitalize)
     end
 
-    def greater_than_current_date?(day_month_year, format="%d/%m/%Y")
-      raise ArgumentError, "#{day_month_year}: invalid format date, expected xx/xx/xxxx", "#{self.class}" if day_month_year !~ /(\d{1,2})\/(\d{1,2})\/(\d{4})/
+    def greater_than_current_date?(year_month_day, format="%Y-%m-%d")
+      raise ArgumentError, "#{year_month_day}: invalid format date, expected YYYY-MM-DD", "#{self.class}" if year_month_day !~ /(\d{4})-(\d{1,2})-(\d{1,2})/
       current = Time.now
-      raise ArgumentError, "The date is less than current date" if Date.strptime("#{current.day}/#{current.month}/#{current.year}", format) > Date.strptime(day_month_year, format)
+      raise ArgumentError, "The date is less than current date" if Date.strptime("#{current.year}-#{current.month}-#{current.day}", format) > Date.strptime(year_month_day, format)
       true
     end
 

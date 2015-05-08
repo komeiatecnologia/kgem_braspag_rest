@@ -68,17 +68,17 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
 
   def test_expiration_date_should_return_invalid_date_format_exception_message
     p = new_pwps
-    ed = "2014-10-11"
+    ed = "2017-10-11"
     begin
       p.expiration_date = ed
     rescue Exception => e
-      assert_equal("#{ed}: invalid format date, expected xx/xx/xxxx", e.message)
+      assert_equal("#{ed}: invalid format date, expected YYYY-MM-DD", e.message)
     end
   end
 
   def test_expiration_date_should_return_invalid_date_exception_message
     p = new_pwps
-    ed = "31/02/2016"
+    ed = "2016-02-30"
     begin
       p.expiration_date = ed
     rescue Exception => e
@@ -86,16 +86,16 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     end
   end
 
-  def test_expiration_date_should_return_20_10_2016
+  def test_expiration_date_should_return_2016_10_20
     p = new_pwps
-    ed = "20/10/2016"
+    ed = "2016-10-20"
     p.expiration_date = ed
     assert_equal ed, p.expiration_date
   end
 
   def test_identification_should_return_123456789
     p = new_pwps
-    id = "123456789"
+    id = "1234567890"
     p.identification = id
     assert_equal id, p.identification
   end

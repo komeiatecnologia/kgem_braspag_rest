@@ -74,7 +74,7 @@ module KBraspag
         end
 
         def valid_expiration_date_format?(month_year)
-          raise ArgumentError, "Invalid date format: #{month_year}, expected XX/XXXX", "#{self.class}" if month_year !~ @@EXPIRATION_DATE_REGEX
+          raise ArgumentError, "Invalid date format: #{month_year}, expected MM/YYYY", "#{self.class}" if month_year !~ @@EXPIRATION_DATE_REGEX
           true
         end
       end
