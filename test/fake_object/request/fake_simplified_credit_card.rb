@@ -7,7 +7,7 @@ class FakeSimplifiedCreditCard
     FakeCustomer.default_name!(scc.customer)
     FakeCreditCard.default!(scc.payment.credit_card)
     scc.payment.amount = 15700
-    scc.payment.provider = "Simulado"
+    scc.payment.provider = :simulado
     scc.payment.installments = 1
     scc
   end

@@ -24,7 +24,7 @@ module KBraspag
         end
 
         def provider=(provider)
-          @provider = provider if valid_provider?(provider)
+          @provider = KBraspag.payment_slip_providers[provider] if valid_provider?(provider)
         end
 
         def installments=(installments)
@@ -50,7 +50,8 @@ module KBraspag
         end
 
         def valid_provider?(provider)
-          valid_class_type?(provider, String)
+          valid_class_type?(provider, Symbol)
+          parameter_exists?(provider, KBraspag.payment_slip_providers)
         end
 
         def valid_installments?(installments)
