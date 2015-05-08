@@ -45,8 +45,11 @@ module KBraspag
 
         private
         def self.body_parse(body)
-          return JSON.parse(body) if body !~ /=>\{|=> \{|=>\"|=> \"|=>\[|=> \[/
-          eval(body)
+          begin
+            return eval(body)
+          rescue Exception => e
+            return JSON.parse(body)
+          end
         end
 
         def self.build_sucess_response(response_hash)
