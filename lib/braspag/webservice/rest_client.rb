@@ -92,9 +92,9 @@ module KBraspag
         "#{$1}-#{$2}-#{$3}-#{$4}-#{$5}" unless uuid !~ @@REGEX_UUID
       end
 
-      def logger
-        KLog::Log.new
-      end
+      # def logger
+      #   KLog::Log.new
+      # end
     end
   end
 end
