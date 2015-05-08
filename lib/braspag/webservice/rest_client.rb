@@ -52,14 +52,14 @@ module KBraspag
         @https = new_https(uri)
         @req = new_request(method, uri)
         params ? @req.body = params.to_json : @req.body = "{}"
-        # logger.log_request(@req, uri)
+        logger.log_request(@req, uri)
       end
 
       def send_request
         response = nil
         KBraspag.connection_attempts.times do |i|
           response = @https.request(@req)
-          # logger.log_response(response)
+          logger.log_response(response)
           break unless response.nil?
         end
         response
@@ -92,9 +92,9 @@ module KBraspag
         "#{$1}-#{$2}-#{$3}-#{$4}-#{$5}" unless uuid !~ @@REGEX_UUID
       end
 
-      # def logger
-      #   KLog::Log.new
-      # end
+      def logger
+        KLog::Log.new
+      end
     end
   end
 end
