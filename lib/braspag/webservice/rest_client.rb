@@ -5,7 +5,7 @@ module KBraspag
       # require 'net/https'
       # require 'openssl'
       # require 'securerandom'
-      # # require 'klog'
+      # # require 'kgem_log'
       # # require 'json'
 
       @@REGEX_UUID = /^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12}).*/.freeze

@@ -5,7 +5,7 @@ require 'securerandom'
 require 'date'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require 'klog'
+require 'kgem_log'
 require 'json'
 
 require 'helpers/configuration'
