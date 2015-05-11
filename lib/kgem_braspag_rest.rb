@@ -65,15 +65,21 @@ module KBraspag
 
     ## PAYMENT METHODS AVAILABLE
   define_setting :payment_types, {
-                                  :credit_card => "CreditCard", :debit_card => "DebitCard",
-                                  :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"
+                                  :credit_card => "CreditCard",
+                                  :debit_card => "DebitCard",
+                                  :eletronic_transfer => "EletronicTransfer",
+                                  :payment_slip => "Boleto"
                                  }
 
   ## CREDIT CARD BRANDS AVAILABLE
   define_setting :brands, {
                             :visa => 'Visa', :mastercard => 'Mastercard',
-                            :amex => 'Amex', :elo => 'Elo', :auria => 'Auria',
-                            :jcb => 'JCB', :diners => 'Diners', :discover => 'Discover'
+                            :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
+                            :jcb => 'JCB', :diners => 'Diners',
+                            :discover => 'Discover', :hipercard => 'Hipercard',
+                            :hiper => 'Hiper', :naranja => 'Naranja',
+                            :nevada => 'Nevada', :cabal => 'Cabal',
+                            :credz => 'Credz', :credsystem => 'CredSystem'
                           }
 
   ## AVAILABLE PROVIDERS LIST

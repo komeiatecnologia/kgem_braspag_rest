@@ -27,7 +27,7 @@ module KBraspag
        1 => 'Afiliação não encontrada',
        2 => 'Saldo insuficiênte',
        3 => 'Cartão de crédito não encontrado',
-       4 => 'A conexão com o adquirente falhou',
+       4 => 'A conexão com a operadora de cartões falhou',
        5 => 'Tipo de transação inválido',
        6 => 'Plano de pagamento inválido',
        7 => 'Negado',
@@ -51,7 +51,6 @@ module KBraspag
     }
 
     ERROR_MESSAGE = {
-      309 => "O cancelamento não está disponível para essa transação",
       100 => "RequestId é obrigatório",
       101 => "MerchantId é obrigatório",
       102 => "Payment Type é obrigatório",
@@ -117,7 +116,22 @@ module KBraspag
       163 => "Return Url é obrigatório",
       164 => "Return Url é inválida",
       166 => "AuthorizeNow é obrigatório",
-      167 => "Antifraude não configurado"
+      167 => "Antifraude não configurado",
+      300 => "MerchantId não encontrado",
+      301 => "Não são permitidas requisições deste IP",
+      302 => "O MerchantOrderId informado já existe",
+      303 => "O OrderId informado não existe",
+      304 => "Customer Identity é obrigatório",
+      306 => "A chave de loja(MerchantId) informada está bloqueado",
+      307 => "Transação não encontrada",
+      308 => "Transação não está disponível para Captura",
+      309 => "O cancelamento não está disponível para essa transação",
+      310 => "O método de pagamento informado não é suportado por essa operação",
+      311 => "Estorno de transações não está ativo para essa chave de loja(MerchantId)",
+      312 => "Transação não disponível para estorno",
+      313 => "Pagamento recorrente não encontrado",
+      314 => "Integração inválida",
+      315 => "Não é possível alterar a data do próximo pagamento(NextRecurrency) com pagamento pendente"
     }
 
     protected
