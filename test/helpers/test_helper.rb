@@ -1,4 +1,4 @@
-require 'lib/helpers/helpers'
+require 'helpers/helpers'
 
 module TestHelper
   include KBraspag::Helpers

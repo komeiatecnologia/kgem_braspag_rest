@@ -8,10 +8,10 @@ class DefaultCustomertTest < Test::Unit::TestCase
   def test_should_throw_exception_name_invalid_class_type
     c = new_customer
     begin
-      name = Object.new
+      name = :rafael_moraes
       c.name = name
     rescue Exception => e
-      assert_equal c.msg_invalid_class(name, String), e.message
+      assert_equal c.msg_invalid_class(:name, String), e.message
     end
   end
 

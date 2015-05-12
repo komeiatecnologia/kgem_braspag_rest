@@ -12,15 +12,25 @@ module KBraspag
           send(:type=, :credit_card)
         end
 
+        def provider=(provider)
+          @provider = KBraspag.credit_card_providers[provider] if valid_provider?(provider)
+        end
+
         def to_braspag_hash
           h = super
           h['CreditCard'] = @credit_card.to_braspag_hash
           h
         end
 
-        def valid?
+        def valid_?
           super
-          @credit_card.valid?
+          @credit_card.valid_?
+        end
+
+        private
+        def valid_provider?(provider)
+          valid_class_type_?(:provider, provider, Symbol)
+          parameter_exists_?(provider, KBraspag.credit_card_providers)
         end
       end
     end

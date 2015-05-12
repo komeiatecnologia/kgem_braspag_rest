@@ -22,7 +22,7 @@ module KBraspag
 
         private
         def valid_name?(name)
-          valid_class_type?(name, String) && present?(name, "name")
+          valid_class_type_?(:name, name, String) && present_?(name, "name")
         end
       end
     end

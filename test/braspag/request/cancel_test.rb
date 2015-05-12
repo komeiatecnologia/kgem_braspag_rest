@@ -11,7 +11,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.payment_id = nil
     rescue Exception => e
-      assert_equal cancel.msg_invalid_class(nil, String), e.message
+      assert_equal cancel.msg_invalid_class('payment_id', String), e.message
     end
   end
 
@@ -20,7 +20,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.payment_id = 12345678
     rescue Exception => e
-      assert_equal cancel.msg_invalid_class(12345678, String), e.message
+      assert_equal cancel.msg_invalid_class("payment_id", String), e.message
     end
   end
 
@@ -72,7 +72,7 @@ class CancelTest < Test::Unit::TestCase
     begin
       cancel.amount = "1"
     rescue Exception => e
-      assert_equal cancel.msg_invalid_class("1", Numeric), e.message
+      assert_equal cancel.msg_invalid_class("amount", Numeric), e.message
     end
   end
 

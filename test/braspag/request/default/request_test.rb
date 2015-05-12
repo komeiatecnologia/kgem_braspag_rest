@@ -13,7 +13,7 @@ class DefaultRequestTest < Test::Unit::TestCase
     begin
       r.merchant_order_id = id
     rescue Exception => e
-      assert_equal r.msg_invalid_class(id, String), e.message
+      assert_equal r.msg_invalid_class(:merchant_order_id, String), e.message
     end
   end
 
@@ -50,14 +50,14 @@ class DefaultRequestTest < Test::Unit::TestCase
     begin
       r.customer = customer
     rescue Exception => e
-      assert_equal r.msg_invalid_class(customer, customer_class), e.message
+      assert_equal r.msg_invalid_class("customer", customer_class), e.message
     end
 
     begin
       customer = "José da Silva"
       r.customer = customer
     rescue Exception => e
-      assert_equal r.msg_invalid_class(customer, customer_class), e.message
+      assert_equal r.msg_invalid_class("customer", customer_class), e.message
     end
   end
 
@@ -73,14 +73,14 @@ class DefaultRequestTest < Test::Unit::TestCase
     begin
       r.payment = payment
     rescue Exception => e
-      assert_equal r.msg_invalid_class(payment, payment_class), e.message
+      assert_equal r.msg_invalid_class("payment", payment_class), e.message
     end
 
     begin
       payment = {}
       r.payment = payment
     rescue Exception => e
-      assert_equal r.msg_invalid_class(payment, payment_class), e.message
+      assert_equal r.msg_invalid_class("payment", payment_class), e.message
     end
   end
 

@@ -23,10 +23,6 @@ module KBraspag
           @amount = amount if valid_amount?(amount)
         end
 
-        def provider=(provider)
-          @provider = KBraspag.payment_slip_providers[provider] if valid_provider?(provider)
-        end
-
         def installments=(installments)
           @installments = installments if valid_installments?(installments)
         end
@@ -42,20 +38,15 @@ module KBraspag
 
         private
         def valid_type?(type)
-          valid_class_type?(type, Symbol) && parameter_exists?(type, KBraspag.payment_types)
+          valid_class_type_?(:type, type, Symbol) && parameter_exists_?(type, KBraspag.payment_types)
         end
 
         def valid_amount?(amount)
-          greater_than_zero?(amount)
-        end
-
-        def valid_provider?(provider)
-          valid_class_type?(provider, Symbol)
-          parameter_exists?(provider, KBraspag.payment_slip_providers)
+          greater_than_zero_?(amount)
         end
 
         def valid_installments?(installments)
-          valid_class_type?(installments, Integer) && greater_than_zero?(installments)
+          valid_class_type_?(:installments, installments, Integer) && greater_than_zero_?(installments)
         end
 
         def type_to_symbol_valid(type)

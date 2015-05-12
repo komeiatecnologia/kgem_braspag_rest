@@ -138,31 +138,24 @@ class PaymentTest < Test::Unit::TestCase
     begin
       p.installments = installments
     rescue Exception => e
-      assert_equal p.msg_invalid_class(installments,Integer), e.message
+      assert_equal p.msg_invalid_class(:installments,Integer), e.message
     end
   end
 
   def test_should_throw_exeception_when_provider_class_not_is_symbol
     p = new_payment
-    provider = "Banco"
-    begin
-      p.provider = provider
-    rescue Exception => e
-      assert_equal p.msg_invalid_class(provider, Symbol), e.message
-    end
+    assert_equal false, p.respond_to?(:provider=)
   end
 
   def test_should_convert_self_to_braspag_hash
     p = new_payment
     p.type = :credit_card
     p.amount = 10010
-    p.provider = :simulado
     p.installments = 6
 
     hash = p.to_braspag_hash
     assert_equal("CreditCard", hash["Type"])
     assert_equal(10010, hash["Amount"])
-    assert_equal("Simulado", hash["Provider"])
     assert_equal(6, hash["Installments"])
   end
 

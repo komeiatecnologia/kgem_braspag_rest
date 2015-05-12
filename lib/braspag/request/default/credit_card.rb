@@ -49,23 +49,23 @@ module KBraspag
 
         private
         def valid_brand?(brand)
-          valid_class_type?(brand, Symbol) && parameter_exists?(brand, KBraspag.brands)
+          valid_class_type_?(:brand, brand, Symbol) && parameter_exists_?(brand, KBraspag.brands)
         end
 
         def valid_security_code?(security_code)
-          valid_class_type?(security_code, String) && present?(security_code, "security_code")
+          valid_class_type_?(:security_code, security_code, String) && present_?(security_code, "security_code")
         end
 
         def valid_expiration_date?(month_year)
-          valid_class_type?(month_year, String) && present?(month_year, "expiration_date") && valid_expiration_date_format?(month_year)
+          valid_class_type_?(:expiration_date, month_year, String) && present_?(month_year, "expiration_date") && valid_expiration_date_format?(month_year)
         end
 
         def valid_holder?(holder)
-          valid_class_type?(holder, String) && present?(holder, 'holder')
+          valid_class_type_?(:holder, holder,String) && present_?(holder, 'holder')
         end
 
         def valid_card_number?(number)
-          valid_class_type?(number, String) && present?(number, "card_number") && valid_card_number_format?(number)
+          valid_class_type_?(:card_number, number, String) && present_?(number, "card_number") && valid_card_number_format?(number)
         end
 
         def valid_card_number_format?(value)

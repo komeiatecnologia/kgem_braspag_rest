@@ -6,7 +6,7 @@ module KBraspag
     class Cancel < KBraspag::Request::Cancel
 
       def cancel
-        send_request if valid?
+        send_request if valid_?
       end
 
       private

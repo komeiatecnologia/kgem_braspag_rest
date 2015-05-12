@@ -11,7 +11,7 @@ class CancelTest < Test::Unit::TestCase
     cancel = fake_without_amount
     cancel.instance_variable_set :@payment_id, nil
     begin
-      cancel.valid?
+      cancel.valid_?
     rescue Exception => e
       assert_equal cancel.msg_can_not_be_empty("payment_id"), e.message
     end

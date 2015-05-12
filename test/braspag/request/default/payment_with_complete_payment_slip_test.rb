@@ -28,7 +28,8 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
         ad = :nao_sou_de_uma_string
         p.send(method, ad)
       rescue Exception => e
-        assert_equal("#{ad.class}: Invalid class type, expected String.class", e.message)
+        at = method.to_s.gsub('=', '')
+        assert_equal("#{at}: Invalid class type, expected String.class", e.message)
       end
     end
   end

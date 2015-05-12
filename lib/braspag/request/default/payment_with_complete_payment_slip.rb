@@ -6,11 +6,13 @@ module KBraspag
 
       class PaymentWithCompletePaymentSlip < KBraspag::Request::Default::PaymentWithPaymentSlip
         include KBraspag::Helpers
+        extend KBraspag::HelpersClass
 
-        can_be_empty [:address, :payment_slip_number, :assignor, :demonstrative,
-                      :expiration_date, :identification, :instructions]
+        can_be_nil :address, :payment_slip_number, :assignor, :demonstrative,
+                   :expiration_date, :identification, :instructions
 
-        attr_reader :address, :assignor, :demonstrative, :expiration_date, :identification, :instructions, :payment_slip_number
+        attr_reader :address, :assignor, :demonstrative, :expiration_date,
+                    :identification, :instructions, :payment_slip_number
 
         def initialize
           super
@@ -65,23 +67,23 @@ module KBraspag
 
         private
         def valid_address?(address)
-          valid_class_type_?(address, String) && present_?(address, "address")
+          valid_class_type_?(:address, address, String) && present_?(address, "address")
         end
 
         def valid_assignor?(assignor)
-          valid_class_type_?(assignor, String) && present_?(assignor, "assignor")
+          valid_class_type_?(:assignor, assignor, String) && present_?(assignor, "assignor")
         end
 
         def valid_demonstrative?(demonstrative)
-          valid_class_type_?(demonstrative, String) && present_?(demonstrative, "demonstrative")
+          valid_class_type_?(:demonstrative, demonstrative, String) && present_?(demonstrative, "demonstrative")
         end
 
         def valid_expiration_date?(expiration_date)
-          valid_class_type_?(expiration_date, String) && present_?(expiration_date, "expiration_date") && greater_than_current_date_?(expiration_date)
+          valid_class_type_?(:expiration_date, expiration_date, String) && present_?(expiration_date, "expiration_date") && greater_than_current_date_?(expiration_date)
         end
 
         def valid_identification?(identification)
-          valid_class_type_?(identification, String) && present_?(identification, "identification") && valid_identification_format?(identification)
+          valid_class_type_?(:identification, identification, String) && present_?(identification, "identification") && valid_identification_format?(identification)
         end
 
         def valid_identification_format?(identification)
@@ -91,11 +93,11 @@ module KBraspag
         end
 
         def valid_instructions?(instructions)
-          valid_class_type_?(instructions, String) && present_?(instructions, "instructions")
+          valid_class_type_?(:instructions, instructions, String) && present_?(instructions, "instructions")
         end
 
         def valid_payment_slip_number?(payment_slip_number)
-          valid_class_type_?(payment_slip_number, String) && present_?(payment_slip_number, "payment_slip_number") && valid_payment_slip_format?(payment_slip_number)
+          valid_class_type_?(:payment_slip_number, payment_slip_number, String) && present_?(payment_slip_number, "payment_slip_number") && valid_payment_slip_format?(payment_slip_number)
         end
 
         def valid_payment_slip_format?(payment_slip_number)

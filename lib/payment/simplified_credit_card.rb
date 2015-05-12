@@ -6,7 +6,7 @@ module KBraspag
     class SimplifiedCreditCard < KBraspag::Request::SimplifiedCreditCard
 
       def pay
-        send_request if valid?
+        send_request if valid_?
       end
 
       private

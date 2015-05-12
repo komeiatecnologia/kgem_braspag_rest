@@ -59,7 +59,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     scc = fake_obj
     scc.instance_variable_set :@payment, nil
     begin
-      scc.valid?
+      scc.valid_?
     rescue Exception => e
       assert_equal scc.msg_can_not_be_empty("payment"), e.message
     end
@@ -69,7 +69,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     scc = fake_obj
     scc.instance_variable_set :@customer, nil
     begin
-      scc.valid?
+      scc.valid_?
     rescue Exception => e
       assert_equal scc.msg_can_not_be_empty("customer"), e.message
     end

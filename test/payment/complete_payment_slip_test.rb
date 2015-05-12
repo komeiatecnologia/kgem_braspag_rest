@@ -7,14 +7,10 @@ require 'test/fake_object/request/fake_complete_payment_slip'
 class CompletePaymentSlipTest < Test::Unit::TestCase
   include KBraspag::Helpers
 
-  def test_should_throw_payment_identification_can_not_be_empty
+  def test_should_can_be_empty_payment_identification
     cps = fake_obj
     cps.payment.instance_variable_set(:@identification, nil)
-    begin
-      cps.pay
-    rescue Exception => e
-      assert_equal cps.msg_can_not_be_empty("identification"), e.message
-    end
+    assert_equal true, cps.valid_?
   end
 
   def test_should_throw_customer_name_can_not_be_empty
@@ -59,7 +55,7 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     cps = fake_obj
     cps.instance_variable_set :@payment, nil
     begin
-      cps.valid?
+      cps.valid_?
     rescue Exception => e
       assert_equal cps.msg_can_not_be_empty("payment"), e.message
     end
@@ -69,7 +65,7 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     cps = fake_obj
     cps.instance_variable_set :@customer, nil
     begin
-      cps.valid?
+      cps.valid_?
     rescue Exception => e
       assert_equal cps.msg_can_not_be_empty("customer"), e.message
     end

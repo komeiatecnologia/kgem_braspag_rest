@@ -11,14 +11,14 @@ class CreditCardTest < Test::Unit::TestCase
       n = 1234566
       c.card_number = n
     rescue Exception => e
-      assert_equal c.msg_invalid_class(n,String), e.message
+      assert_equal c.msg_invalid_class('card_number',String), e.message
     end
 
     begin
       n = 1.2
       c.card_number =n
     rescue Exception => e
-      assert_equal c.msg_invalid_class(n,String), e.message
+      assert_equal c.msg_invalid_class('card_number',String), e.message
     end
   end
 
@@ -51,7 +51,7 @@ class CreditCardTest < Test::Unit::TestCase
       h = :teste
       c.holder = h
     rescue Exception => e
-      assert_equal c.msg_invalid_class(h, String), e.message
+      assert_equal c.msg_invalid_class('holder', String), e.message
     end
 
     begin
@@ -59,7 +59,7 @@ class CreditCardTest < Test::Unit::TestCase
       h = 234234
       c.holder = h
     rescue Exception => e
-      assert_equal c.msg_invalid_class(h,String), e.message
+      assert_equal c.msg_invalid_class('holder',String), e.message
     end
   end
 
@@ -85,7 +85,7 @@ class CreditCardTest < Test::Unit::TestCase
       d = Time.now
       c.expiration_date = d
     rescue Exception => e
-      assert_equal c.msg_invalid_class(d, String), e.message
+      assert_equal c.msg_invalid_class('expiration_date', String), e.message
     end
   end
 
@@ -119,7 +119,7 @@ class CreditCardTest < Test::Unit::TestCase
       s = 123
       c.security_code = 123
     rescue Exception => e
-      assert_equal c.msg_invalid_class(s, String), e.message
+      assert_equal c.msg_invalid_class('security_code', String), e.message
     end
   end
 
@@ -146,7 +146,7 @@ class CreditCardTest < Test::Unit::TestCase
       b = "visa"
       c.brand = b
     rescue Exception => e
-      assert_equal c.msg_invalid_class(b, Symbol), e.message
+      assert_equal c.msg_invalid_class("brand", Symbol), e.message
     end
   end
 
@@ -184,10 +184,10 @@ class CreditCardTest < Test::Unit::TestCase
     assert_equal "Elo", c.brand
   end
 
-  def test_should_return_brand_equal_Auria
+  def test_should_return_brand_equal_Aura
     c = new_credit_card
-    c.brand = :auria
-    assert_equal "Auria", c.brand
+    c.brand = :aura
+    assert_equal "Aura", c.brand
   end
 
   def test_should_return_brand_equal_JCB
