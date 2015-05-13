@@ -32,36 +32,57 @@ module KBraspag
         end
 
         def self.build_response(response)
-          body = body_parse(response.body)
           if response.kind_of? Net::HTTPSuccess
-            body['RequestId'] = response['RequestId']
-            build_sucess_response(body)
+            build_sucess_response(response)
           else
-            body = [] if body.nil?
-            body << response['RequestId']
-            build_error_response(body)
+            build_error_response(response)
           end
         end
 
         private
         def self.body_parse(body)
+          parsed = json_body_parse body
+          parsed = hash_body_parse body if parsed.nil?
+          parsed
+        end
+
+        def self.json_body_parse(body)
           begin
             return eval(body)
           rescue Exception => e
-            return JSON.parse(body)
+            nil
           end
         end
 
-        def self.build_sucess_response(response_hash)
-          send(:new, response_hash)
+        def self.hash_body_parse(body)
+          begin
+            return JSON.parse(body)
+          rescue Exception => e
+            nil
+          end
         end
 
-        def self.build_error_response(response_array)
-          KBraspag::Response::Default::Errors.new(response_array)
+        def self.build_sucess_response(response)
+          body = body_parse(response.body)
+          body['RequestId'] = response['RequestId']
+          send(:new, body)
+        end
+
+        def self.build_error_response(response)
+          body = body_parse(response.body)
+          body = build_error_empty_body_response(response) if body.nil?
+          body << response['RequestId']
+          KBraspag::Response::Default::Errors.new(body)
+        end
+
+        def self.build_error_empty_body_response(response)
+          [{'Code' => "[HTTP-ERROR] #{response.code}", 'Message' => response.message}]
         end
 
         def reason_message
-          REASON_MESSAGE[@payment.reason_code]
+          code = @payment.reason_code
+          return REASON_MESSAGE[code] if REASON_MESSAGE.key? code
+          "#{code} - #{REASON_MESSAGE[code]}"
         end
 
         def provider_message
