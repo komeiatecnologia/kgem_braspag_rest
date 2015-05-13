@@ -3,6 +3,7 @@ require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_payment_with_payment_slip'
 require 'lib/braspag/response/default/payment_with_payment_slip'
 
+
 class PaymentWithPaymentSlipTest < Test::Unit::TestCase
   include TestHelper
 

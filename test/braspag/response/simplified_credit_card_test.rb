@@ -2,6 +2,7 @@ require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_simplified_credit_card'
 require 'braspag/response/simplified_credit_card'
+require 'test/fake_object/response/fake_response'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
   include TestHelper
@@ -27,6 +28,72 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     assert_equal(IGNORED_CLASS[1], c.class)
   end
 
+  def test_parse_success_braspag_response_body
+    body = "{
+    \"MerchantOrderId\": \"2014111706\",
+    \"Customer\": {
+        \"Name\": \"Comprador Teste\"
+    },
+    \"Payment\": {
+        \"ServiceTaxAmount\": 0,
+        \"Installments\": 1,
+        \"Interest\": \"ByMerchant\",
+        \"Capture\": false,
+        \"Authenticate\": false,
+        \"CreditCard\": {
+            \"CardNumber\": \"123412******1231\",
+            \"Holder\": \"Teste Holder\",
+            \"ExpirationDate\": \"12/2021\",
+            \"SaveCard\": false,
+            \"Brand\": \"Visa\"
+        },
+        \"ProofOfSale\": \"674532\",
+        \"AcquirerTransactionId\": \"0305023644309\",
+        \"AuthorizationCode\": \"123456\",
+        \"PaymentId\": \"24bc8366-fc31-4d6c-8555-17049a836a07\",
+        \"Type\": \"CreditCard\",
+        \"Amount\": 15700,
+        \"Currency\": \"BRL\",
+        \"Country\": \"BRA\",
+        \"Provider\": \"Simulado\",
+        \"ExtraDataCollection\": [],
+        \"ReasonCode\": 0,
+        \"ReasonMessage\": \"Successful\",
+        \"Status\": 1,
+        \"ProviderReturnCode\": \"4\",
+        \"ProviderReturnMessage\": \"Operation Successful\",
+        \"Links\": [
+            {
+                \"Method\": \"GET\",
+                \"Rel\": \"self\",
+                \"Href\": \"https://apiquerysandbox.braspag.com.br/v2/sales/{PaymentId}\"
+            },
+            {
+                \"Method\": \"PUT\",
+                \"Rel\": \"capture\",
+                \"Href\": \"https://apisandbox.braspag.com.br/v2/sales/{PaymentId}/capture\"
+            },
+            {
+                \"Method\": \"PUT\",
+                \"Rel\": \"void\",
+                \"Href\": \"https://apisandbox.braspag.com.br/v2/sales/{PaymentId}/void\"
+            }
+        ]
+    }
+}"
+
+    fake = FakeResponse.new.build_success(:body => body)
+
+    res = scc_class.build_response(fake)
+
+    assert_equal reason_message[res.payment.reason_code], res.messages.first
+    assert_equal 2, res.messages.size
+    assert_equal "4", res.payment.provider_return_code
+    assert_equal Array, res.payment.links.class
+    assert_equal true, res.payment.links.first.respond_to?(:rel)
+    assert_equal "24bc8366-fc31-4d6c-8555-17049a836a07", res.payment.payment_id
+  end
+
   private
   def verify_class?(returned)
     !IGNORED_CLASS.include? returned.class
@@ -38,5 +105,13 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
 
   def fake_object
     KBraspag::Response::SimplifiedCreditCard.new(fake_hash)
+  end
+
+  def scc_class
+    KBraspag::Response::SimplifiedCreditCard
+  end
+
+  def reason_message
+    KBraspag::Pagador::REASON_MESSAGE
   end
 end

@@ -1,6 +1,7 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_complete_payment_slip'
+require 'test/fake_object/response/fake_response'
 # require 'braspag/response/complete_payment_slip'
 require 'lib/kgem_braspag_rest'
 
@@ -28,6 +29,53 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal(IGNORED_CLASS[1], pwps.class)
   end
 
+  def test_parse_with_braspag_success_response
+    body = "{
+    \"MerchantOrderId\": \"2014111706\",
+    \"Customer\":
+    {
+        \"Name\": \"Comprador Teste\",
+        \"Address\": {}
+    },
+    \"Payment\":
+    {
+        \"Instructions\": \"Aceitar somente até a data de vencimento, após essa data juros de 1% dia.\",
+        \"ExpirationDate\": \"2015-01-05\",
+        \"Url\": \"https://apisandbox.braspag.com.br/post/pagador/reenvia.asp/a5f3181d-c2e2-4df9-a5b4-d8f6edf6bd51\",
+        \"Number\": \"123-2\",
+        \"BarCodeNumber\": \"00096629900000157000494250000000012300656560\",
+        \"DigitableLine\": \"00090.49420 50000.000013 23006.565602 6 62990000015700\",
+        \"Assignor\": \"Empresa Teste\",
+        \"Address\": \"Rua Teste\",
+        \"Identification\": \"11884926754\",
+        \"PaymentId\": \"a5f3181d-c2e2-4df9-a5b4-d8f6edf6bd51\",
+        \"Type\": \"Boleto\",
+        \"Amount\": 15700,
+        \"Currency\": \"BRL\",
+        \"Country\": \"BRA\",
+        \"Provider\": \"Simulado\",
+        \"ExtraDataCollection\": [],
+        \"ReasonCode\": 0,
+        \"ReasonMessage\": \"Successful\",
+        \"Status\": 1,
+        \"Links\": [
+            {
+                \"Method\": \"GET\",
+                \"Rel\": \"self\",
+                \"Href\": \"https://apiquerysandbox.braspag.com.br/v2/sales/{PaymentId}\"
+            }
+        ]
+    }
+}"
+    fake = FakeResponse.new.build_success(:body => body)
+    res = cps_class.build_response(fake)
+    assert_equal reason_message[res.payment.reason_code], res.messages.first
+    assert_equal "2015-01-05", res.payment.expiration_date
+    assert_equal "Simulado", res.payment.provider
+    assert_equal "Comprador Teste", res.customer.name
+    assert_equal "2014111706", res.merchant_order_id
+  end
+
   private
   def verify_class?(returned)
     !IGNORED_CLASS.include? returned.class
@@ -39,5 +87,13 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
 
   def fake_object
     KBraspag::Response::CompletePaymentSlip.new(fake_hash)
+  end
+
+  def cps_class
+    KBraspag::Response::CompletePaymentSlip
+  end
+
+  def reason_message
+    KBraspag::Pagador::REASON_MESSAGE
   end
 end

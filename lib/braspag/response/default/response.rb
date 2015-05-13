@@ -33,7 +33,7 @@ module KBraspag
 
         def self.build_response(response)
           if response.kind_of? Net::HTTPSuccess
-            build_sucess_response(response)
+            build_success_response(response)
           else
             build_error_response(response)
           end
@@ -41,12 +41,12 @@ module KBraspag
 
         private
         def self.body_parse(body)
-          parsed = json_body_parse body
-          parsed = hash_body_parse body if parsed.nil?
+          parsed = eval_body_parser body
+          parsed = json_body_parser body if parsed.nil?
           parsed
         end
 
-        def self.json_body_parse(body)
+        def self.eval_body_parser(body)
           begin
             return eval(body)
           rescue Exception => e
@@ -54,7 +54,7 @@ module KBraspag
           end
         end
 
-        def self.hash_body_parse(body)
+        def self.json_body_parser(body)
           begin
             return JSON.parse(body)
           rescue Exception => e
@@ -62,7 +62,7 @@ module KBraspag
           end
         end
 
-        def self.build_sucess_response(response)
+        def self.build_success_response(response)
           body = body_parse(response.body)
           body['RequestId'] = response['RequestId']
           send(:new, body)
