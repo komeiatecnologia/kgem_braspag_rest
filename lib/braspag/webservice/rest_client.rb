@@ -58,9 +58,13 @@ module KBraspag
       def send_request
         response = nil
         KBraspag.connection_attempts.times do |i|
-          response = @https.request(@req)
-          logger.log_response(response)
-          break unless response.nil?
+          begin
+            response = @https.request(@req)
+            logger.log_response(response)
+            break unless response.nil?
+          rescue Exception => e
+            logger.log "#{e.class}: e.message"
+          end
         end
         response
       end
