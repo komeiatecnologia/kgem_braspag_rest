@@ -6,6 +6,8 @@ module KBraspag
 
       attr_reader :payment_id, :amount
 
+      REGEX_VALID_PAYMENT = /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
+
       def initialize
         @amount = nil
         @payment_id = nil
@@ -37,7 +39,7 @@ module KBraspag
       def valid_payment_id_format?(payment_id)
         raise(ArgumentError,
               "Invalid payment_id, expected xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-              self.class.to_s) if payment_id !~ /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
+              self.class.to_s) if payment_id !~ REGEX_VALID_PAYMENT
         true
       end
     end

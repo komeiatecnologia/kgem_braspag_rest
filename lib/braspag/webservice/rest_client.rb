@@ -9,8 +9,10 @@ module KBraspag
       # # require 'json'
 
       @@REGEX_UUID = /^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12}).*/.freeze
-      @@DEFAULT_METHODS = { :get => Net::HTTP::Get, :post => Net::HTTP::Post,
-                            :put => Net::HTTP::Put, :delete => Net::HTTP::Delete
+      @@DEFAULT_METHODS = { :get => Net::HTTP::Get,
+                            :post => Net::HTTP::Post,
+                            :put => Net::HTTP::Put,
+                            :delete => Net::HTTP::Delete
                           }
 
       def initialize
@@ -63,7 +65,7 @@ module KBraspag
             logger.log_response(response)
             break unless response.nil?
           rescue Exception => e
-            logger.log "#{e.class}: e.message"
+            logger.log "#{e.class}: #{e.message}"
           end
         end
         response
@@ -77,6 +79,7 @@ module KBraspag
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        # http.ca_file = KBraspag.ca_file_path if cert_exist?
         http.read_timeout = KBraspag.timeout
         http
       end
@@ -98,6 +101,12 @@ module KBraspag
 
       def logger
         KLog::Log.new
+      end
+
+      def cert_exist?
+        valid = File.exist?(KBraspag.ca_file_path) if KBraspag.ca_file_path
+        raise ArgumentError, "certificate ssl not found, configure in KBraspag.ca_file_path=, for more information read README file" unless valid
+        valid
       end
     end
   end

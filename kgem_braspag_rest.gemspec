@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description   = "Cliente Braspag Pagador API REST que funciona no ruby 1.8 e atende as necessidades especiais da Komeia"
   s.summary       = "API Pagamentos"
   s.author        = "Komeia Interativa"
-  s.files         = Dir["{lib/**/*.rb,*.gemspec,README, Gemfile}"]
+  s.files         = Dir["{lib/**/*.rb,*.gemspec,README, Gemfile, *}"]
   s.require_paths = ["lib"]
 
   s.add_dependency "kgem_log"

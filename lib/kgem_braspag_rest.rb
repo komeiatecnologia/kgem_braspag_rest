@@ -65,7 +65,10 @@ module KBraspag
   Cancel = Payment::Cancel
   C = Cancel
 
-    ## PAYMENT METHODS AVAILABLE
+  ## FILE PATH TO CA CERTIFICATE (*.pem)
+  define_setting :ca_file_path, File.expand_path('braspag.pem')
+
+  ## PAYMENT METHODS AVAILABLE
   define_setting :payment_types, {
                                   :credit_card => "CreditCard",
                                   :debit_card => "DebitCard",
