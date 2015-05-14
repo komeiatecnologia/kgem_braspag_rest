@@ -6,7 +6,8 @@ module KBraspag
 
     class Cancel
       include KBraspag::Pagador
-      attr_reader :request_id, :status, :reason_code, :reason_message, :provider_return_code, :provider_return_message, :links
+      attr_reader :request_id, :status, :reason_code, :reason_message,
+                  :provider_return_code, :provider_return_message, :links
 
       def initialize(hash)
         @request_id = hash['RequestId']
@@ -19,14 +20,10 @@ module KBraspag
       end
 
       def self.build_response(response)
-        body = eval(response.body)
         if response.kind_of? Net::HTTPSuccess
-          body['RequestId'] = response['RequestId']
-          build_sucess_response(body)
+          build_success_response(response)
         else
-          body = [] if body.nil?
-          body << response['RequestId']
-          build_error_response(body)
+          build_error_response(response)
         end
       end
 
@@ -35,22 +32,65 @@ module KBraspag
       end
 
       def messages
-        @messages ||= build_messages
+        unless @messages
+          @messages = []
+          @messages << reason_message
+          @messages << provider_message if exists_provider_message?
+        end
+        @messages
       end
 
       private
-      def build_messages
-        @messages = []
-        @messages << REASON_MESSAGE[@reason_code]
-        @messages << "#{@provider_return_code} - #{@provider_return_message}" if @provider_return_code
+      def self.body_parse(body)
+        parsed = eval_body_parser body
+        parsed = json_body_parser body if parsed.nil?
+        parsed
       end
 
-      def self.build_sucess_response(response_hash)
-        send(:new, response_hash)
+      def self.eval_body_parser(body)
+        begin
+          return eval(body)
+        rescue Exception => e
+          nil
+        end
       end
 
-      def self.build_error_response(response_array)
-        KBraspag::Response::Default::Errors.new(response_array)
+      def self.json_body_parser(body)
+        begin
+          return JSON.parse(body)
+        rescue Exception => e
+          nil
+        end
+      end
+
+      def self.build_success_response(response)
+        body = body_parse(response.body)
+        body['RequestId'] = response['RequestId']
+        send(:new, body)
+      end
+
+      def self.build_error_response(response)
+        body = body_parse(response.body)
+        body = build_error_empty_body_response(response) if body.nil?
+        body << response['RequestId']
+        KBraspag::Response::Default::Errors.new(body)
+      end
+
+      def self.build_error_empty_body_response(response)
+        [{'Code' => "[HTTP-ERROR] #{response.code}", 'Message' => response.message}]
+      end
+
+      def reason_message
+        return REASON_MESSAGE[@reason_code] if REASON_MESSAGE.key? @reason_code
+        "#{@reason_code} - #{REASON_MESSAGE[@reason_code]}"
+      end
+
+      def provider_message
+        "#{@provider_return_code} - #{@provider_return_message}"
+      end
+
+      def exists_provider_message?
+        !@provider_return_code.nil?
       end
     end
   end
