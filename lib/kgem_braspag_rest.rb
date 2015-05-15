@@ -67,7 +67,7 @@ module KBraspag
   C = Cancel
 
   ## FILE PATH TO CA CERTIFICATE (*.pem)
-  define_setting :ca_file_path, File.expand_path('braspag.pem')
+  define_setting :ca_file_path, "#{File.dirname(__FILE__)}/braspag.pem"
 
   ## PAYMENT METHODS AVAILABLE
   define_setting :payment_types, {
