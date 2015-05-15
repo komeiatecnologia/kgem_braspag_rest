@@ -23,17 +23,27 @@ Exemplos:
 Abaixo está listado todas as configurações disponíveis e os valores default
 
 KBraspag.configuration do |config|
+
+  ## FILE PATH TO CA CERTIFICATE (*.pem)
+  config.ca_file_path, "./braspag.pem"
+
   ## PAYMENT METHODS AVAILABLE
   config.payment_types, {
-                          :credit_card => "CreditCard", :debit_card => "DebitCard",
-                          :eletronic_transfer => "EletronicTransfer", :payment_slip => "Boleto"
+                          :credit_card => "CreditCard",
+                          :debit_card => "DebitCard",
+                          :eletronic_transfer => "EletronicTransfer",
+                          :payment_slip => "Boleto"
                          }
 
   ## CREDIT CARD BRANDS AVAILABLE
   config.brands, {
                     :visa => 'Visa', :mastercard => 'Mastercard',
-                    :amex => 'Amex', :elo => 'Elo', :auria => 'Auria',
-                    :jcb => 'JCB', :diners => 'Diners', :discover => 'Discover'
+                    :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
+                    :jcb => 'JCB', :diners => 'Diners',
+                    :discover => 'Discover', :hipercard => 'Hipercard',
+                    :hiper => 'Hiper', :naranja => 'Naranja',
+                    :nevada => 'Nevada', :cabal => 'Cabal',
+                    :credz => 'Credz', :credsystem => 'CredSystem'
                   }
 
   ## AVAILABLE PROVIDERS LIST
