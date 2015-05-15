@@ -52,6 +52,7 @@ require 'payment/cancel'
 require 'payment/complete_payment_slip'
 require 'payment/simplified_credit_card'
 
+KLog::Log.configuration {|config| config.label = "Braspag Pagador API Rest"}
 
 module KBraspag
   extend Configuration

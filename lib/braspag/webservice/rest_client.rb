@@ -105,7 +105,10 @@ module KBraspag
 
       def cert_exist?
         valid = File.exist?(KBraspag.ca_file_path) if KBraspag.ca_file_path
-        raise ArgumentError, "certificate ssl not found, configure in KBraspag.ca_file_path=, for more information read README file" unless valid
+        raise(
+              ArgumentError,
+              "certificate ssl not found, configure in KBraspag.ca_file_path=, for more information read README file"
+              ) unless valid
         valid
       end
     end
