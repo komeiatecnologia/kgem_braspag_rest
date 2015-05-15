@@ -19,7 +19,6 @@ module KBraspag
           @digitable_line = hash['DigitableLine']
           @assignor = hash['Assignor']
           @address = hash['Address']
-          @identification = hash['Identification']
           @payment_id = hash['PaymentId']
           @reason_code = hash['ReasonCode']
           @reason_message = hash['ReasonMessage']

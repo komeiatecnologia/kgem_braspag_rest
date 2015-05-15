@@ -5,8 +5,8 @@ module KBraspag
 
       class PaymentWithPaymentSlip < KBraspag::Request::Default::Payment
         # # Remove os métodos herdados
-        # undef_method :installments
-        # undef_method :installments=
+        undef_method :installments
+        undef_method :installments=
 
         def initialize
           super

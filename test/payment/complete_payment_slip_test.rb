@@ -7,12 +7,6 @@ require 'test/fake_object/request/fake_complete_payment_slip'
 class CompletePaymentSlipTest < Test::Unit::TestCase
   include KBraspag::Helpers
 
-  def test_should_can_be_empty_payment_identification
-    cps = fake_obj
-    cps.payment.instance_variable_set(:@identification, nil)
-    assert_equal true, cps.valid_?
-  end
-
   def test_should_throw_customer_name_can_not_be_empty
     cps = fake_obj
     cps.customer.instance_variable_set(:@name, nil)
@@ -39,6 +33,7 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal cps.merchant_order_id, hash['MerchantOrderId']
     assert_equal cps.customer.class, KBraspag::Request::Default::Customer
     assert_equal cps.customer.name, hash['Customer']['Name']
+    assert_equal cps.customer.identification, hash['Customer']['Identification']
     assert_equal cps.payment.class, KBraspag::Request::Default::PaymentWithCompletePaymentSlip
     assert_equal cps.payment.amount, hash['Payment']['Amount']
     assert_equal cps.payment.provider, hash['Payment']['Provider']
@@ -47,7 +42,6 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal cps.payment.assignor, hash['Payment']['Assignor']
     assert_equal cps.payment.demonstrative, hash['Payment']['Demonstrative']
     assert_equal cps.payment.expiration_date, hash['Payment']['ExpirationDate']
-    assert_equal cps.payment.identification, hash['Payment']['Identification']
     assert_equal cps.payment.instructions, hash['Payment']['Instructions']
   end
 

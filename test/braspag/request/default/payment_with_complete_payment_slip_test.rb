@@ -5,7 +5,7 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
 
   TARGET_METHODS = [
                   :address=, :assignor=, :demonstrative=, :expiration_date=,
-                  :identification=, :instructions=, :payment_slip_number=
+                  :instructions=, :payment_slip_number=
                 ]
 
   def test_should_not_exist_installment_variable_and_get_set_methods
@@ -94,13 +94,6 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal ed, p.expiration_date
   end
 
-  def test_identification_should_return_123456789
-    p = new_pwps
-    id = "1234567890"
-    p.identification = id
-    assert_equal id, p.identification
-  end
-
   def test_instructions_should_return_aceitar_somente_ate_a_data_de_vencimento_apos_essa_data_juros_de_1_porcento_dia
     p = new_pwps
     ins = "Aceitar somente até a data de vencimento, após essa data juros de 1% dia."
@@ -129,7 +122,6 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal(true, hash.key?('Assignor'))
     assert_equal(true, hash.key?('Demonstrative'))
     assert_equal(true, hash.key?('ExpirationDate'))
-    assert_equal(true, hash.key?('Identification'))
     assert_equal(true, hash.key?('Instructions'))
   end
 
