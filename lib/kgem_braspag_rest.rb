@@ -83,9 +83,7 @@ module KBraspag
                             :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
                             :jcb => 'JCB', :diners => 'Diners',
                             :discover => 'Discover', :hipercard => 'Hipercard',
-                            :hiper => 'Hiper', :naranja => 'Naranja',
-                            :nevada => 'Nevada', :cabal => 'Cabal',
-                            :credz => 'Credz', :credsystem => 'CredSystem'
+                            :hiper => 'Hiper'
                           }
 
   ## AVAILABLE PROVIDERS LIST
@@ -102,6 +100,7 @@ module KBraspag
                                             :itau => "Itau",
                                             :brb => "Brb",
                                             :caixa => "Caixa",
+                                            :santander => "Santander",
                                             :simulado => "Simulado"
                                           }
   define_setting :eletronic_transfer_providers, {
