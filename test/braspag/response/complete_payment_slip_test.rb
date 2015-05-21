@@ -74,6 +74,8 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal "Simulado", res.payment.provider
     assert_equal "Comprador Teste", res.customer.name
     assert_equal "2014111706", res.merchant_order_id
+    assert_equal false, res.paid?
+    assert_equal true, res.success?
   end
 
   private

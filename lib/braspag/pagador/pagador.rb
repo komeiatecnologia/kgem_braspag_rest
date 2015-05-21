@@ -135,6 +135,14 @@ module KBraspag
     }
 
     protected
+    def credit_card_paid?(status)
+      [1,2].include? status
+    end
+
+    def payment_slip_paid?(status)
+      status == 2
+    end
+
     def operation_success?(status)
       [1,2,10,11].include? status
     end

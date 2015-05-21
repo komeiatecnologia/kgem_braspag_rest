@@ -5,7 +5,9 @@ module KBraspag
     # require 'lib/braspag/response/default/link'
 
     class PaymentWithCreditCard < KBraspag::Response::Default::Payment
-      attr_accessor :acquirer_transaction_id, :authenticate, :capture, :credit_card, :installments, :interest, :links, :payment_id, :reason_code, :reason_message, :service_tax_amount
+      attr_accessor :acquirer_transaction_id, :authenticate, :capture
+      attr_accessor :credit_card, :installments, :interest, :links, :payment_id
+      attr_accessor :reason_code, :reason_message, :service_tax_amount
 
       def initialize(hash)
         super(hash)

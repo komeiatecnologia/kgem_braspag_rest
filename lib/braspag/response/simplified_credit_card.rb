@@ -17,6 +17,9 @@ module KBraspag
         @payment.create_get_method("provider_return_message", hash['Payment']['ProviderReturnMessage'])
       end
 
+      def paid?
+        @paid ||= credit_card_paid?(@payment.status)
+      end
     end
   end
 end

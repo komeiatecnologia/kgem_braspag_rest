@@ -13,6 +13,9 @@ module KBraspag
         @customer = Default::Customer.new(hash['Customer'])
       end
 
+      def paid?
+        @paid ||= payment_slip_paid?(@payment.status)
+      end
     end
   end
 end

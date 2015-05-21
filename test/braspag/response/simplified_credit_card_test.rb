@@ -92,6 +92,8 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     assert_equal Array, res.payment.links.class
     assert_equal true, res.payment.links.first.respond_to?(:rel)
     assert_equal "24bc8366-fc31-4d6c-8555-17049a836a07", res.payment.payment_id
+    assert_equal true, res.paid?
+    assert_equal true, res.success?
   end
 
   private
