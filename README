@@ -41,9 +41,7 @@ KBraspag.configuration do |config|
                     :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
                     :jcb => 'JCB', :diners => 'Diners',
                     :discover => 'Discover', :hipercard => 'Hipercard',
-                    :hiper => 'Hiper', :naranja => 'Naranja',
-                    :nevada => 'Nevada', :cabal => 'Cabal',
-                    :credz => 'Credz', :credsystem => 'CredSystem'
+                    :hiper => 'Hiper'
                   }
 
   ## AVAILABLE PROVIDERS LIST
@@ -60,6 +58,7 @@ KBraspag.configuration do |config|
                                     :itau => "Itau",
                                     :brb => "Brb",
                                     :caixa => "Caixa",
+                                    :santander => "Santander",
                                     :simulado => "Simulado"
                                   }
   config.eletronic_transfer_providers, {
