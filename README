@@ -1,4 +1,99 @@
-Para alterar as configurações default leia os exemplos abaixo.
+******* COMO USAR ********
+
+CONFIGURAR
+
+  1 - Instale a gem kgem_braspag_rest
+
+  2 - Informar o MerchantID e MerchantKey
+    Em projetos Rails basta criar um arquivo .rb no diretório initializers e seguir o exemplo abaixo:
+
+    require 'kgem_braspag_rest'
+
+    KBraspag.configuration do |config|
+      config.merchant_id = "MeuMerchantID"
+      config.merchant_key = "MeuMerchantKey"
+    end
+
+REALIZAR PAGAMENTOS
+ - Exemplo Boleto
+    boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
+    boleto.customer.name = "José da Silva"
+    boleto.customer.identification = "1234567890"
+    boleto.merchant_order_id = '2014111703'
+    boleto.payment.amount = 15700 #Ou 15.700, "15,700"
+    boleto.payment.provider = :meu_banco
+    boleto.payment.address = "Rua Teste"
+    boleto.payment.payment_slip_number = "123"
+    boleto.payment.assignor = "Empresa Teste"
+    boleto.payment.demonstrative = "Desmonstrative Teste"
+    boleto.payment.expiration_date = "2020-05-1"
+    boleto.payment.instructions = "Aceitar somente até a data de vencimento, após essa data juros de 1% dia."
+
+    # Tentar realizar o pagamento
+    resposta = boleto.pay
+
+    #Verificar se a transação foi realizada com sucesso (true|false)
+    resposta.success?
+
+    #Verificar se a transação teve o pagamento confirmado (true| false)
+    resposta.paid?
+
+    #Verificar todas as mensagens retornadas pelo gateway (Array)
+    resposta.messages
+
+    #Verificar a messagem retornada de maior relevancia (String)
+    resposta.messages.first
+
+ - Exemplo Cartão de Crédito
+    cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
+    cartao.merchant_order_id = '2014111703'
+    cartao.payment.amount = 15700
+    cartao.payment.provider = :minha_operadora
+    cartao.payment.installments = 1
+    cartao.customer.name = "José da Silva"
+    cartao.credit_card.card_number = "0000000000000006"
+    cartao.credit_card.holder = "J Silva"
+    cartao.credit_card.expiration_date = "12/2021"
+    cartao.credit_card.security_code = "123"
+    cartao.credit_card.brand = :minha_bandeira
+
+    # Tentar realizar o pagamento
+    resposta = cartao.pay
+
+    #Verificar se a transação foi realizada com sucesso (true|false)
+    resposta.success?
+
+    #Verificar se a transação teve o pagamento confirmado (true| false)
+    resposta.paid?
+
+    #Verificar todas as mensagens retornadas pelo gateway (Array)
+    resposta.messages
+
+    #Verificar a messagem retornada de maior relevancia (String)
+    resposta.messages.first
+
+CANCELAR PAGAMENTO
+  - Exemplo cancelar transação
+    cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
+
+    cancelar.payment_id = "uuid da transação"
+
+    # Caso não seja informado o valor é estornado todo o valor da transação
+    cancelar.amount = 10 # Ou 10.00, "10,00"
+
+    # Tentar cancelar/estornar
+    resposta = cancelar.cancel
+
+    #Verificar se a transação foi realizada com sucesso (true|false)
+    resposta.success?
+
+    #Verificar todas as mensagens retornadas pelo gateway (Array)
+    resposta.messages
+
+    #Verificar a messagem retornada de maior relevancia (String)
+    resposta.messages.first
+
+******* ALTERAR AS CONFIGURAÇÕES DEFAULT *********
 
 Exemplos:
 
