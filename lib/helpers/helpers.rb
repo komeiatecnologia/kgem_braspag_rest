@@ -2,6 +2,7 @@ module KBraspag
   module Helpers
 
     LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/
+    REGEX_VALID_PAYMENT = /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
 
     def valid_class_type_?(attr_name, value, expected_class)
       raise TypeError, msg_invalid_class(attr_name, expected_class), "#{self.class}" if !value.kind_of? expected_class
@@ -127,6 +128,13 @@ module KBraspag
     def insert_last_decimal_place(value)
       value << '0' unless value !~ LAST_DECIMAL_PLACE
       value
+    end
+
+    def valid_payment_id_format?(payment_id)
+      raise(ArgumentError,
+            "Invalid payment_id, expected xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            self.class.to_s) if payment_id !~ REGEX_VALID_PAYMENT
+      true
     end
 
   private

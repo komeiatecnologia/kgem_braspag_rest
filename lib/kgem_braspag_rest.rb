@@ -47,6 +47,7 @@ require 'braspag/webservice/cancel'
 require 'braspag/webservice/complete_payment_slip'
 require 'braspag/webservice/rest_client'
 require 'braspag/webservice/simplified_credit_card'
+require 'braspag/webservice/query'
 
 require 'payment/cancel'
 require 'payment/complete_payment_slip'
@@ -122,5 +123,6 @@ module KBraspag
   define_setting :complete_payment_slip_resource, "/v2/sales/"
   define_setting :simplified_credit_card_resource, "/v2/sales/"
   define_setting :cancel_resource, "/v2/sales/"
+  define_setting :query_resource, "/v2/sales/"
 end
 

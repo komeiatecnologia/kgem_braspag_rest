@@ -49,7 +49,7 @@ module KBraspag
       end
 
       private
-      def build_request(method, resource, params)
+      def build_request(method, resource, params = nil)
         uri = URI(resource)
         @https = new_https(uri)
         @req = new_request(method, uri)

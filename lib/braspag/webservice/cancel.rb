@@ -15,7 +15,8 @@ module KBraspag
 
       private
       def url(payment_id, amount)
-        url = "#{KBraspag.payment_url}#{KBraspag.cancel_resource}#{payment_id}/void"
+        url = "#{KBraspag.payment_url}#{KBraspag.cancel_resource}"
+        url << "#{payment_id}/void"
         url << "?amount=#{amount}" if amount
         url
       end
