@@ -26,8 +26,13 @@ module KBraspag
       end
 
       def valid_?
-        present_?(@merchant_order_id) if @payment_id.nil?
-        present_?(@payment_id) if @merchant_order_id.nil?
+        if @merchant_order_id.nil? && @payment_id.nil?
+          raise ArgumentError, "No informed parameter", "#{self.class}"
+        elsif @merchant_order_id.nil?
+          present_?(@payment_id, :payment_id)
+        elsif @payment_id.nil?
+          present_?(@merchant_order_id, :merchant_order_id)
+        end
       end
 
       private
@@ -39,6 +44,7 @@ module KBraspag
       def valid_merchant_order_id?(merchant_order_id)
         valid_class_type_?("merchant_order_id", merchant_order_id, String)
       end
+
     end
   end
 end

@@ -38,10 +38,12 @@ require 'braspag/response/default/payment_with_payment_slip'
 require 'braspag/response/cancel'
 require 'braspag/response/complete_payment_slip'
 require 'braspag/response/simplified_credit_card'
+require 'braspag/response/query'
 
 require 'braspag/request/cancel'
 require 'braspag/request/complete_payment_slip'
 require 'braspag/request/simplified_credit_card'
+require 'braspag/request/query'
 
 require 'braspag/webservice/cancel'
 require 'braspag/webservice/complete_payment_slip'
@@ -52,6 +54,7 @@ require 'braspag/webservice/query'
 require 'payment/cancel'
 require 'payment/complete_payment_slip'
 require 'payment/simplified_credit_card'
+require 'payment/query'
 
 KLog::Log.configuration {|config| config.label = "Braspag Pagador API Rest"}
 
@@ -66,6 +69,9 @@ module KBraspag
 
   Cancel = Payment::Cancel
   C = Cancel
+
+  Query = Payment::Query
+  Q = Query
 
   ## FILE PATH TO CA CERTIFICATE (*.pem)
   define_setting :ca_file_path, "#{File.dirname(__FILE__)}/braspag.pem"
