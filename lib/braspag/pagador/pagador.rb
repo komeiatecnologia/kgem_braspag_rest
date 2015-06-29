@@ -136,7 +136,7 @@ module KBraspag
 
     protected
     def credit_card_paid?(status)
-      [1,2].include? status
+      status == 2
     end
 
     def payment_slip_paid?(status)
