@@ -49,6 +49,7 @@ REALIZAR PAGAMENTOS
  - Exemplo Cartão de Crédito
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
+    cartao.payment.capture = true # default já é true, portanto pode ser omitido a atribuição
     cartao.payment.amount = 15700
     cartao.payment.provider = :minha_operadora
     cartao.payment.installments = 1
@@ -164,7 +165,7 @@ KBraspag.configuration do |config|
                                         }
 
   ##REQUEST SETTINGS
-  config.timeout, 5
+  config.timeout, 15
   config.merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
   config.merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
   config.connection_attempts, 3
