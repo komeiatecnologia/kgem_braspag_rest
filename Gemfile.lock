@@ -25,3 +25,6 @@ DEPENDENCIES
   kgem_log (>= 0.0.1)
   pry (= 0.9.12.6)
   rake (= 0.8.7)
+
+BUNDLED WITH
+   1.10.3
