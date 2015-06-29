@@ -6,9 +6,11 @@ module KBraspag
 
       class PaymentWithCreditCard < KBraspag::Request::Default::Payment
         attr_accessor :credit_card
+        attr_accessor :capture
 
         def initialize
           @credit_card = KBraspag::Request::Default::CreditCard.new
+          @capture = true
           send(:type=, :credit_card)
         end
 
@@ -19,6 +21,7 @@ module KBraspag
         def to_braspag_hash
           h = super
           h['CreditCard'] = @credit_card.to_braspag_hash
+          h['Capture'] = @capture
           h
         end
 
