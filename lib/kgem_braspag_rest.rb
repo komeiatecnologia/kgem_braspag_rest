@@ -56,7 +56,7 @@ require 'payment/complete_payment_slip'
 require 'payment/simplified_credit_card'
 require 'payment/query'
 
-KLog::Log.configuration {|config| config.label = "Braspag Pagador API Rest"}
+KLog::Log.configuration {|config| config.label = "Braspag Pagador API Rest [#{Time.now}]"}
 
 module KBraspag
   extend Configuration
@@ -116,7 +116,7 @@ module KBraspag
                                                 }
 
   ##REQUEST SETTINGS
-  define_setting :timeout, 5
+  define_setting :timeout, 15
   define_setting :merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
   define_setting :merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
   define_setting :connection_attempts, 3
