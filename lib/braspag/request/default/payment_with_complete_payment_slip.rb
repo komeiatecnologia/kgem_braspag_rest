@@ -9,10 +9,10 @@ module KBraspag
         extend KBraspag::HelpersClass
 
         can_be_nil :address, :payment_slip_number, :assignor, :demonstrative,
-                   :expiration_date, :instructions
+                   :expiration_date, :instructions, :identification
 
         attr_reader :address, :assignor, :demonstrative, :expiration_date,
-                    :instructions, :payment_slip_number
+                    :instructions, :payment_slip_number, :identification
 
         def initialize
           super
@@ -20,6 +20,7 @@ module KBraspag
           @assignor = nil
           @demonstrative = nil
           @expiration_date = nil
+          @identification = nil
           @instructions = nil
           @payment_slip_number = nil # Nosso número
         end
@@ -40,6 +41,10 @@ module KBraspag
           @expiration_date = expiration_date if valid_expiration_date?(expiration_date)
         end
 
+        def identification=(identification)
+          @identification = identification if valid_identification?(identification)
+        end
+
         def instructions=(instructions)
           @instructions = instructions if valid_instructions?(instructions)
         end
@@ -55,6 +60,7 @@ module KBraspag
           h['Assignor'] = @assignor
           h['Demonstrative'] = @demonstrative
           h['ExpirationDate'] = @expiration_date
+          h['Identification'] = @identification
           h['Instructions'] = @instructions
           h
         end
@@ -74,6 +80,10 @@ module KBraspag
 
         def valid_expiration_date?(expiration_date)
           valid_class_type_?(:expiration_date, expiration_date, String) && present_?(expiration_date, "expiration_date") && greater_than_current_date_?(expiration_date)
+        end
+
+        def valid_identification?(identification)
+          present_?(identification, 'identification') && valid_class_type_?(:identification, identification, String) && valid_identification_format?(identification)
         end
 
         def valid_instructions?(instructions)

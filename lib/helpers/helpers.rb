@@ -3,6 +3,8 @@ module KBraspag
 
     LAST_DECIMAL_PLACE = /^.*\d+[\,|\.]\d{1}$/
     REGEX_VALID_PAYMENT = /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
+    VALID_IDENTIFICATION = /^\d{1,14}$/
+    VALID_DATE_FORMAT = /\A\d{4}-\d{2}-\d{2}\z/
 
     def valid_class_type_?(attr_name, value, expected_class)
       raise TypeError, msg_invalid_class(attr_name, expected_class), "#{self.class}" if !value.kind_of? expected_class
@@ -137,7 +139,19 @@ module KBraspag
       true
     end
 
+    def valid_string_date_format_?(string_date)
+      raise(ArgumentError, "Invalid date format, expected YYYY-MM-DD"
+        ) if string_date !~ VALID_DATE_FORMAT
+    end
+
   private
+    def valid_identification_format?(identification)
+      raise( ArgumentError,
+            "Invalid identification, expected string with max 14 numeric characters(CPF/CPNJ)",
+            self.class.to_s) if identification !~ VALID_IDENTIFICATION
+      true
+    end
+
     def verify?(attribute)
       attribute = attribute.to_sym
       return !can_be_nil.include?(attribute) if can_be_nil

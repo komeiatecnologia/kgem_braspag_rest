@@ -20,7 +20,7 @@ REALIZAR PAGAMENTOS
  - Exemplo Boleto
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
-    boleto.customer.identification = "1234567890"
+    boleto.customer.identity = "1234567890"
     boleto.merchant_order_id = '2014111703'
     boleto.payment.amount = 15700 #Ou 15.700, "15,700"
     boleto.payment.provider = :meu_banco

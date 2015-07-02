@@ -1,0 +1,110 @@
+module KBraspag
+  module Request
+    module Default
+      class Address
+        include KBraspag::Helpers
+        extend KBraspag::HelpersClass
+
+        UF = /\A(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)\z/
+        INVALID_STATE = "Invalid state, expected [AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO]"
+
+        can_be_nil :street, :number, :complement, :zip_code, :city, :state,
+                   :country
+
+        attr_reader :street, :number, :complement, :zip_code, :city, :state,
+                    :country
+
+        def initialize
+          @street = nil
+          @number = nil
+          @complement = nil
+          @zip_code = nil
+          @city = nil
+          @state = nil
+          @country = "BRA"
+        end
+
+        def street=(street)
+          @street = street if valid_street?(street)
+        end
+
+        def number=(number)
+          @number = number if valid_number?(number)
+        end
+
+        def complement=(complement)
+          @complement = complement if valid_complement?(complement)
+        end
+
+        def zip_code=(zip_code)
+          @zip_code = zip_code if zip_code_valid?(zip_code)
+        end
+
+        def city=(city)
+          @city = city if valid_city?(city)
+        end
+
+        def state=(state)
+          @state = state if valid_state?(state)
+        end
+
+        def country=(country)
+          @country = country if valid_country?(country)
+        end
+
+        def to_braspag_hash
+          {
+            "Street" => @street,
+            "Number" => @number,
+            "Complement" => @complement,
+            "ZipCode" => @zip_code,
+            "City" => @city,
+            "State" => @state,
+            "Country" => @country
+          }
+        end
+
+        private
+        def valid_street?(street)
+          valid_class_type_?(:street, street, String)
+          valid_string_size_?(street, :street, 255)
+        end
+
+        def valid_number?(number)
+          valid_class_type_?(:number, number, String)
+          valid_string_size_?(number, :number, 15)
+        end
+
+        def valid_complement?(complement)
+          valid_class_type_?(:complement, complement, String)
+          valid_string_size_?(complement, :complement, 50)
+        end
+
+        def valid_zip_code?(zip_code)
+          valid_class_type_?(:zip_code, zip_code, String)
+          valid_string_size_?(zip_code, :zip_code, 9)
+        end
+
+        def valid_city?(city)
+          valid_class_type_?(:city, city, String)
+          valid_string_size_?(city, :city, 50)
+        end
+
+        def valid_uf?(state)
+          raise(ArgumentError, INVALID_STATE) if UF !~ state
+          true
+        end
+
+        def valid_state?(state)
+          valid_class_type_?(:state, state, String)
+          valid_uf?(state)
+        end
+
+        def valid_country?(country)
+          valid_class_type_?(:country, country, String)
+          valid_string_size_?(country, :country, 35)
+        end
+      end
+    end
+  end
+end

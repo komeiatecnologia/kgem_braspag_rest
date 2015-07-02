@@ -11,6 +11,7 @@ class FakeCompletePaymentSlip
     cps.payment.assignor = "Empresa Teste"
     cps.payment.demonstrative = "Desmonstrative Teste"
     cps.payment.expiration_date = "2020-05-1"
+    cps.payment.instructions = '12345678901234'
     cps.payment.instructions = "Aceitar somente até a data de vencimento, após essa data juros de 1% dia."
     cps
   end

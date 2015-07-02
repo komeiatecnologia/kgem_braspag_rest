@@ -33,7 +33,7 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal cps.merchant_order_id, hash['MerchantOrderId']
     assert_equal cps.customer.class, KBraspag::Request::Default::Customer
     assert_equal cps.customer.name, hash['Customer']['Name']
-    assert_equal cps.customer.identification, hash['Customer']['Identification']
+    assert_equal cps.customer.identity, hash['Customer']['Identity']
     assert_equal cps.payment.class, KBraspag::Request::Default::PaymentWithCompletePaymentSlip
     assert_equal cps.payment.amount, hash['Payment']['Amount']
     assert_equal cps.payment.provider, hash['Payment']['Provider']

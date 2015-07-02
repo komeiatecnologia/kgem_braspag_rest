@@ -108,6 +108,36 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal pn, p.payment_slip_number
   end
 
+  def test_should_throw_if_identification_not_be_String
+    pwps = new_pwps
+    begin
+      pwps.identification = 1234567
+    rescue Exception => e
+      assert_equal("identification: Invalid class type, expected String.class", e.message)
+    end
+  end
+
+  def test_should_throw_if_identification_greater_than_14_digits
+    pwps = new_pwps
+    begin
+      pwps.identification = '123456789012345'
+    rescue Exception => e
+      assert_equal("Invalid identification, expected string with max 14 numeric characters(CPF/CPNJ)", e.message)
+    end
+  end
+
+  def test_identification_should_return_1234567890
+    pwps = new_pwps
+    pwps.identification = '1234567890'
+    assert_equal('1234567890', pwps.identification)
+  end
+
+  def test_braspag_hash_should_return_identification_equal_1234567890
+    pwps = new_pwps
+    pwps.identification = '1234567890'
+    assert_equal('1234567890', pwps.to_braspag_hash['Identification'])
+  end
+
   def test_should_braspag_hash_keys
     p = new_pwps
     hash = new_pwps.to_braspag_hash
@@ -122,6 +152,7 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     assert_equal(true, hash.key?('Assignor'))
     assert_equal(true, hash.key?('Demonstrative'))
     assert_equal(true, hash.key?('ExpirationDate'))
+    assert_equal(true, hash.key?('Identification'))
     assert_equal(true, hash.key?('Instructions'))
   end
 

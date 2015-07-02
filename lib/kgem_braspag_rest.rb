@@ -16,6 +16,7 @@ require 'helpers/meta'
 
 require 'braspag/pagador/pagador'
 
+require 'braspag/request/default/address'
 require 'braspag/request/default/request'
 require 'braspag/request/default/payment'
 require 'braspag/request/default/credit_card'
