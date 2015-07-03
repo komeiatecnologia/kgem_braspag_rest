@@ -37,7 +37,7 @@ module KBraspag
         end
 
         def zip_code=(zip_code)
-          @zip_code = zip_code if zip_code_valid?(zip_code)
+          @zip_code = zip_code if valid_zip_code?(zip_code)
         end
 
         def city=(city)

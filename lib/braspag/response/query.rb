@@ -3,21 +3,30 @@ module KBraspag
     #require 'braspag/pagador/pagador'
 
     class Query
-      Builders = {
+      BOLETO = /"Type":"Boleto"/
+      CREDIT_CARD = /"Type":"CreditCard"/
+
+      BUILDERS = {
         :error => KBraspag::Response::Default::Response,
-        "CreditCard" => KBraspag::Response::SimplifiedCreditCard,
-        "Boleto" => KBraspag::Response::CompletePaymentSlip
+        :credit_card => KBraspag::Response::SimplifiedCreditCard,
+        :payment_slip => KBraspag::Response::CompletePaymentSlip
       }
 
       def self.build_response(response)
         if response.kind_of? Net::HTTPSuccess
-          type = response['Payment']['Type']
-          Builders[type].build_response(response)
+          formatter(response.body).build_response(response)
         else
-          Builders[:error].build_response(response)
+          BUILDERS[:error].build_response(response)
         end
       end
 
+      private
+      def self.formatter(body)
+        return BUILDERS[:payment_slip] if BOLETO =~ body
+        # incluir as demais opções aqui, para não haver falso verdadeiro
+        # no caso do cartão de crédito
+        return BUILDERS[:credit_card] if CREDIT_CARD =~ body
+      end
     end
   end
 end

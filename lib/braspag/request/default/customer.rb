@@ -18,7 +18,8 @@ module KBraspag
           @identity_type = nil #CPF ou CNPJ
           @email = nil
           @birthdate = nil
-          @address = @delivery_address = KBraspag::Request::Default::Address.new
+          @address = KBraspag::Request::Default::Address.new
+          @delivery_address = KBraspag::Request::Default::Address.new
         end
 
         def name=(name)
@@ -29,8 +30,8 @@ module KBraspag
           @identity = identity if valid_identity?(identity)
         end
 
-        def valid_identify_type(type)
-          @identity_type = type if valid_identify_type?(type)
+        def identity_type=(type)
+          @identity_type = type if valid_identity_type?(type)
         end
 
         def email=(email)
@@ -64,9 +65,9 @@ module KBraspag
           valid_identification_format?(identity)
         end
 
-        def valid_identify_type(type)
+        def valid_identity_type?(identity_type)
           valid_class_type_?(:identity_type, identity_type, String)
-          valid_string_size_?(type, :type, 25)
+          valid_string_size_?(identity_type, :identity_type, 25)
         end
 
         def valid_email_format_?(email)
@@ -80,7 +81,7 @@ module KBraspag
           valid_email_format_?(email)
         end
 
-        def birthdate?(birthdate)
+        def valid_birthdate?(birthdate)
           valid_class_type_?(:birthdate, birthdate, String)
           valid_string_date_format_?(birthdate)
         end

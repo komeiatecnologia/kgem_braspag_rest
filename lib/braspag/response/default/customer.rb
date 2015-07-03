@@ -2,11 +2,16 @@ module KBraspag
   module Response
     module Default
       class Customer
-        attr_reader :name, :identification
+        attr_reader :name, :identity, :identity_type, :email, :address,
+                    :delivery_address
 
         def initialize(hash)
           @name = hash['Name']
-          @identification = hash['Identification']
+          @identity = hash['Identity']
+          @identity_type = hash['IdentityType']
+          @email = hash['Email']
+          @address = KBraspag::Response::Default::Address.new(hash['Address']) if hash['Address']
+          @delivery_address = KBraspag::Response::Default::Address.new(hash['DeliveryAddress']) if hash['DeliveryAddress']
         end
       end
     end

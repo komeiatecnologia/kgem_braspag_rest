@@ -1,6 +1,6 @@
 class FakePaymentWithPaymentSlip
   def self.default!(pwps)
-    pwps.amount = 15700
+    pwps.amount = 100
     pwps.provider = :simulado
   end
 end

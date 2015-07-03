@@ -32,6 +32,7 @@ require 'braspag/response/default/link'
 require 'braspag/response/default/payment'
 require 'braspag/response/default/credit_card'
 require 'braspag/response/default/customer'
+require 'braspag/response/default/address'
 require 'braspag/response/default/payment_with_credit_card'
 require 'braspag/response/default/payment_with_payment_slip'
 
@@ -120,11 +121,15 @@ module KBraspag
   define_setting :timeout, 15
   define_setting :merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
   define_setting :merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
+  # define_setting :merchant_id, "4E9083D8-6584-E311-93FD-000AF7120B63"
+  # define_setting :merchant_key, "LRGS34zfF06c8lilS2hJRmJFiMw8fawd0HIIDtHZ"
   define_setting :connection_attempts, 3
 
   ##URLs
   define_setting :payment_url, "https://apisandbox.braspag.com.br"
   define_setting :query_url, "https://apiquerysandbox.braspag.com.br"
+  # define_setting :payment_url, "https://api.braspag.com.br"
+  # define_setting :query_url, "https://apiquery.braspag.com.br"
 
   ##RESOURCES
   define_setting :complete_payment_slip_resource, "/v2/sales/"
