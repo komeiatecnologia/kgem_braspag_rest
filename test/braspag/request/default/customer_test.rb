@@ -79,6 +79,17 @@ class DefaultCustomertTest < Test::Unit::TestCase
     assert_equal id, c.identity
   end
 
+  def test_should_throw_exception_identity_type_invalid_class_type
+    c = new_customer
+    begin
+      c.identity_type = :cpf
+    rescue Exception => e
+      assert_equal c.msg_invalid_class(:identity_type, String), e.message
+    end
+  end
+
+
+
   private
   def new_customer
     KBraspag::Request::Default::Customer.new
