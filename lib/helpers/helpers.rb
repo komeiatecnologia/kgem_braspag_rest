@@ -142,12 +142,13 @@ module KBraspag
     def valid_string_date_format_?(string_date)
       raise(ArgumentError, "Invalid date format, expected YYYY-MM-DD"
         ) if string_date !~ VALID_DATE_FORMAT
+      true
     end
 
   private
     def valid_identification_format?(identification)
       raise( ArgumentError,
-            "Invalid identification, expected string with max 14 numeric characters(CPF/CPNJ)",
+            "Invalid identity/identification, expected string with max 14 numeric characters(CPF/CPNJ)",
             self.class.to_s) if identification !~ VALID_IDENTIFICATION
       true
     end

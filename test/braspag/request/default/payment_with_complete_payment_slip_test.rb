@@ -122,7 +122,7 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     begin
       pwps.identification = '123456789012345'
     rescue Exception => e
-      assert_equal("Invalid identification, expected string with max 14 numeric characters(CPF/CPNJ)", e.message)
+      assert_equal("Invalid identity/identification, expected string with max 14 numeric characters(CPF/CPNJ)", e.message)
     end
   end
 
