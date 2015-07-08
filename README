@@ -20,7 +20,27 @@ REALIZAR PAGAMENTOS
  - Exemplo Boleto
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
+    boleto.customer.identity_type = 'CPF' # CPF|CNPJ
     boleto.customer.identity = "1234567890"
+    boleto.customer.email = "email@email.com"
+    boleto.customer.birthdate = "1999-10-10" # YYYY-MM-DD
+
+    boleto.customer.address.street = "Minha Rua"
+    boleto.customer.address.number = "1234"
+    boleto.customer.address.complemento = "Meu Complemento"
+    boleto.customer.address.zipcode = "86010-540"
+    boleto.customer.address.city = "Minha Cidade"
+    boleto.customer.address.state = "PR" #Deve ser a sigla
+    boleto.customer.address.country = "BRA" #Opcional o default já é Brasil
+
+    boleto.customer.delivery_address.street = "Minha Rua"
+    boleto.customer.delivery_address.number = "1234"
+    boleto.customer.delivery_address.complemento = "Meu Complemento"
+    boleto.customer.delivery_address.zipcode = "86010-540"
+    boleto.customer.delivery_address.city = "Minha Cidade"
+    boleto.customer.delivery_address.state = "PR" #Deve ser a sigla
+    boleto.customer.delivery_address.country = "BRA" #Opcional o default já é Brasil
+
     boleto.merchant_order_id = '2014111703'
     boleto.payment.amount = 15700 #Ou 15.700, "15,700"
     boleto.payment.provider = :meu_banco
