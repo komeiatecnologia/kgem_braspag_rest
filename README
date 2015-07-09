@@ -28,15 +28,15 @@ REALIZAR PAGAMENTOS
     boleto.customer.address.street = "Minha Rua"
     boleto.customer.address.number = "1234"
     boleto.customer.address.complemento = "Meu Complemento"
-    boleto.customer.address.zipcode = "86010-540"
+    boleto.customer.address.zip_code = "86010-540"
     boleto.customer.address.city = "Minha Cidade"
     boleto.customer.address.state = "PR" #Deve ser a sigla
     boleto.customer.address.country = "BRA" #Opcional o default já é Brasil
 
     boleto.customer.delivery_address.street = "Minha Rua"
     boleto.customer.delivery_address.number = "1234"
-    boleto.customer.delivery_address.complemento = "Meu Complemento"
-    boleto.customer.delivery_address.zipcode = "86010-540"
+    boleto.customer.delivery_address.complement = "Meu Complemento"
+    boleto.customer.delivery_address.zip_code = "86010-540"
     boleto.customer.delivery_address.city = "Minha Cidade"
     boleto.customer.delivery_address.state = "PR" #Deve ser a sigla
     boleto.customer.delivery_address.country = "BRA" #Opcional o default já é Brasil
@@ -155,7 +155,7 @@ KBraspag.configuration do |config|
 
   ## CREDIT CARD BRANDS AVAILABLE
   config.brands, {
-                    :visa => 'Visa', :mastercard => 'Mastercard',
+                    :visa => 'Visa', :mastercard => 'Master',
                     :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
                     :jcb => 'JCB', :diners => 'Diners',
                     :discover => 'Discover', :hipercard => 'Hipercard',

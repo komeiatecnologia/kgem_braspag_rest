@@ -88,7 +88,7 @@ module KBraspag
 
   ## CREDIT CARD BRANDS AVAILABLE
   define_setting :brands, {
-                            :visa => 'Visa', :mastercard => 'Mastercard',
+                            :visa => 'Visa', :mastercard => 'Master',
                             :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
                             :jcb => 'JCB', :diners => 'Diners',
                             :discover => 'Discover', :hipercard => 'Hipercard',
