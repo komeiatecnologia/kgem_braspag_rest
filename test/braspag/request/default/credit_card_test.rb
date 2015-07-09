@@ -166,10 +166,10 @@ class CreditCardTest < Test::Unit::TestCase
     assert_equal "Visa", c.brand
   end
 
-  def test_should_return_brand_equal_Mastercard
+  def test_should_return_brand_equal_Master
     c = new_credit_card
     c.brand = :mastercard
-    assert_equal "Mastercard", c.brand
+    assert_equal "Master", c.brand
   end
 
   def test_should_return_brand_equal_Amex
