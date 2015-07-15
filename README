@@ -1,24 +1,106 @@
 Documentação API Pagador Rest: http://apidocs.braspag.com.br
 
-- O Provider Redecard não possui estorno online.
-
 ******* COMO USAR ********
 
-CONFIGURAR
+1 - Instale a gem kgem_braspag_rest
 
-  1 - Instale a gem kgem_braspag_rest
+2 - Informar o MerchantID e MerchantKey
+  Em projetos Rails basta criar um arquivo .rb no diretório config/initializers e seguir o exemplo abaixo:
 
-  2 - Informar o MerchantID e MerchantKey
-    Em projetos Rails basta criar um arquivo .rb no diretório initializers e seguir o exemplo abaixo:
+  require 'kgem_braspag_rest'
 
-    require 'kgem_braspag_rest'
+  KBraspag.configuration do |config|
+    config.merchant_id = "MeuMerchantID"
+    config.merchant_key = "MeuMerchantKey"
+  end
 
-    KBraspag.configuration do |config|
-      config.merchant_id = "MeuMerchantID"
-      config.merchant_key = "MeuMerchantKey"
+******* ALTERAR AS CONFIGURAÇÕES DEFAULT *********
+
+Exemplos:
+
+1 - Desejo alterar o timeout de 15 para 5 segundos.
+
+    KBraspag.configuration { |config| config.timeout = 15 }
+
+2 - Desejo incluir mais um gerador de boleto
+
+    KBraspag.configuration { |config| config.payment_slip_providers[:santander] = "Santander" }
+
+3 - Desejo substituir todas operadores de cartões
+
+    kBraspag.configuration do |config|
+      config.credit_card_providers = {
+                                       :operadora1 => 'Operadora 1',
+                                       :operadora2 => 'Operadora 2'
+                                     }
     end
 
-REALIZAR PAGAMENTOS
+
+Abaixo todas as configurações disponíveis e os valores default
+
+KBraspag.configuration do |config|
+
+  ## FILE PATH TO CA CERTIFICATE (*.pem)
+  config.ca_file_path, "./braspag.pem"
+
+  ## PAYMENT METHODS AVAILABLE
+  config.payment_types, {
+                          :credit_card => "CreditCard",
+                          :payment_slip => "Boleto"
+                         }
+
+  ## CREDIT CARD BRANDS AVAILABLE
+  config.brands, {
+                    :visa => 'Visa',
+                    :mastercard => 'Master',
+                    :amex => 'Amex',
+                    :elo => 'Elo',
+                    :aura => 'Aura',
+                    :jcb => 'JCB',
+                    :diners => 'Diners',
+                    :discover => 'Discover',
+                    :hipercard => 'Hipercard',
+                    :hiper => 'Hiper'
+                  }
+
+  ## AVAILABLE PROVIDERS LIST
+  config.credit_card_providers, {
+                                   :simulado => "Simulado",
+                                   :cielo => "Cielo",
+                                   :rede => "Redecard"
+                                 }
+
+  config.payment_slip_providers, {
+                                    :bradesco => "Bradesco",
+                                    :banco_do_brasil => "BancoDoBrasil",
+                                    :citibank => "CitiBank",
+                                    :itau => "Itau",
+                                    :brb => "Brb",
+                                    :caixa => "Caixa",
+                                    :santander => "Santander",
+                                    :simulado => "Simulado"
+                                  }
+
+
+  ##REQUEST SETTINGS
+  config.timeout, 15
+  config.merchant_id, nil
+  config.merchant_key, nil
+  config.connection_attempts, 3
+
+  ##URLs
+  define_setting :payment_url, "https://api.braspag.com.br"
+  define_setting :query_url, "https://apiquery.braspag.com.br"
+
+  ##RESOURCES
+  config.complete_payment_slip_resource, "/v2/sales/"
+  config.simplified_credit_card_resource, "/v2/sales/"
+  config.cancel_resource, "/v2/sales/"
+end
+
+******* REALIZAR PAGAMENTOS *******
+
+
  - Exemplo Boleto
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
@@ -29,7 +111,7 @@ REALIZAR PAGAMENTOS
 
     boleto.customer.address.street = "Minha Rua"
     boleto.customer.address.number = "1234"
-    boleto.customer.address.complemento = "Meu Complemento"
+    boleto.customer.address.complement = "Meu Complemento"
     boleto.customer.address.zip_code = "86010-540"
     boleto.customer.address.city = "Minha Cidade"
     boleto.customer.address.state = "PR" #Deve ser a sigla
@@ -62,6 +144,9 @@ REALIZAR PAGAMENTOS
     #Verificar se a transação teve o pagamento confirmado (true| false)
     resposta.paid?
 
+    #Verificar se a transação foi cancelada/estornada (true|false)
+    resposta.canceled?
+
     #Verificar todas as mensagens retornadas pelo gateway (Array)
     resposta.messages
 
@@ -71,7 +156,7 @@ REALIZAR PAGAMENTOS
  - Exemplo Cartão de Crédito
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
-    cartao.payment.capture = true # default já é true, portanto pode ser omitido a atribuição
+    cartao.payment.capture = true # default já é true, portanto pode ser omitida a atribuição
     cartao.payment.amount = 15700
     cartao.payment.provider = :minha_operadora
     cartao.payment.installments = 1
@@ -91,14 +176,42 @@ REALIZAR PAGAMENTOS
     #Verificar se a transação teve o pagamento confirmado (true| false)
     resposta.paid?
 
+    #Verificar se a transação foi cancelada/estornada (true|false)
+    resposta.canceled?
+
     #Verificar todas as mensagens retornadas pelo gateway (Array)
     resposta.messages
 
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
-CANCELAR PAGAMENTO
-  - Exemplo cancelar transação
+
+CONSULTAR PAGAMENTO/TRANSAÇÃO
+  - Exemplo consultar transação método 1
+    consultar = KBraspag::Query.new # Ou KBraspag::Q.new
+
+    consular.payment_id = "uuid da transação"
+
+    resposta = consultar.consult
+
+  - Exemplo consultar transação método 2
+    consultar = KBraspag::Query.new # Ou KBraspag::Q.new
+
+    responsta = consultar.consult("uuid da transação")
+
+  - Verificar resultado
+    #Verificar se a operação foi realizada com sucesso (true|false)
+    resposta.success?
+
+    #Verificar todas as mensagens retornadas pelo gateway (Array)
+    resposta.messages
+
+    #Verificar a messagem retornada de maior relevancia (String)
+    resposta.messages.first
+
+
+CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
+  - Exemplo cancelar transação método 1
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     cancelar.payment_id = "uuid da transação"
@@ -109,7 +222,14 @@ CANCELAR PAGAMENTO
     # Tentar cancelar/estornar
     resposta = cancelar.cancel
 
-    #Verificar se a transação foi realizada com sucesso (true|false)
+  - Exemplo cancelar transação método 2
+    cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
+
+    # Tentar cancelar/estornar
+    resposta = cancelar.cancel(payment_id, amount) #Amount é opcional
+
+  - Verificar resultado
+    #Verificar se a operação foi realizada com sucesso (true|false)
     resposta.success?
 
     #Verificar todas as mensagens retornadas pelo gateway (Array)
@@ -118,86 +238,3 @@ CANCELAR PAGAMENTO
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
-******* ALTERAR AS CONFIGURAÇÕES DEFAULT *********
-
-Exemplos:
-
-1 - Desejo alterar somente o timeout de 5 segundos para 15 segundos.
-
-    KBraspag.configuration { |config| config.timeout = 15 }
-
-2 - Desejo incluir mais um gerador de boleto
-
-    KBraspag.configuration { |config| config.payment_slip_providers[:santander] = "Santander" }
-
-3 - Desejo substituir todas operadores de cartões
-
-    kBraspag.configuration do |config|
-      config.credit_card_providers = {
-                                       :operadora1 => 'Operadora 1',
-                                       :operadora2 => 'Operadora 2'
-                                     }
-    end
-
-
-Abaixo está listado todas as configurações disponíveis e os valores default
-
-KBraspag.configuration do |config|
-
-  ## FILE PATH TO CA CERTIFICATE (*.pem)
-  config.ca_file_path, "./braspag.pem"
-
-  ## PAYMENT METHODS AVAILABLE
-  config.payment_types, {
-                          :credit_card => "CreditCard",
-                          :debit_card => "DebitCard",
-                          :eletronic_transfer => "EletronicTransfer",
-                          :payment_slip => "Boleto"
-                         }
-
-  ## CREDIT CARD BRANDS AVAILABLE
-  config.brands, {
-                    :visa => 'Visa', :mastercard => 'Master',
-                    :amex => 'Amex', :elo => 'Elo', :aura => 'Aura',
-                    :jcb => 'JCB', :diners => 'Diners',
-                    :discover => 'Discover', :hipercard => 'Hipercard',
-                    :hiper => 'Hiper'
-                  }
-
-  ## AVAILABLE PROVIDERS LIST
-  config.credit_card_providers, {
-                                   :simulado => "Simulado",
-                                   :cielo => "Cielo",
-                                   :rede => "Redecard"
-                                 }
-  config.debit_providers, {:cielo => "Cielo"}
-  config.payment_slip_providers, {
-                                    :bradesco => "Bradesco",
-                                    :banco_do_brasil => "BancoDoBrasil",
-                                    :citibank => "CitiBank",
-                                    :itau => "Itau",
-                                    :brb => "Brb",
-                                    :caixa => "Caixa",
-                                    :santander => "Santander",
-                                    :simulado => "Simulado"
-                                  }
-  config.eletronic_transfer_providers, {
-                                          :bradesco => "Bradesco",
-                                          :simulado => "Simulado"
-                                        }
-
-  ##REQUEST SETTINGS
-  config.timeout, 15
-  config.merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
-  config.merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
-  config.connection_attempts, 3
-
-  ##URLs
-  config.payment_url, "https://apisandbox.braspag.com.br"
-  config.query_url, "https://apiquerysandbox.braspag.com.br"
-
-  ##RESOURCES
-  config.complete_payment_slip_resource, "/v2/sales/"
-  config.simplified_credit_card_resource, "/v2/sales/"
-  config.cancel_resource, "/v2/sales/"
-end
