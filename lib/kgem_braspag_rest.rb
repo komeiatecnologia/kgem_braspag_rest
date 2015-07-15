@@ -128,6 +128,9 @@ module KBraspag
   # Development merchant
   # define_setting :merchant_id, "e895fcba-14df-49f6-a019-e576c136f520"
   # define_setting :merchant_key, "FLKAVCQRLZKEZFFSDOYDBXPMWSUYWFSCMGDNKYYJ"
+  define_setting :merchant_id, nil
+  define_setting :merchant_key, nil
+
   define_setting :connection_attempts, 3
 
   ##URLs
