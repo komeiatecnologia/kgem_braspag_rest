@@ -87,7 +87,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     res = scc_class.build_response(fake)
 
     assert_equal reason_message[res.payment.reason_code], res.messages.first
-    assert_equal 2, res.messages.size
+    assert_equal 3, res.messages.size
     assert_equal "4", res.payment.provider_return_code
     assert_equal Array, res.payment.links.class
     assert_equal true, res.payment.links.first.respond_to?(:rel)

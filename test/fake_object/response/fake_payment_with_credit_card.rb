@@ -21,6 +21,12 @@ class FakePaymentWithCreditCard
     hash['ReasonCode'] = 0
     hash['ReasonMessage'] = "Successful"
     hash['ServiceTaxAmount'] = 0
+    hash["AuthorizationCode"]= "923923"
+    hash["ReceivedDate"] = "2015-07-15 09:16:40"
+    hash["CapturedAmount"] = 15700
+    hash["CapturedDate"] = "2015-07-15 09:16:40"
+    hash["VoidedAmount"] = 15700
+    hash["VoidedDate"] = "2015-07-15 11:52:20"
     hash['Type'] = "CreditCard"
     hash
   end

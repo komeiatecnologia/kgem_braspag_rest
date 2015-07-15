@@ -1,18 +1,6 @@
 module KBraspag
   module Pagador
     STATUS = {
-       0 => 'Not Finished',
-       1 => 'Authorized',
-       2 => 'Payment Confirmed',
-       3 => 'Denied',
-      10 => 'Voided',
-      11 => 'Refunded',
-      12 => 'Pending',
-      13 => 'Aborted',
-      20 => 'Scheduled'
-    }
-
-    STATUS_MESSAGE = {
        0 => 'Não finalizada',
        1 => 'Autorizada',
        2 => 'Pagamento confirmado',
@@ -134,9 +122,9 @@ module KBraspag
       304 => "Customer Identity é obrigatório",
       306 => "A chave de loja(MerchantId) informada está bloqueado",
       307 => "Transação não encontrada",
-      308 => "Transação não está disponível para Captura",
+      308 => "Transação não está disponível para captura",
       309 => "O cancelamento não está disponível para essa transação",
-      310 => "O método de pagamento informado não é suportado por essa operação",
+      310 => "O pagamento informado não suporta essa operação",
       311 => "Estorno de transações não está ativo para essa chave de loja(MerchantId)",
       312 => "Transação não disponível para estorno",
       313 => "Pagamento recorrente não encontrado",
@@ -159,6 +147,10 @@ module KBraspag
 
     def operation_success?(status)
       [1,2,10,11].include? status
+    end
+
+    def transaction_canceled?(status)
+      [10,11].include? status
     end
   end
 end

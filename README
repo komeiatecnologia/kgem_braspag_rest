@@ -1,5 +1,7 @@
 Documentação API Pagador Rest: http://apidocs.braspag.com.br
 
+- O Provider Redecard não possui estorno online.
+
 ******* COMO USAR ********
 
 CONFIGURAR

@@ -18,10 +18,15 @@ module KBraspag
           @success ||= operation_success?(@payment.status)
         end
 
+        def canceled?
+          @canceled ||= transaction_canceled?(@payment.status)
+        end
+
         def messages
           unless @messages
             @messages = []
             @messages << reason_message
+            @messages << @payment.status_message
             @messages << provider_message if exists_provider_message?
           end
           @messages

@@ -5,7 +5,10 @@ module KBraspag
 
     class Cancel < KBraspag::Request::Cancel
 
-      def cancel
+      def cancel(id = nil, a = nil)
+        self.payment_id = id unless id.nil?
+        self.amount = a unless a.nil?
+
         send_request if valid_?
       end
 
