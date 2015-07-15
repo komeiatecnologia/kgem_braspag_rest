@@ -132,7 +132,7 @@ module KBraspag
       315 => "Não é possível alterar a data do próximo pagamento(NextRecurrency) com pagamento pendente",
       316 => "A próxima recorrência não pode ser uma data passada",
       317 => "Data de recorrência inválida",
-      318 => "Transação não encontrada",
+      318 => "Nenhuma transação encontrada",
       319 => "Recorrência inteligente não está ativa"
     }
 
