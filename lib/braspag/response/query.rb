@@ -16,6 +16,7 @@ module KBraspag
         if response.kind_of? Net::HTTPSuccess
           body_parser(response.body).build_response(response)
         else
+          response = ganbiarra(response) if response.code == '404'
           BUILDERS[:error].build_response(response)
         end
       end
@@ -26,6 +27,17 @@ module KBraspag
         # incluir as demais opções aqui, para não haver falso verdadeiro
         # no caso do cartão de crédito
         return BUILDERS[:credit_card] if CREDIT_CARD =~ body
+      end
+
+      # Para dar um retorno mais preciso quando não encontrar o pagamento consultado
+      def self.ganbiarra(response)
+        def response.body
+          '[{
+            "Code": 307,
+            "Message": "Transaction not found"
+          }]'
+        end
+        response
       end
     end
   end
