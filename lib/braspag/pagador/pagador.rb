@@ -8,7 +8,8 @@ module KBraspag
       10 => 'Voided',
       11 => 'Refunded',
       12 => 'Pending',
-      13 => 'Aborted'
+      13 => 'Aborted',
+      20 => 'Scheduled'
     }
 
     STATUS_MESSAGE = {
@@ -19,7 +20,8 @@ module KBraspag
       10 => 'Cancelado',
       11 => 'Reembolsado',
       12 => 'Pendente',
-      13 => 'Abortado'
+      13 => 'Abortado',
+      20 => 'Agendado'
     }
 
     REASON_MESSAGE = {
@@ -46,6 +48,8 @@ module KBraspag
       20 => 'Problemas com a emissora',
       21 => 'Número de cartão de crédito inválido',
       22 => 'Conexão expirou',
+      23 => 'Cartão protegido não está ativo',
+      24 => 'O meio de pagamento não está ativo',
       98 => 'Requisição inválida',
       99 => 'Erro desconhecido'
     }
@@ -117,6 +121,12 @@ module KBraspag
       164 => "Return Url é inválida",
       166 => "AuthorizeNow é obrigatório",
       167 => "Antifraude não configurado",
+      168 => "Pagamento recorrente não encontrado",
+      169 => "Pagamento recorrente não está ativo",
+      170 => "Cartão Protegido não configurado",
+      171 => "Dados da afiliação não enviado",
+      172 => "Código credencial é obrigatório",
+      173 => "Meio de pagamento não está ativo",
       300 => "MerchantId não encontrado",
       301 => "Não são permitidas requisições deste IP",
       302 => "O MerchantOrderId informado já existe",
@@ -131,7 +141,11 @@ module KBraspag
       312 => "Transação não disponível para estorno",
       313 => "Pagamento recorrente não encontrado",
       314 => "Integração inválida",
-      315 => "Não é possível alterar a data do próximo pagamento(NextRecurrency) com pagamento pendente"
+      315 => "Não é possível alterar a data do próximo pagamento(NextRecurrency) com pagamento pendente",
+      316 => "A próxima recorrência não pode ser uma data passada",
+      317 => "Data de recorrência inválida",
+      318 => "Transação não encontrada",
+      319 => "Recorrência inteligente não está ativa"
     }
 
     protected

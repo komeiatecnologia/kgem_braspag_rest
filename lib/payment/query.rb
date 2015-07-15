@@ -5,7 +5,8 @@ module KBraspag
 
     class Query < KBraspag::Request::Query
 
-      def consult
+      def consult(payment_id = nil)
+        payment_id = payment_id unless payment_id.nil?
         send_request if valid_?
       end
 

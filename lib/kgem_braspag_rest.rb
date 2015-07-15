@@ -110,6 +110,7 @@ module KBraspag
                                             :brb => "Brb",
                                             :caixa => "Caixa",
                                             :santander => "Santander",
+                                            :hsbc => "HSBC",
                                             :simulado => "Simulado"
                                           }
   define_setting :eletronic_transfer_providers, {
