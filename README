@@ -147,6 +147,9 @@ end
     # Tentar realizar o pagamento
     resposta = boleto.pay
 
+    #Verificar se a transação foi criada com sucesso (true|false)
+    resposta.transaction_created?
+
     #Verificar se a transação foi realizada com sucesso (true|false)
     resposta.success?
 
@@ -178,6 +181,9 @@ end
 
     # Tentar realizar o pagamento
     resposta = cartao.pay
+
+    #Verificar se a transação foi criada com sucesso (true|false)
+    resposta.transaction_created?
 
     #Verificar se a transação foi realizada com sucesso (true|false)
     resposta.success?
