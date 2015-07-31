@@ -26,7 +26,7 @@ Exemplos:
 
     KBraspag.configuration { |config| config.payment_slip_providers[:santander] = "Santander" }
 
-3 - Desejo substituir todas operadores de cartões
+3 - Desejo substituir todas operadoras de cartões
 
     kBraspag.configuration do |config|
       config.credit_card_providers = {
@@ -131,7 +131,7 @@ end
     boleto.customer.delivery_address.complement = "Meu Complemento"
     boleto.customer.delivery_address.zip_code = "86010-540"
     boleto.customer.delivery_address.city = "Minha Cidade"
-    boleto.customer.delivery_address.state = "PR" #Deve ser a sigla
+    boleto.customer.delivery_address.state = "PR" #Deve ser a sigla/uf
     boleto.customer.delivery_address.country = "BRA" #Opcional o default já é Brasil
 
     boleto.merchant_order_id = '2014111703'
