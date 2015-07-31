@@ -15,6 +15,7 @@ class PaymentWithCreditCardTest < Test::Unit::TestCase
 
     hash = p.to_braspag_hash
     assert_equal Hash, hash['CreditCard'].class
+    assert_equal "ByIssuer", hash['Interest']
   end
 
   private

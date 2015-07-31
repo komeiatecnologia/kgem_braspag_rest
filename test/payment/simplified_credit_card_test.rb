@@ -45,7 +45,8 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     assert_equal scc.customer.name, hash['Customer']['Name']
     assert_equal scc.payment.class, KBraspag::Request::Default::PaymentWithCreditCard
     assert_equal scc.payment.amount, hash['Payment']['Amount']
-    assert_equal scc.payment.provider, hash['Payment']['Provider']
+    assert_equal "Simulado", hash['Payment']['Provider']
+    assert_equal "ByIssuer", hash['Payment']['Interest']
     assert_equal scc.payment.installments, hash['Payment']['Installments']
     assert_equal scc.payment.credit_card.class, KBraspag::Request::Default::CreditCard
     assert_equal scc.payment.credit_card.card_number, hash['Payment']['CreditCard']['CardNumber']

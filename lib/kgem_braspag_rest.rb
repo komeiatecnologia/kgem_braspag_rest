@@ -106,6 +106,12 @@ module KBraspag
                                            :cielo => "Cielo",
                                            :rede => "Redecard"
                                          }
+  ## AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
+  define_setting :responsible_for_installment, {
+                                                  :merchant => "ByMerchant",
+                                                  :issuer => "ByIssuer"
+                                               }
+
   # define_setting :debit_providers, {:cielo => "Cielo"}
   define_setting :payment_slip_providers, {
                                             :bradesco => "Bradesco",
@@ -133,7 +139,7 @@ module KBraspag
 
   define_setting :connection_attempts, 3
 
-  ##URLs
+  #URLs
   # define_setting :payment_url, "https://apisandbox.braspag.com.br"
   # define_setting :query_url, "https://apiquerysandbox.braspag.com.br"
 
@@ -146,5 +152,8 @@ module KBraspag
   define_setting :simplified_credit_card_resource, "/v2/sales/"
   define_setting :cancel_resource, "/v2/sales/"
   define_setting :query_resource, "/v2/sales/"
+
+  ## DEFAULT RESPONSIBLE INSTALLMENTS
+  define_setting :interest, :issuer
 end
 

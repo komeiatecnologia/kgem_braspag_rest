@@ -41,16 +41,22 @@ Abaixo todas as configurações disponíveis e os valores default
 KBraspag.configuration do |config|
 
   ## FILE PATH TO CA CERTIFICATE (*.pem)
-  config.ca_file_path, "./braspag.pem"
+  config.ca_file_path = "./braspag.pem"
 
   ## PAYMENT METHODS AVAILABLE
-  config.payment_types, {
+  config.payment_types = {
                           :credit_card => "CreditCard",
                           :payment_slip => "Boleto"
                          }
 
+  ## AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
+  config.responsible_for_installment = {
+                                                  :merchant => "ByMerchant",
+                                                  :issuer => "ByIssuer"
+                                               }
+
   ## CREDIT CARD BRANDS AVAILABLE
-  config.brands, {
+  config.brands = {
                     :visa => 'Visa',
                     :mastercard => 'Master',
                     :amex => 'Amex',
@@ -64,13 +70,13 @@ KBraspag.configuration do |config|
                   }
 
   ## AVAILABLE PROVIDERS LIST
-  config.credit_card_providers, {
+  config.credit_card_providers = {
                                    :simulado => "Simulado",
                                    :cielo => "Cielo",
                                    :rede => "Redecard"
                                  }
 
-  config.payment_slip_providers, {
+  config.payment_slip_providers = {
                                     :bradesco => "Bradesco",
                                     :banco_do_brasil => "BancoDoBrasil",
                                     :citibank => "CitiBank",
@@ -83,19 +89,22 @@ KBraspag.configuration do |config|
 
 
   ##REQUEST SETTINGS
-  config.timeout, 15
-  config.merchant_id, nil
-  config.merchant_key, nil
-  config.connection_attempts, 3
+  config.timeout = 15
+  config.merchant_id = nil
+  config.merchant_key = nil
+  config.connection_attempts = 3
 
   ##URLs
-  define_setting :payment_url, "https://api.braspag.com.br"
-  define_setting :query_url, "https://apiquery.braspag.com.br"
+  define_setting :payment_url = "https://api.braspag.com.br"
+  define_setting :query_url = "https://apiquery.braspag.com.br"
 
   ##RESOURCES
-  config.complete_payment_slip_resource, "/v2/sales/"
-  config.simplified_credit_card_resource, "/v2/sales/"
-  config.cancel_resource, "/v2/sales/"
+  config.complete_payment_slip_resource = "/v2/sales/"
+  config.simplified_credit_card_resource = "/v2/sales/"
+  config.cancel_resource = "/v2/sales/"
+
+  ## DEFAULT RESPONSIBLE INSTALLMENTS(:issuer|:merchant)
+  config.interest = :issuer
 end
 
 ******* REALIZAR PAGAMENTOS *******
