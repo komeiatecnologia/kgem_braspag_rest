@@ -18,6 +18,7 @@ class FakeResponse
     args.each do |k, v|
       create_get_method fake, k, v
     end
+    create_get_method fake, 'transaction_created', false
     fake
   end
 

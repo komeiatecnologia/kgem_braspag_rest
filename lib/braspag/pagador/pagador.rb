@@ -15,7 +15,7 @@ module KBraspag
     REASON_MESSAGE = {
        0 => 'Sucesso',
        1 => 'Afiliação não encontrada',
-       2 => 'Saldo insuficiênte',
+       2 => 'Saldo insuficiente',
        3 => 'Cartão de crédito não encontrado',
        4 => 'A conexão com a operadora de cartões falhou',
        5 => 'Tipo de transação inválido',

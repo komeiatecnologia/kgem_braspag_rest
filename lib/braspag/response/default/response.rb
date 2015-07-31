@@ -14,6 +14,10 @@ module KBraspag
           @request_id = hash['RequestId']
         end
 
+        def transaction_created?
+          @transaction_created ||= true
+        end
+
         def success?
           @success ||= operation_success?(@payment.status)
         end

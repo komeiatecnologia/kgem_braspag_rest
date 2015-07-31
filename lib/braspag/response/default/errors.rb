@@ -16,6 +16,10 @@ module KBraspag
           end
         end
 
+        def transaction_created?
+          @transaction_created ||= false
+        end
+
         def success?
           @success ||= false
         end

@@ -17,6 +17,7 @@ class ResponseTest < Test::Unit::TestCase
     each_expected_and_returned(fake, response) do |expected, returned|
       assert_equal(expected, returned)
     end
+    assert_equal true, response.transaction_created?
   end
 
   def test_parse_with_nil_response_body
@@ -38,6 +39,7 @@ class ResponseTest < Test::Unit::TestCase
 
     assert_equal REQUEST_ID, res.request_id
     assert_equal KBraspag::Pagador::ERROR_MESSAGE[code], res.messages.first
+    assert_equal false, res.transaction_created?
   end
 
   private
