@@ -1,8 +1,8 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_response'
-require 'lib/braspag/response/default/response'
-require 'json'
+
+
 
 class ResponseTest < Test::Unit::TestCase
   include TestHelper

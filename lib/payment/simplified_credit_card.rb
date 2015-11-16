@@ -1,7 +1,7 @@
 module KBraspag
   module Payment
-    # require 'lib/braspag/webservice/simplified_credit_card'
-    # require 'lib/braspag/request/simplified_credit_card'
+
+
 
     class SimplifiedCreditCard < KBraspag::Request::SimplifiedCreditCard
 

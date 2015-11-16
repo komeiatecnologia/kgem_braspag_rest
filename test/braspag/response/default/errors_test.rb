@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/braspag/response/default/errors'
+
 require 'test/fake_object/response/fake_errors'
 
 class ErrorsTest < Test::Unit::TestCase

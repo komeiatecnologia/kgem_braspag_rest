@@ -1,7 +1,7 @@
 module KBraspag
   module Request
     module Default
-      # require 'lib/braspag/request/default/payment'
+
 
       class PaymentWithPaymentSlip < KBraspag::Request::Default::Payment
         # # Remove os métodos herdados

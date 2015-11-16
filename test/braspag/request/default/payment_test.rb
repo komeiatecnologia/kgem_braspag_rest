@@ -1,7 +1,7 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/payment'
-# require 'lib/helpers/helpers'
-# require 'lib/kgem_braspag_rest'
+
+
+
 
 class PaymentTest < Test::Unit::TestCase
   # include KBraspag::Helpers

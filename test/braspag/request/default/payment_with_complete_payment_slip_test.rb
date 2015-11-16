@@ -1,5 +1,5 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/payment_with_complete_payment_slip'
+
 
 class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
 

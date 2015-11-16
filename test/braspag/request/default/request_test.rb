@@ -1,8 +1,8 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/request'
-# require 'lib/braspag/request/default/payment'
-# require 'lib/braspag/request/default/customer'
-# require 'lib/helpers/helpers'
+
+
+
+
 
 class DefaultRequestTest < Test::Unit::TestCase
   # include KBraspag::Helpers

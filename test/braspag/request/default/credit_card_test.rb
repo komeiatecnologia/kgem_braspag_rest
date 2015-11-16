@@ -1,6 +1,6 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/credit_card'
-# require 'lib/helpers/helpers'
+
+
 
 class CreditCardTest < Test::Unit::TestCase
   # include KBraspag::Helpers
@@ -235,8 +235,8 @@ class CreditCardTest < Test::Unit::TestCase
     assert_equal("Visa", braspag_hash['Brand'])
   end
 
-  # def test_should_show_all_brands
-  #   assert_equal(KBraspag::Request::Default::CreditCard.all_brands.class, String)
+  # def test_should_show_all_credit_card_brands
+  #   assert_equal(KBraspag::Request::Default::CreditCard.all_credit_card_brands.class, String)
   # end
 
 private

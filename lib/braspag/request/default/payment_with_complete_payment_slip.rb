@@ -1,8 +1,8 @@
 module KBraspag
   module Request
     module Default
-      # require 'lib/braspag/request/default/payment_with_payment_slip'
-      # require 'lib/helpers/helpers'
+
+
 
       class PaymentWithCompletePaymentSlip < KBraspag::Request::Default::PaymentWithPaymentSlip
         include KBraspag::Helpers

@@ -1,9 +1,9 @@
 require 'test/unit'
-# require 'lib/helpers/helpers'
-# require 'lib/braspag/request/cancel'
-# require 'test/test_helper'
 
-class CancelTest < Test::Unit::TestCase
+
+
+
+class RequestCancelTest < Test::Unit::TestCase
   # include KBraspag::Helpers
 
   def test_should_throw_invalid_payment_id_when_receive_nil

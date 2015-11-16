@@ -1,8 +1,8 @@
 module KBraspag
   module Request
-    # require 'lib/braspag/request/default/request'
-    # require 'lib/braspag/request/default/customer'
-    # require 'lib/braspag/request/default/payment_with_credit_card'
+
+
+
 
     class SimplifiedCreditCard < KBraspag::Request::Default::Request
 

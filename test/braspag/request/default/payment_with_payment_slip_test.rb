@@ -1,5 +1,5 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/payment'
+
 
 class PaymentWithPaymentSlipTest < Test::Unit::TestCase
   # def test_should_not_response_for_installments_methods

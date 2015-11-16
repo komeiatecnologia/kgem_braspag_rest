@@ -1,10 +1,10 @@
 require 'test/unit'
 require 'test/fake_object/request/fake_cancel'
-# require 'lib/payment/cancel'
-# require 'lib/helpers/helpers'
-# require 'test/test_helper'
 
-class CancelTest < Test::Unit::TestCase
+
+
+
+class PaymentCancelTest < Test::Unit::TestCase
   include KBraspag::Helpers
 
   def test_should_throw_can_not_be_empty_when_payment_id_equal_nil

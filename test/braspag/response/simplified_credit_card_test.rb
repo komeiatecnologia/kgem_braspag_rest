@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_simplified_credit_card'
-require 'braspag/response/simplified_credit_card'
+
 require 'test/fake_object/response/fake_response'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase

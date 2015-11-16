@@ -1,9 +1,9 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/payment_with_payment_slip'
-# require 'lib/braspag/request/default/payment_with_complete_payment_slip'
-# require 'lib/braspag/request/default/customer'
-# require 'lib/braspag/request/default/request'
-# require 'lib/braspag/request/complete_payment_slip'
+
+
+
+
+
 
 
 class CompletePaymentSlipTest < Test::Unit::TestCase

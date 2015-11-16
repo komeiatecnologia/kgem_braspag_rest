@@ -1,7 +1,7 @@
 module KBraspag
   module Payment
-    # require 'lib/braspag/request/cancel'
-    # require 'lib/braspag/webservice/cancel'
+
+
 
     class Cancel < KBraspag::Request::Cancel
 

@@ -1,8 +1,8 @@
 module KBraspag
   module Response
     module Default
-      # require 'lib/braspag/response/default/payment'
-      # require 'lib/braspag/response/default/link'
+
+
 
       class PaymentWithPaymentSlip < KBraspag::Response::Default::Payment
         attr_reader :instructions, :expiration_date, :url, :number, :bar_code_number

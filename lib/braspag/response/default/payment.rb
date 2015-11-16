@@ -1,7 +1,7 @@
 module KBraspag
   module Response
     module Default
-      # require 'lib/helpers/meta'
+
 
       VARIABLES_ATTRIBUTES = ['proof_of_sale', 'authorization_code',
         'received_date', 'captured_amount', 'captured_date', 'voided_amount',

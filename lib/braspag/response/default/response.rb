@@ -1,8 +1,8 @@
 module KBraspag
   module Response
     module Default
-      # require 'lib/braspag/pagador/pagador'
-      # require 'lib/braspag/response/default/errors'
+
+
 
       class Response
         include KBraspag::Pagador

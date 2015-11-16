@@ -1,6 +1,6 @@
 require 'test/unit'
-# require 'lib/braspag/request/default/customer'
-# require 'lib/helpers/helpers'
+
+
 
 class DefaultCustomertTest < Test::Unit::TestCase
   # include KBraspag::Helpers

@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'braspag/response/default/payment'
+#require 'braspag/response/default/payment'
 require 'test/fake_object/response/fake_payment'
 require 'test/helpers/test_helper'
 

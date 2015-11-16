@@ -1,12 +1,12 @@
 module KBraspag
   module WebService
     class RestClient
-      # require 'net/http'
-      # require 'net/https'
-      # require 'openssl'
-      # require 'securerandom'
-      # # require 'kgem_log'
-      # # require 'json'
+
+
+
+
+      #
+      #
 
       @@REGEX_UUID = /^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12}).*/.freeze
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get,

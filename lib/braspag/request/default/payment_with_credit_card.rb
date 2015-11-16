@@ -1,8 +1,8 @@
 module KBraspag
   module Request
     module Default
-      # require 'lib/braspag/request/default/payment'
-      # require 'lib/braspag/request/default/credit_card'
+
+
 
       class PaymentWithCreditCard < KBraspag::Request::Default::Payment
         attr_accessor :credit_card
