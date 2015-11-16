@@ -34,7 +34,7 @@ module KBraspag
         end
 
         def brand=(brand)
-          @brand = KBraspag.brands[brand] if valid_brand?(brand)
+          @brand = KBraspag.credit_card_brands[brand] if valid_brand?(brand)
         end
 
         def to_braspag_hash
@@ -49,7 +49,7 @@ module KBraspag
 
         private
         def valid_brand?(brand)
-          valid_class_type_?(:brand, brand, Symbol) && parameter_exists_?(brand, KBraspag.brands)
+          valid_class_type_?(:brand, brand, Symbol) && parameter_exists_?(brand, KBraspag.credit_card_brands)
         end
 
         def valid_security_code?(security_code)

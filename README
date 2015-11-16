@@ -56,7 +56,7 @@ KBraspag.configuration do |config|
                                                }
 
   ## CREDIT CARD BRANDS AVAILABLE
-  config.brands = {
+  config.credit_card_brands = {
                     :visa => 'Visa',
                     :mastercard => 'Master',
                     :amex => 'Amex',

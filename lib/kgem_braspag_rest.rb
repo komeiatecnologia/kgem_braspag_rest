@@ -81,38 +81,49 @@ module KBraspag
   ## PAYMENT METHODS AVAILABLE
   define_setting :payment_types, {
                                   :credit_card => "CreditCard",
-                                  # :debit_card => "DebitCard",
+                                  :debit_card => "DebitCard",
                                   # :eletronic_transfer => "EletronicTransfer",
                                   :payment_slip => "Boleto"
                                  }
 
   ## CREDIT CARD BRANDS AVAILABLE
-  define_setting :brands, {
-                            :visa => 'Visa',
-                            :mastercard => 'Master',
-                            :amex => 'Amex',
-                            :elo => 'Elo',
-                            :aura => 'Aura',
-                            :jcb => 'JCB',
-                            :diners => 'Diners',
-                            :discover => 'Discover',
-                            :hipercard => 'Hipercard',
-                            :hiper => 'Hiper'
-                          }
+  define_setting :credit_card_brands, {
+                                        :visa => 'Visa',
+                                        :mastercard => 'Master',
+                                        :amex => 'Amex',
+                                        :elo => 'Elo',
+                                        :aura => 'Aura',
+                                        :jcb => 'JCB',
+                                        :diners => 'Diners',
+                                        :discover => 'Discover',
+                                        :hipercard => 'Hipercard',
+                                        :hiper => 'Hiper'
+                                      }
 
-  ## AVAILABLE PROVIDERS LIST
+  define_setting :debit_card_brands, {
+                                        :visa => "Visa",
+                                        :mastercard => "Master"
+                                      }
+
+  ## CREDIT CARD PROVIDERS AVAILABLE
   define_setting :credit_card_providers, {
                                            :simulado => "Simulado",
                                            :cielo => "Cielo",
                                            :rede => "Redecard"
                                          }
+
+  ## DEBIT CARD PROVIDERS AVAILABLE
+  define_setting :debit_card_providers, {
+                                          :simulado => "Simulado",
+                                          :cielo => "Cielo"
+                                        }
+
   ## AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
   define_setting :responsible_for_installment, {
                                                   :merchant => "ByMerchant",
                                                   :issuer => "ByIssuer"
                                                }
 
-  # define_setting :debit_providers, {:cielo => "Cielo"}
   define_setting :payment_slip_providers, {
                                             :bradesco => "Bradesco",
                                             :banco_do_brasil => "BancoDoBrasil",
