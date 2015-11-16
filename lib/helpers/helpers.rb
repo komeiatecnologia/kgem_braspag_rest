@@ -5,6 +5,12 @@ module KBraspag
     REGEX_VALID_PAYMENT = /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
     VALID_IDENTIFICATION = /^\d{1,14}$/
     VALID_DATE_FORMAT = /\A\d{4}-\d{2}-\d{2}\z/
+    VALID_URL = /\A\w+(\.\w+)+/
+
+    def valid_url_?(url)
+      raise ArgumentError, "Invalid URL: #{url}", "#{self.class}" if url !~ VALID_URL
+      true
+    end
 
     def valid_class_type_?(attr_name, value, expected_class)
       raise TypeError, msg_invalid_class(attr_name, expected_class), "#{self.class}" if !value.kind_of? expected_class

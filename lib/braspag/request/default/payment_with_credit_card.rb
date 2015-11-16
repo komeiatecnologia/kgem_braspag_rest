@@ -1,9 +1,6 @@
 module KBraspag
   module Request
     module Default
-
-
-
       class PaymentWithCreditCard < KBraspag::Request::Default::Payment
         attr_accessor :credit_card
         attr_accessor :capture, :interest

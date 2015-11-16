@@ -1,7 +1,5 @@
 require 'test/unit'
 
-
-
 class PaymentWithCreditCardTest < Test::Unit::TestCase
 
   def test_should_return_payment_with_credit_card_class

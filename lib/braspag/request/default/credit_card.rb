@@ -3,7 +3,6 @@ module KBraspag
     module Default
       class CreditCard < Card
 
-
         def brand=(brand)
           @brand = KBraspag.credit_card_brands[brand] if valid_brand?(brand)
         end

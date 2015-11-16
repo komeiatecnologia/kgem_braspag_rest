@@ -18,11 +18,11 @@ class PaymentTest < Test::Unit::TestCase
     assert_equal("CreditCard", p.type)
   end
 
-  # def test_type_receive_string_should_be_equal_DebitCard
-  #   p = new_payment
-  #   p.type = "DebitCard"
-  #   assert_equal("DebitCard", p.type)
-  # end
+  def test_type_receive_string_should_be_equal_DebitCard
+    p = new_payment
+    p.type = "DebitCard"
+    assert_equal("DebitCard", p.type)
+  end
 
   # def test_type_receive_string_should_be_equal_EletronicTransfer
   #   p = new_payment
@@ -42,11 +42,11 @@ class PaymentTest < Test::Unit::TestCase
     assert_equal "CreditCard", p.type
   end
 
-  # def test_type_should_be_equal_DebitCard
-  #   p = new_payment
-  #   p.type = :debit_card
-  #   assert_equal "DebitCard", p.type
-  # end
+  def test_type_should_be_equal_DebitCard
+    p = new_payment
+    p.type = :debit_card
+    assert_equal "DebitCard", p.type
+  end
 
   # def test_type_should_be_equal_EletronicTransfer
   #   p = new_payment
