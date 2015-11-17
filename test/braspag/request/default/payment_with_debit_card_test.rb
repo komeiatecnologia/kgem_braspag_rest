@@ -16,6 +16,47 @@ class PaymentWithDebitCardTest < Test::Unit::TestCase
     assert_equal true, hash.key?('ReturnUrl')
   end
 
+  def test_return_url_should_be_valid_url_string
+    p = new_payment_with_debit_card
+
+    url = "subdominio.dominio.com"
+    p.return_url = url
+
+    assert_equal url, p.return_url
+  end
+
+  def test_return_url_should_be_invalid_url_string
+    p = new_payment_with_debit_card
+    url = 'não_sou_uma_url_valida'
+    begin
+      p.return_url= url
+    rescue Exception => e
+      assert_equal "Invalid URL: #{url}", e.message
+    end
+  end
+
+  def test_return_url_should_be_invalid_url_type
+    p = new_payment_with_debit_card
+
+    begin
+      p.return_url= URI('subdominio.dominio.com')
+    rescue Exception => e
+      assert_equal true, true
+    end
+
+    begin
+      p.return_url= URL('subdominio.dominio.com')
+    rescue Exception => e
+      assert_equal true, true
+    end
+  end
+
+  def test_type_should_return_DebitCard
+    p = new_payment_with_debit_card
+    p.type = :debit_card
+    assert_equal "DebitCard", p.type
+  end
+
   private
   def new_payment_with_debit_card
     KBraspag::Request::Default::PaymentWithDebitCard.new

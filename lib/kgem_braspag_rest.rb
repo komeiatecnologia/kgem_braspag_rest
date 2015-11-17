@@ -28,37 +28,42 @@ require 'braspag/request/default/payment_with_credit_card'
 require 'braspag/request/default/payment_with_payment_slip'
 require 'braspag/request/default/payment_with_complete_payment_slip'
 
-
 require 'braspag/response/default/response'
 require 'braspag/response/default/errors'
 require 'braspag/response/default/link'
 require 'braspag/response/default/payment'
+require 'braspag/response/default/card'
 require 'braspag/response/default/credit_card'
+require 'braspag/response/default/debit_card'
 require 'braspag/response/default/customer'
 require 'braspag/response/default/address'
 require 'braspag/response/default/payment_with_credit_card'
+require 'braspag/response/default/payment_with_debit_card'
 require 'braspag/response/default/payment_with_payment_slip'
-
 
 require 'braspag/response/cancel'
 require 'braspag/response/complete_payment_slip'
 require 'braspag/response/simplified_credit_card'
+require 'braspag/response/simplified_debit_card'
 require 'braspag/response/query'
 
 require 'braspag/request/cancel'
 require 'braspag/request/complete_payment_slip'
 require 'braspag/request/simplified_credit_card'
+require 'braspag/request/simplified_debit_card'
 require 'braspag/request/query'
 
 require 'braspag/webservice/cancel'
 require 'braspag/webservice/complete_payment_slip'
 require 'braspag/webservice/rest_client'
 require 'braspag/webservice/simplified_credit_card'
+require 'braspag/webservice/simplified_debit_card'
 require 'braspag/webservice/query'
 
 require 'payment/cancel'
 require 'payment/complete_payment_slip'
 require 'payment/simplified_credit_card'
+require 'payment/simplified_debit_card'
 require 'payment/query'
 
 KLog::Log.configuration {|config| config.label = "Braspag Pagador API Rest [#{Time.now}]"}
@@ -164,6 +169,7 @@ module KBraspag
   ##RESOURCES
   define_setting :complete_payment_slip_resource, "/v2/sales/"
   define_setting :simplified_credit_card_resource, "/v2/sales/"
+  define_setting :simplified_debit_card_resource, "/v2/sales/"
   define_setting :cancel_resource, "/v2/sales/"
   define_setting :query_resource, "/v2/sales/"
 

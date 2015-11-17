@@ -1,9 +1,6 @@
 module KBraspag
   module Response
 
-
-
-
     class PaymentWithCreditCard < KBraspag::Response::Default::Payment
       attr_accessor :acquirer_transaction_id, :authenticate, :capture
       attr_accessor :credit_card, :installments, :interest, :links, :payment_id

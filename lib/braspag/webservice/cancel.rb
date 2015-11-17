@@ -1,8 +1,5 @@
 module KBraspag
   module WebService
-
-
-
     class Cancel
       def initialize
         @rest_client = KBraspag::WebService::RestClient.new

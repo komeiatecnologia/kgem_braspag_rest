@@ -1,8 +1,5 @@
 module KBraspag
   module Payment
-    #require 'lib/braspag/request/query'
-    #require 'lib/braspag/webservice/query'
-
     class Query < KBraspag::Request::Query
 
       def consult(payment_id = nil)

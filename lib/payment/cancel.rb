@@ -1,8 +1,5 @@
 module KBraspag
   module Payment
-
-
-
     class Cancel < KBraspag::Request::Cancel
 
       def cancel(id = nil, a = nil)

@@ -35,7 +35,7 @@ module KBraspag
 
         private
         def valid_url?(url)
-          valid_class_type_?(:return_url, url, String) && super(url)
+          valid_class_type_?(:return_url, url, String) && valid_url_?(url)
         end
 
         def valid_provider?(provider)

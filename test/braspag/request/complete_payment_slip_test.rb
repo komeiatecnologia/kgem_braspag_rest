@@ -1,11 +1,5 @@
 require 'test/unit'
 
-
-
-
-
-
-
 class CompletePaymentSlipTest < Test::Unit::TestCase
 
   def test_should_return_valid_instance_of_complete_payment_slip
@@ -64,6 +58,5 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
   def correct_ancestor_class
     KBraspag::Request::Default::Request
   end
-
 
 end

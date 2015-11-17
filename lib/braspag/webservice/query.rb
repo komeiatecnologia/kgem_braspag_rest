@@ -1,8 +1,5 @@
 module KBraspag
   module WebService
-
-
-
     class Query
       def initialize
         @rest_client = KBraspag::WebService::RestClient.new

@@ -1,14 +1,17 @@
 module KBraspag
   module Response
-    #require 'braspag/pagador/pagador'
-
     class Query
-      BOLETO = /"Type":"Boleto"/
-      CREDIT_CARD = /"Type":"CreditCard"/
+
+      PATTERNS = {
+        :boleto => /"Type":"Boleto"/,
+        :credit_card => /"Type":"CreditCard"/,
+        :debit_card => /"Type":"DebitCard"/
+      }
 
       BUILDERS = {
         :error => KBraspag::Response::Default::Response,
         :credit_card => KBraspag::Response::SimplifiedCreditCard,
+        :debit_card => KBraspag::Response::SimplifiedDebitCard,
         :payment_slip => KBraspag::Response::CompletePaymentSlip
       }
 
@@ -23,10 +26,9 @@ module KBraspag
 
       private
       def self.body_parser(body)
-        return BUILDERS[:payment_slip] if BOLETO =~ body
-        # incluir as demais opções aqui, para não haver falso verdadeiro
-        # no caso do cartão de crédito
-        return BUILDERS[:credit_card] if CREDIT_CARD =~ body
+        PATTERNS.each do |k,v|
+          return BUILDERS[k] if v =~ body
+        end
       end
 
       # Para dar um retorno mais preciso quando não encontrar o pagamento consultado

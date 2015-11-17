@@ -1,9 +1,5 @@
 module KBraspag
   module Response
-
-
-
-
     class CompletePaymentSlip < KBraspag::Response::Default::Response
       attr_reader :payment, :customer
 

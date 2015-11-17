@@ -2,8 +2,6 @@ module KBraspag
   module Response
     module Default
 
-
-
       class Response
         include KBraspag::Pagador
 

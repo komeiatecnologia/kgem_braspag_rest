@@ -1,8 +1,5 @@
 require 'test/unit'
 
-
-
-
 class PaymentTest < Test::Unit::TestCase
   # include KBraspag::Helpers
 

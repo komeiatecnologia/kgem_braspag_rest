@@ -1,7 +1,7 @@
 module KBraspag
   module Response
     module Default
-      class CreditCard < Card
+      class DebitCard < Card
       end
     end
   end

@@ -1,9 +1,6 @@
 require 'test/unit'
 require 'test/fake_object/request/fake_simplified_credit_card'
 
-
-
-
 class SimplifiedCreditCardTest < Test::Unit::TestCase
   include KBraspag::Helpers
 

@@ -1,0 +1,14 @@
+require 'test/fake_object/request/fake_customer'
+require 'test/fake_object/request/fake_debit_card'
+
+class FakeSimplifiedDebitCard
+  def self.default!(sdc)
+    sdc.merchant_order_id = '2014111703'
+    FakeCustomer.default_name!(sdc.customer)
+    FakeDebitCard.default!(sdc.payment.debit_card)
+    sdc.payment.amount = 15700
+    sdc.payment.provider = :simulado
+    sdc.payment.return_url = 'subdominio.dominio.com'
+    sdc
+  end
+end

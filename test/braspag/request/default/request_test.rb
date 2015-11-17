@@ -1,9 +1,5 @@
 require 'test/unit'
 
-
-
-
-
 class DefaultRequestTest < Test::Unit::TestCase
   # include KBraspag::Helpers
 
