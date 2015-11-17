@@ -1,23 +1,11 @@
 module KBraspag
   module Request
     module Default
-
-
       class PaymentWithPaymentSlip < KBraspag::Request::Default::Payment
-        # # Remove os métodos herdados
-        undef_method :installments
-        undef_method :installments=
 
         def initialize
           super
           send(:type=, :payment_slip)
-          remove_instance_variable :@installments #remove a variável de instancia herdada
-        end
-
-        def to_braspag_hash
-          h = super
-          h.delete('Installments')
-          h
         end
 
         def provider=(provider)

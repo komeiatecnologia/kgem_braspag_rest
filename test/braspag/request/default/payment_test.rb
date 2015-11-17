@@ -114,34 +114,6 @@ class PaymentTest < Test::Unit::TestCase
     assert_equal 101020, p.amount
   end
 
-  def test_installments_should_greater_than_zero
-    p = new_payment
-    p.installments = 10
-    assert_equal(10, p.installments)
-
-    begin
-      p.installments = -1
-    rescue Exception => e
-      assert_equal p.msg_less_or_equal_zero(-1), e.message
-    end
-
-    begin
-      p.installments = 0
-    rescue Exception => e
-      assert_equal p.msg_less_or_equal_zero(0), e.message
-    end
-  end
-
-  def test_should_throw_exception_when_installment_is_a_fractional_number
-    p = new_payment
-    installments = 1.2
-    begin
-      p.installments = installments
-    rescue Exception => e
-      assert_equal p.msg_invalid_class(:installments,Integer), e.message
-    end
-  end
-
   def test_should_throw_exeception_when_provider_class_not_is_symbol
     p = new_payment
     assert_equal false, p.respond_to?(:provider=)
@@ -151,12 +123,10 @@ class PaymentTest < Test::Unit::TestCase
     p = new_payment
     p.type = :credit_card
     p.amount = 10010
-    p.installments = 6
 
     hash = p.to_braspag_hash
     assert_equal("CreditCard", hash["Type"])
     assert_equal(10010, hash["Amount"])
-    assert_equal(6, hash["Installments"])
   end
 
   private

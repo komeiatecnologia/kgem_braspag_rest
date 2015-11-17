@@ -4,13 +4,12 @@ module KBraspag
       class Payment
         include KBraspag::Helpers
 
-        attr_reader :type, :amount, :provider, :installments
+        attr_reader :type, :amount, :provider
 
         def initialize
           @type = nil
           @amount = nil
           @provider = nil
-          @installments = nil
         end
 
         def type=(type)
@@ -23,16 +22,11 @@ module KBraspag
           @amount = amount if valid_amount?(amount)
         end
 
-        def installments=(installments)
-          @installments = installments if valid_installments?(installments)
-        end
-
         def to_braspag_hash
           {
             "Type" => @type,
             "Amount" => @amount,
-            "Provider" => @provider,
-            "Installments" => @installments
+            "Provider" => @provider
           }
         end
 
@@ -43,10 +37,6 @@ module KBraspag
 
         def valid_amount?(amount)
           greater_than_zero_?(amount)
-        end
-
-        def valid_installments?(installments)
-          valid_class_type_?(:installments, installments, Integer) && greater_than_zero_?(installments)
         end
 
         def type_to_symbol_valid(type)

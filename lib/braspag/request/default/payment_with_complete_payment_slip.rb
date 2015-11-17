@@ -1,9 +1,6 @@
 module KBraspag
   module Request
     module Default
-
-
-
       class PaymentWithCompletePaymentSlip < KBraspag::Request::Default::PaymentWithPaymentSlip
         include KBraspag::Helpers
         extend KBraspag::HelpersClass

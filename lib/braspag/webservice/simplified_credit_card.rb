@@ -1,8 +1,5 @@
 module KBraspag
   module WebService
-
-
-
     class SimplifiedCreditCard
 
       def initialize

@@ -2,12 +2,6 @@ module KBraspag
   module WebService
     class RestClient
 
-
-
-
-      #
-      #
-
       @@REGEX_UUID = /^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12}).*/.freeze
       @@DEFAULT_METHODS = { :get => Net::HTTP::Get,
                             :post => Net::HTTP::Post,
