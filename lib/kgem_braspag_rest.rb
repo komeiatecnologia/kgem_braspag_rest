@@ -155,20 +155,25 @@ module KBraspag
   define_setting :timeout, 15
 
   # Development merchant https://cadastrosandbox.braspag.com.br
-  define_setting :merchant_id, "d1f105a3-edbf-41e3-bc2e-49c93d2b4b96"
-  define_setting :merchant_key, "JOXEBQTVZGGWKQCOZAEGOXXWCUCYLKOVMPVMOLCB"
+  # define_setting :merchant_id, "d1f105a3-edbf-41e3-bc2e-49c93d2b4b96"
+  # define_setting :merchant_key, "JOXEBQTVZGGWKQCOZAEGOXXWCUCYLKOVMPVMOLCB"
+
+  ## Chave do Demo Abelhinha, teve de ser usada para realizar testes com cartão de débito
+  define_setting :merchant_id, "9449501D-7914-7C1E-07BA-BECF7ED97326"
+  define_setting :merchant_key, "5jHxGCmD5ZVhK9K5J1ffk1NkRwUpdf2gfLmEJ3T8"
+
   # define_setting :merchant_id, nil
   # define_setting :merchant_key, nil
 
   define_setting :connection_attempts, 3
 
   #URLs
-  define_setting :payment_url, "https://apisandbox.braspag.com.br"
-  define_setting :query_url, "https://apiquerysandbox.braspag.com.br"
+  # define_setting :payment_url, "https://apisandbox.braspag.com.br"
+  # define_setting :query_url, "https://apiquerysandbox.braspag.com.br"
 
   # Production URLs
-  # define_setting :payment_url, "https://api.braspag.com.br"
-  # define_setting :query_url, "https://apiquery.braspag.com.br"
+  define_setting :payment_url, "https://api.braspag.com.br"
+  define_setting :query_url, "https://apiquery.braspag.com.br"
 
   ##RESOURCES
   define_setting :complete_payment_slip_resource, "/v2/sales/"
