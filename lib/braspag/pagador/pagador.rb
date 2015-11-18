@@ -75,7 +75,7 @@ module KBraspag
       130 => "Não foi possível obter o número do cartão",
       131 => "MerchantKey é obrigatório",
       132 => "MerchantKey é inválida",
-      133 => "O tipo de pagamento escolhido não suporta o provider informado",
+      133 => "O tipo de pagamento escolhido não é suportado pelo provider informado",
       134 => "FingerPrint excedeu o tamanho máximo permitido",
       135 => "MerchantDefinedFieldValue excedeu o tamanho máximo permitido",
       136 => "ItemDataName excedeu o tamanho máximo permitido",
