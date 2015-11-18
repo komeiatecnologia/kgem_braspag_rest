@@ -2,9 +2,11 @@ module KBraspag
   module Response
 
     class PaymentWithCreditCard < KBraspag::Response::Default::Payment
-      attr_accessor :acquirer_transaction_id, :authenticate, :capture
-      attr_accessor :credit_card, :installments, :interest, :links, :payment_id
-      attr_accessor :reason_code, :reason_message, :service_tax_amount
+      attr_accessor :acquirer_transaction_id, :authenticate, :capture,
+                    :credit_card, :installments, :interest, :links, :payment_id,
+                    :reason_code, :reason_message, :service_tax_amount,
+                    :proof_of_sale, :authorization_code, :provider_return_code,
+                    :provider_return_message
 
       def initialize(hash)
         super(hash)
@@ -19,6 +21,10 @@ module KBraspag
         @reason_code = hash['ReasonCode']
         @reason_message = hash['ReasonMessage']
         @service_tax_amount = hash['ServiceTaxAmount']
+        @proof_of_sale = hash['ProofOfSale']
+        @authorization_code = hash['AuthorizationCode']
+        @provider_return_code = hash['ProviderReturnCode']
+        @provider_return_message = hash['ProviderReturnMessage']
       end
     end
   end
