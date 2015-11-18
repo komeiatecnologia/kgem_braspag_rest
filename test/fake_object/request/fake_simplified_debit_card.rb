@@ -7,7 +7,7 @@ class FakeSimplifiedDebitCard
     FakeCustomer.default_name!(sdc.customer)
     FakeDebitCard.default!(sdc.payment.debit_card)
     sdc.payment.amount = 15700
-    sdc.payment.provider = :simulado
+    sdc.payment.provider = :cielo
     sdc.payment.return_url = 'https://subdominio.dominio.com/teste/123'
     sdc
   end

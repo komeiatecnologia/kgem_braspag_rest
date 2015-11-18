@@ -19,7 +19,7 @@ class PaymentWithDebitCardTest < Test::Unit::TestCase
   def test_return_url_should_be_valid_url_string
     p = new_payment_with_debit_card
 
-    url = "subdominio.dominio.com"
+    url = "https://subdominio.dominio.com/teste/123"
     p.return_url = url
 
     assert_equal url, p.return_url

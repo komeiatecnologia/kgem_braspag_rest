@@ -8,15 +8,10 @@ class FakeSimplifiedDebitCard
 
   private
   def build_hash
-    h = {
-          'Customer' => FakeCustomer.new.default_hash,
-          'MerchantOrderId' => "2014111706",
-          'Payment' => FakePaymentWithDebitCard.new.default_hash
-        }
-    h['Payment']['ProofOfSale'] = "674532"
-    h['Payment']['AuthorizationCode'] = "123456"
-    h['Payment']['ProviderReturnCode'] = "4"
-    h['Payment']['ProviderReturnMessage'] = "Operation Successful"
-    h
+    {
+      'Customer' => FakeCustomer.new.default_hash,
+      'MerchantOrderId' => "2014111706",
+      'Payment' => FakePaymentWithDebitCard.new.default_hash
+    }
   end
 end

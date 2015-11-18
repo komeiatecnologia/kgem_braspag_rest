@@ -3,7 +3,8 @@ module KBraspag
 
     class PaymentWithDebitCard < KBraspag::Response::Default::Payment
       attr_accessor :acquirer_transaction_id, :authentication_url, :debit_card,
-                    :links, :payment_id, :reason_code, :reason_message, :return_url
+                    :links, :payment_id, :reason_code, :reason_message,
+                    :return_url, :provider_return_code, :provider_return_message
 
       def initialize(hash)
         super(hash)
@@ -15,6 +16,8 @@ module KBraspag
         @reason_code = hash['ReasonCode']
         @reason_message = hash['ReasonMessage']
         @return_url = hash['ReturnUrl']
+        @provider_return_code = hash['ProviderReturnCode']
+        @provider_return_message = hash['ProviderReturnMessage']
       end
     end
   end

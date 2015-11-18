@@ -33,7 +33,7 @@ class SimplifiedDebitCardTest < Test::Unit::TestCase
     assert_equal sdc.payment.class, KBraspag::Request::Default::PaymentWithDebitCard
     assert_equal sdc.payment.amount, hash['Payment']['Amount']
     assert_equal sdc.payment.return_url, hash['Payment']['ReturnUrl']
-    assert_equal "Simulado", hash['Payment']['Provider']
+    assert_equal "Cielo", hash['Payment']['Provider']
     assert_equal sdc.payment.debit_card.class, KBraspag::Request::Default::DebitCard
     assert_equal sdc.payment.debit_card.card_number, hash['Payment']['DebitCard']['CardNumber']
     assert_equal sdc.payment.debit_card.holder, hash['Payment']['DebitCard']['Holder']

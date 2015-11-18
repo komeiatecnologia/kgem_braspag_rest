@@ -10,16 +10,18 @@ class FakePaymentWithDebitCard
   private
   def build_hash
     hash = FakePayment.new.default_hash
-    hash['AcquirerTransactionId'] = "0305023644309"
-    hash['Authenticate'] = false
+    hash['AcquirerTransactionId'] = "1006993069207A31A001"
+    hash['AuthenticationUrl'] = "https://xxxxxxxxxxxx.xxxxx.xxx.xx/xxx/xxxxx.xxxx?{PaymentId}"
     hash['DebitCard'] = FakeDebitCard.new.default_hash
     hash['Links'] = FakeLink.default_hash_array
-    hash['PaymentId'] = "24bc8366-fc31-4d6c-8555-17049a836a07"
-    hash['ReasonCode'] = 0
-    hash['ReasonMessage'] = "Successful"
-    hash["AuthorizationCode"]= "923923"
-    hash["ReceivedDate"] = "2015-07-15 09:16:40"
+    hash['PaymentId'] = "0309f44f-fe5a-4de1-ba39-984f456130bd"
+    hash['ReasonCode'] = 9
+    hash['ReasonMessage'] = "Waiting"
+    # hash["AuthorizationCode"]= "923923"
+    hash["ReceivedDate"] = "2015-03-25 09:36:20"
     hash['Type'] = "DebitCard"
+    hash['ProviderReturnCode'] = "0"
+    # hash['ProviderReturnMessage'] = "Operation Successful"
     hash
   end
 end
