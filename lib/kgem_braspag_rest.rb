@@ -74,6 +74,9 @@ module KBraspag
   SimplifiedCreditCard = Payment::SimplifiedCreditCard
   SCC = SimplifiedCreditCard
 
+  SimplifiedDebitCard = Payment::SimplifiedDebitCard
+  SDC = SimplifiedDebitCard
+
   CompletePaymentSlip = Payment::CompletePaymentSlip
   CPS = CompletePaymentSlip
 
