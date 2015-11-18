@@ -5,7 +5,7 @@ module KBraspag
     REGEX_VALID_PAYMENT = /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/
     VALID_IDENTIFICATION = /^\d{1,14}$/
     VALID_DATE_FORMAT = /\A\d{4}-\d{2}-\d{2}\z/
-    VALID_URL = /\A\w+(\.\w+)+/
+    VALID_URL = /\A(https|http)\:\/\/\w+(\.\w+)+.*\z/
 
     def valid_url_?(url)
       raise ArgumentError, "Invalid URL: #{url}", "#{self.class}" if url !~ VALID_URL

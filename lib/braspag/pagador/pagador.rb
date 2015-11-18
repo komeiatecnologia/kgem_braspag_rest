@@ -106,7 +106,7 @@ module KBraspag
       161 => "As instruções do boleto excedeu o tamanho máximo permitido",
       162 => "O demonstrativo do boleto excedeu o tamanho máximo permitido",
       163 => "Return Url é obrigatório",
-      164 => "Return Url é inválida",
+      164 => "A URL de retorno informada é inválida",
       166 => "AuthorizeNow é obrigatório",
       167 => "Antifraude não configurado",
       168 => "Pagamento recorrente não encontrado",
