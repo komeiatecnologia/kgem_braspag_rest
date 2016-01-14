@@ -152,7 +152,7 @@ module KBraspag
   #                                               }
 
   ##REQUEST SETTINGS
-  define_setting :timeout, 15
+  define_setting :timeout, 20
 
   # Development merchant https://cadastrosandbox.braspag.com.br
   # define_setting :merchant_id, "d1f105a3-edbf-41e3-bc2e-49c93d2b4b96"
