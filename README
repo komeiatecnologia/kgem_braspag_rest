@@ -200,6 +200,54 @@ end
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
+ - Exemplo Cartão de Débito
+     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
+
+     sdc.merchant_order_id = "11111111"
+
+     sdc.customer.name = "Komeia Interativa"
+     sdc.customer.identity = "11122233344"
+     sdc.customer.identity_type = "CNPJ" # OU "CPF"
+     sdc.customer.email = "email@komeia.com"
+     sdc.customer.birthdate = "1999-08-14"
+
+     sdc.customer.address.street = "Av JK"
+     sdc.customer.address.number = "1086"
+     sdc.customer.address.complement = "Centro"
+     sdc.customer.address.zip_code = "86010-540"
+     sdc.customer.address.city = "Londrina"
+     sdc.customer.address.state = "PR"
+
+     sdc.payment.amount = 100
+     sdc.payment.provider = :cielo
+     sdc.payment.return_url = "https://komeia.com"
+
+     sdc.payment.debit_card.card_number = "0000000000000000"
+     sdc.payment.debit_card.holder = "Teste Komeia"
+     sdc.payment.debit_card.expiration_date = "03/2050"
+     sdc.payment.debit_card.security_code = "123"
+     sdc.payment.debit_card.brand = :visa
+
+     # Tentar realizar o pagamento
+     resposta = sdc.pay
+
+     #Verificar se a transação foi criada com sucesso (true|false)
+     resposta.transaction_created?
+
+     #Verificar se a transação foi realizada com sucesso (true|false)
+     resposta.success?
+
+     #Verificar se a transação teve o pagamento confirmado (true| false)
+     resposta.paid?
+
+     #Verificar se a transação foi cancelada/estornada (true|false)
+     resposta.canceled?
+
+     #Verificar todas as mensagens retornadas pelo gateway (Array)
+     resposta.messages
+
+     #Verificar a messagem retornada de maior relevancia (String)
+     resposta.messages.first
 
 CONSULTAR PAGAMENTO/TRANSAÇÃO
   - Exemplo consultar transação método 1
@@ -252,4 +300,3 @@ CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funciona
 
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
-
