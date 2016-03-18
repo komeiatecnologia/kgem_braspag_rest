@@ -8,20 +8,19 @@ COMO USAR
 2 - Informar o MerchantID e MerchantKey
   Em projetos Rails basta criar um arquivo .rb no diretório config/initializers e seguir o exemplo abaixo:
 
-:::ruby
-require 'kgem_braspag_rest'
+    require 'kgem_braspag_rest'
 
-`KBraspag.configuration do |config|`
+    KBraspag.configuration do |config|
 
-  `config.merchant_id = "MeuMerchantID"`
+      config.merchant_id = "MeuMerchantID"
 
-  config.merchant_key = "MeuMerchantKey"
+      config.merchant_key = "MeuMerchantKey"
 
-end`
+    end
 
 ### ALTERAR AS CONFIGURAÇÕES DEFAULT
 
-Exemplos:
+###### Exemplos:
 
 1 - Desejo alterar o timeout de 15 para 5 segundos.
 
@@ -46,82 +45,131 @@ Exemplos:
     end
 
 
-Abaixo todas as configurações disponíveis e os valores default
+##### Abaixo todas as configurações disponíveis e os valores default:
 
-KBraspag.configuration do |config|
+      KBraspag.configuration do |config|
 
-  *# FILE PATH TO CA CERTIFICATE (*.pem)
-
+        # FILE PATH TO CA CERTIFICATE (*.pem)
         config.ca_file_path = "./braspag.pem"
 
-  ### PAYMENT METHODS AVAILABLE
-      config.payment_types = {
-        :credit_card => "CreditCard",
-        :payment_slip => "Boleto"
-    }
+        # PAYMENT METHODS AVAILABLE
+        config.payment_types = {
 
-  ## AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
-  config.responsible_for_installment = {
-                                                  :merchant => "ByMerchant",
-                                                  :issuer => "ByIssuer"
-                                               }
+          :credit_card => "CreditCard",
 
-  ## CREDIT CARD BRANDS AVAILABLE
-  config.credit_card_brands = {
-                    :visa => 'Visa',
-                    :mastercard => 'Master',
-                    :amex => 'Amex',
-                    :elo => 'Elo',
-                    :aura => 'Aura',
-                    :jcb => 'JCB',
-                    :diners => 'Diners',
-                    :discover => 'Discover',
-                    :hipercard => 'Hipercard',
-                    :hiper => 'Hiper'
-                  }
+          :debit_card => "DebitCard",
 
-  ## AVAILABLE PROVIDERS LIST
-  config.credit_card_providers = {
-                                   :simulado => "Simulado",
-                                   :cielo => "Cielo",
-                                   :rede => "Redecard"
-                                 }
+          :payment_slip => "Boleto"
 
-  config.payment_slip_providers = {
-                                    :bradesco => "Bradesco",
-                                    :banco_do_brasil => "BancoDoBrasil",
-                                    :citibank => "CitiBank",
-                                    :itau => "Itau",
-                                    :brb => "Brb",
-                                    :caixa => "Caixa",
-                                    :santander => "Santander",
-                                    :simulado => "Simulado"
-                                  }
+        }
+
+        # AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
+        config.responsible_for_installment = {
+
+          :merchant => "ByMerchant",
+
+          :issuer => "ByIssuer"
+
+        }
+
+        # CREDIT CARD BRANDS AVAILABLE
+        config.credit_card_brands = {
+
+          :visa => 'Visa',
+
+          :mastercard => 'Master',
+
+          :amex => 'Amex',
+
+          :elo => 'Elo',
+
+          :aura => 'Aura',
+
+          :jcb => 'JCB',
+
+          :diners => 'Diners',
+
+          :discover => 'Discover',
+
+          :hipercard => 'Hipercard',
+
+          :hiper => 'Hiper'
+
+        }
+
+        # AVAILABLE CREDI CARD PROVIDERS LIST
+        config.credit_card_providers = {
+
+          :simulado => "Simulado",
+
+          :cielo => "Cielo",
+
+          :rede => "Redecard"
+
+        }
+
+        # DEBIT CARD PROVIDERS AVAILABLE
+        define_setting :debit_card_providers, {
+
+          :simulado => "Simulado",
+
+          :cielo => "Cielo"
+
+        }
+
+        # AVAILABLE PAYMENT SLIP PROVIDERS LIST
+        config.payment_slip_providers = {
+
+          :bradesco => "Bradesco",
+
+          :banco_do_brasil => "BancoDoBrasil",
+
+          :citibank => "CitiBank",
+
+          :itau => "Itau",
+
+          :brb => "Brb",
+
+          :caixa => "Caixa",
+
+          :santander => "Santander",
+
+          :hsbc => "HSBC",
+
+          :simulado => "Simulado"
+
+        }
+
+        #REQUEST SETTINGS
+        config.timeout = 20
+
+        config.merchant_id = nil
+
+        config.merchant_key = nil
+
+        config.connection_attempts = 3
+
+        #URLs
+        define_setting :payment_url = "https://api.braspag.com.br"
+
+        define_setting :query_url = "https://apiquery.braspag.com.br"
+
+        #RESOURCES
+        config.complete_payment_slip_resource = "/v2/sales/"
+
+        config.simplified_credit_card_resource = "/v2/sales/"
+
+        config.cancel_resource = "/v2/sales/"
+
+        # DEFAULT RESPONSIBLE INSTALLMENTS(:issuer|:merchant)
+        config.interest = :issuer
+
+    end
+
+# REALIZAR PAGAMENTOS
 
 
-  ##REQUEST SETTINGS
-  config.timeout = 15
-  config.merchant_id = nil
-  config.merchant_key = nil
-  config.connection_attempts = 3
-
-  ##URLs
-  define_setting :payment_url = "https://api.braspag.com.br"
-  define_setting :query_url = "https://apiquery.braspag.com.br"
-
-  ##RESOURCES
-  config.complete_payment_slip_resource = "/v2/sales/"
-  config.simplified_credit_card_resource = "/v2/sales/"
-  config.cancel_resource = "/v2/sales/"
-
-  ## DEFAULT RESPONSIBLE INSTALLMENTS(:issuer|:merchant)
-  config.interest = :issuer
-end
-
-******* REALIZAR PAGAMENTOS *******
-
-
- - Exemplo Boleto
+ ## Exemplo Boleto
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
     boleto.customer.identity_type = 'CPF' # CPF|CNPJ
@@ -176,7 +224,7 @@ end
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
- - Exemplo Cartão de Crédito
+ ## Exemplo Cartão de Crédito
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
     cartao.payment.capture = true # default já é true, portanto pode ser omitida a atribuição
@@ -211,69 +259,72 @@ end
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
- - Exemplo Cartão de Débito
-     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
+ ## Exemplo Cartão de Débito
+ `&#8212;` is the decimal-encoded equivalent of `&mdash;`.
 
-     sdc.merchant_order_id = "11111111"
+    ```ruby
+    sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
 
-     sdc.customer.name = "Komeia Interativa"
-     sdc.customer.identity = "11122233344"
-     sdc.customer.identity_type = "CNPJ" # OU "CPF"
-     sdc.customer.email = "email@komeia.com"
-     sdc.customer.birthdate = "1999-08-14"
+    sdc.merchant_order_id = "11111111"
 
-     sdc.customer.address.street = "Av JK"
-     sdc.customer.address.number = "1086"
-     sdc.customer.address.complement = "Centro"
-     sdc.customer.address.zip_code = "86010-540"
-     sdc.customer.address.city = "Londrina"
-     sdc.customer.address.state = "PR"
+    sdc.customer.name = "Komeia Interativa"
+    sdc.customer.identity = "11122233344"
+    sdc.customer.identity_type = "CNPJ" # OU "CPF"
+    sdc.customer.email = "email@komeia.com"
+    sdc.customer.birthdate = "1999-08-14"
 
-     sdc.payment.amount = 100
-     sdc.payment.provider = :cielo
-     sdc.payment.return_url = "https://komeia.com"
+    sdc.customer.address.street = "Av JK"
+    sdc.customer.address.number = "1086"
+    sdc.customer.address.complement = "Centro"
+    sdc.customer.address.zip_code = "86010-540"
+    sdc.customer.address.city = "Londrina"
+    sdc.customer.address.state = "PR"
 
-     sdc.payment.debit_card.card_number = "0000000000000000"
-     sdc.payment.debit_card.holder = "Teste Komeia"
-     sdc.payment.debit_card.expiration_date = "03/2050"
-     sdc.payment.debit_card.security_code = "123"
-     sdc.payment.debit_card.brand = :visa
+    sdc.payment.amount = 100
+    sdc.payment.provider = :cielo
+    sdc.payment.return_url = "https://komeia.com"
 
-     # Tentar realizar o pagamento
-     resposta = sdc.pay
+    sdc.payment.debit_card.card_number = "0000000000000000"
+    sdc.payment.debit_card.holder = "Teste Komeia"
+    sdc.payment.debit_card.expiration_date = "03/2050"
+    sdc.payment.debit_card.security_code = "123"
+    sdc.payment.debit_card.brand = :visa
 
-     #Verificar se a transação foi criada com sucesso (true|false)
-     resposta.transaction_created?
+    # Tentar realizar o pagamento
+    resposta = sdc.pay
 
-     #Verificar se a transação foi realizada com sucesso (true|false)
-     resposta.success?
+    #Verificar se a transação foi criada com sucesso (true|false)
+    resposta.transaction_created?
 
-     #Verificar se a transação teve o pagamento confirmado (true| false)
-     resposta.paid?
+    #Verificar se a transação foi realizada com sucesso (true|false)
+    resposta.success?
 
-     #Verificar se a transação foi cancelada/estornada (true|false)
-     resposta.canceled?
+    #Verificar se a transação teve o pagamento confirmado (true| false)
+    resposta.paid?
 
-     #Verificar todas as mensagens retornadas pelo gateway (Array)
-     resposta.messages
+    #Verificar se a transação foi cancelada/estornada (true|false)
+    resposta.canceled?
 
-     #Verificar a messagem retornada de maior relevancia (String)
-     resposta.messages.first
+    #Verificar todas as mensagens retornadas pelo gateway (Array)
+    resposta.messages
 
-CONSULTAR PAGAMENTO/TRANSAÇÃO
-  - Exemplo consultar transação método 1
+    #Verificar a messagem retornada de maior relevancia (String)
+    resposta.messages.first
+    ```
+# CONSULTAR PAGAMENTO/TRANSAÇÃO
+
+  ## Exemplo consultar transação método 1
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
-    consular.payment_id = "uuid da transação"
+    consultar.payment_id = "uuid da transação"
 
     resposta = consultar.consult
 
-  - Exemplo consultar transação método 2
+  ## Exemplo consultar transação método 2
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
-    responsta = consultar.consult("uuid da transação")
+    resposta = consultar.consult("uuid da transação")
 
-  - Verificar resultado
     #Verificar se a operação foi realizada com sucesso (true|false)
     resposta.success?
 
@@ -283,9 +334,8 @@ CONSULTAR PAGAMENTO/TRANSAÇÃO
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
-
-CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
-  - Exemplo cancelar transação método 1
+# CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
+   ## Exemplo cancelar transação método 1
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     cancelar.payment_id = "uuid da transação"
@@ -296,13 +346,12 @@ CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funciona
     # Tentar cancelar/estornar
     resposta = cancelar.cancel
 
-  - Exemplo cancelar transação método 2
+  ## Exemplo cancelar transação método 2
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     # Tentar cancelar/estornar
     resposta = cancelar.cancel(payment_id, amount) #Amount é opcional
 
-  - Verificar resultado
     #Verificar se a operação foi realizada com sucesso (true|false)
     resposta.success?
 

@@ -158,12 +158,8 @@ module KBraspag
   # define_setting :merchant_id, "d1f105a3-edbf-41e3-bc2e-49c93d2b4b96"
   # define_setting :merchant_key, "JOXEBQTVZGGWKQCOZAEGOXXWCUCYLKOVMPVMOLCB"
 
-  ## Chave do Demo Abelhinha, teve de ser usada para realizar testes com cartão de débito
-  define_setting :merchant_id, "9449501D-7914-7C1E-07BA-BECF7ED97326"
-  define_setting :merchant_key, "5jHxGCmD5ZVhK9K5J1ffk1NkRwUpdf2gfLmEJ3T8"
-
-  # define_setting :merchant_id, nil
-  # define_setting :merchant_key, nil
+  define_setting :merchant_id, nil
+  define_setting :merchant_key, nil
 
   define_setting :connection_attempts, 3
 
@@ -185,4 +181,3 @@ module KBraspag
   ## DEFAULT RESPONSIBLE INSTALLMENTS
   define_setting :interest, :issuer
 end
-
