@@ -11,7 +11,7 @@ COMO USAR
     
 ```
 #!ruby
-require 'kgem_braspag_rest'
+    require 'kgem_braspag_rest'
 
     KBraspag.configuration do |config|
 
