@@ -11,15 +11,15 @@ COMO USAR
     
 ```
 #!ruby
-    require 'kgem_braspag_rest'
+require 'kgem_braspag_rest'
 
-    KBraspag.configuration do |config|
+KBraspag.configuration do |config|
 
-      config.merchant_id = "MeuMerchantID"
+  config.merchant_id = "MeuMerchantID"
 
-      config.merchant_key = "MeuMerchantKey"
+  config.merchant_key = "MeuMerchantKey"
 
-    end
+end
 ```
 
 
