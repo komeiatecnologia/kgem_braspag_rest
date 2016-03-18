@@ -169,8 +169,8 @@ COMO USAR
 # REALIZAR PAGAMENTOS
 
 
- ## Exemplo Boleto
- 
+Exemplo Boleto
+
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
     boleto.customer.identity_type = 'CPF' # CPF|CNPJ
@@ -225,7 +225,7 @@ COMO USAR
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
- ## Exemplo Cartão de Crédito
+Exemplo Cartão de Crédito
 
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
@@ -261,7 +261,7 @@ COMO USAR
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
- ## Exemplo Cartão de Débito
+Exemplo Cartão de Débito
 
     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
 
@@ -313,14 +313,14 @@ COMO USAR
 
 # CONSULTAR PAGAMENTO/TRANSAÇÃO
 
-  ## Exemplo consultar transação método 1
+Exemplo consultar transação método 1
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
     consultar.payment_id = "uuid da transação"
 
     resposta = consultar.consult
 
-  ## Exemplo consultar transação método 2
+Exemplo consultar transação método 2
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
     resposta = consultar.consult("uuid da transação")
@@ -335,7 +335,8 @@ COMO USAR
     resposta.messages.first
 
 # CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
-   ## Exemplo cancelar transação método 1
+
+Exemplo cancelar transação método 1
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     cancelar.payment_id = "uuid da transação"
@@ -346,7 +347,7 @@ COMO USAR
     # Tentar cancelar/estornar
     resposta = cancelar.cancel
 
-  ## Exemplo cancelar transação método 2
+Exemplo cancelar transação método 2
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     # Tentar cancelar/estornar
