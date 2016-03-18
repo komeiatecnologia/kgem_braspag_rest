@@ -8,6 +8,7 @@ COMO USAR
 2 - Informar o MerchantID e MerchantKey
   Em projetos Rails basta criar um arquivo .rb no diretório config/initializers e seguir o exemplo abaixo:
 
+:::ruby
 `require 'kgem_braspag_rest'`
 
 `KBraspag.configuration do |config|`
