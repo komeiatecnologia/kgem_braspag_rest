@@ -263,6 +263,16 @@ COMO USAR
 
 ## Exemplo Cartão de Débito
 
+#### No momento somente o provider Cielo é suporta esse tipo de transação e por meio do Visa Electron e MasterCard Débito, ppra ativar o recurso é necessário que esteja habilitado na Cielo a função de debito na afiliação..
+
+#### Bandeiras e respectivos bancos aceitos:
+
+##### Visa Electron: Bradesco, Banco do Brasil, Santander, Itaú, HSBC, BRB, Banco do Nordeste, Banco Mercantil, Banco da Amazônia, Banco Safra, Banco Espírito Santo e Sicred.
+
+##### Mastercard Débito: Santander, Citibank, Banco do Brasil e Bancob.
+
+
+
     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
 
     sdc.merchant_order_id = "11111111"
