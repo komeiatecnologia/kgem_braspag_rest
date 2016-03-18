@@ -285,7 +285,7 @@ resposta.messages.first
 
 ## Exemplo Cartão de Débito
 
-#### No momento somente o provider Cielo suporta esse tipo de transação por meio do Visa Electron e MasterCard Débito, para ativar o recurso é necessário que esteja habilitado na Cielo a função de debito na afiliação..
+#### No momento somente o provider Cielo suporta esse tipo de transação por meio do Visa Electron e MasterCard Débito, para ativar o recurso é necessário que esteja habilitado na Cielo a função de debito na afiliação.
 
 ##### Bandeiras e respectivos bancos suportados atualmente:
 
