@@ -313,7 +313,8 @@ Exemplo Cartão de Débito
 
 # CONSULTAR PAGAMENTO/TRANSAÇÃO
 
-Exemplo consultar transação método 1
+- Exemplo consultar transação método 1
+
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
     consultar.payment_id = "uuid da transação"
@@ -321,6 +322,7 @@ Exemplo consultar transação método 1
     resposta = consultar.consult
 
 Exemplo consultar transação método 2
+
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
     resposta = consultar.consult("uuid da transação")
@@ -337,6 +339,7 @@ Exemplo consultar transação método 2
 # CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
 
 Exemplo cancelar transação método 1
+
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     cancelar.payment_id = "uuid da transação"
