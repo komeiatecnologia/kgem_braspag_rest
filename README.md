@@ -170,6 +170,7 @@ COMO USAR
 
 
  ## Exemplo Boleto
+ 
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
     boleto.customer.identity_type = 'CPF' # CPF|CNPJ
@@ -225,6 +226,7 @@ COMO USAR
     resposta.messages.first
 
  ## Exemplo Cartão de Crédito
+
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
     cartao.payment.capture = true # default já é true, portanto pode ser omitida a atribuição
@@ -260,9 +262,7 @@ COMO USAR
     resposta.messages.first
 
  ## Exemplo Cartão de Débito
- `&#8212;` is the decimal-encoded equivalent of `&mdash;`.
 
-    ```ruby
     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
 
     sdc.merchant_order_id = "11111111"
@@ -310,7 +310,7 @@ COMO USAR
 
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
-    ```
+
 # CONSULTAR PAGAMENTO/TRANSAÇÃO
 
   ## Exemplo consultar transação método 1
