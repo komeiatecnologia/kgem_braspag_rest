@@ -225,7 +225,7 @@ Exemplo Boleto
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
-Exemplo Cartão de Crédito
+## Exemplo Cartão de Crédito
 
     cartao = KBraspag::SimplifiedCreditCard.new # Ou KBraspag::SCC.new
     cartao.merchant_order_id = '2014111703'
@@ -313,7 +313,7 @@ Exemplo Cartão de Débito
 
 # CONSULTAR PAGAMENTO/TRANSAÇÃO
 
-- Exemplo consultar transação método 1
+Exemplo consultar transação método 1
 
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
@@ -351,6 +351,7 @@ Exemplo cancelar transação método 1
     resposta = cancelar.cancel
 
 Exemplo cancelar transação método 2
+
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
     # Tentar cancelar/estornar
