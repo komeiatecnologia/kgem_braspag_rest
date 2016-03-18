@@ -45,7 +45,7 @@ COMO USAR
     end
 
 
-##### Abaixo todas as configurações disponíveis e os valores default:
+## Abaixo todas as configurações disponíveis e os valores default:
 
       KBraspag.configuration do |config|
 
