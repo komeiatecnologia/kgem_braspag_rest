@@ -9,7 +9,7 @@ COMO USAR
   Em projetos Rails basta criar um arquivo .rb no diretório config/initializers e seguir o exemplo abaixo:
 
 :::ruby
-`require 'kgem_braspag_rest'`
+require 'kgem_braspag_rest'
 
 `KBraspag.configuration do |config|`
 
