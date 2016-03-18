@@ -169,7 +169,7 @@ COMO USAR
 # REALIZAR PAGAMENTOS
 
 
-Exemplo Boleto
+## Exemplo Boleto
 
     boleto = KBraspag::CompletePaymentSlip.new # Ou use o alias KBraspag::CPS.new
     boleto.customer.name = "José da Silva"
@@ -261,7 +261,7 @@ Exemplo Boleto
     #Verificar a messagem retornada de maior relevancia (String)
     resposta.messages.first
 
-Exemplo Cartão de Débito
+## Exemplo Cartão de Débito
 
     sdc = KBraspag::SDC.new # OU KBraspag::SimplifiedDebitCard.new
 
@@ -313,7 +313,7 @@ Exemplo Cartão de Débito
 
 # CONSULTAR PAGAMENTO/TRANSAÇÃO
 
-Exemplo consultar transação método 1
+## Exemplo consultar transação método 1
 
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
@@ -321,7 +321,7 @@ Exemplo consultar transação método 1
 
     resposta = consultar.consult
 
-Exemplo consultar transação método 2
+## Exemplo consultar transação método 2
 
     consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
@@ -338,7 +338,7 @@ Exemplo consultar transação método 2
 
 # CANCELAR PAGAMENTO/TRANSAÇÃO (Quando utilizado Redecard não use essa funcionalidade)
 
-Exemplo cancelar transação método 1
+## Exemplo cancelar transação método 1
 
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
@@ -350,7 +350,7 @@ Exemplo cancelar transação método 1
     # Tentar cancelar/estornar
     resposta = cancelar.cancel
 
-Exemplo cancelar transação método 2
+## Exemplo cancelar transação método 2
 
     cancelar = KBraspag::Cancel.new # Ou KBraspag::C.new
 
