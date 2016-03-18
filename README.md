@@ -267,9 +267,9 @@ COMO USAR
 
 ##### Bandeiras e respectivos bancos aceitos:
 
-- Visa Electron: Bradesco, Banco do Brasil, Santander, Itaú, HSBC, BRB, Banco do Nordeste, Banco Mercantil, Banco da Amazônia, Banco Safra, Banco Espírito Santo e Sicred.
+Visa Electron: Bradesco, Banco do Brasil, Santander, Itaú, HSBC, BRB, Banco do Nordeste, Banco Mercantil, Banco da Amazônia, Banco Safra, Banco Espírito Santo e Sicred.
 
-- Mastercard Débito: Santander, Citibank, Banco do Brasil e Bancob.
+Mastercard Débito: Santander, Citibank, Banco do Brasil e Bancob.
 
 
 
