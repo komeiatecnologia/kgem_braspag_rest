@@ -1,26 +1,30 @@
-Documentação API Pagador Rest: http://apidocs.braspag.com.br
+Documentação API Pagador Rest: <http://apidocs.braspag.com.br>
 
-******* COMO USAR ********
+COMO USAR
+=========
 
 1 - Instale a gem kgem_braspag_rest
 
 2 - Informar o MerchantID e MerchantKey
   Em projetos Rails basta criar um arquivo .rb no diretório config/initializers e seguir o exemplo abaixo:
 
-  require 'kgem_braspag_rest'
+`require 'kgem_braspag_rest'`
 
-  KBraspag.configuration do |config|
-    config.merchant_id = "MeuMerchantID"
-    config.merchant_key = "MeuMerchantKey"
-  end
+`KBraspag.configuration do |config|`
 
-******* ALTERAR AS CONFIGURAÇÕES DEFAULT *********
+  `config.merchant_id = "MeuMerchantID"`
+
+  config.merchant_key = "MeuMerchantKey"
+
+end`
+
+### ALTERAR AS CONFIGURAÇÕES DEFAULT
 
 Exemplos:
 
 1 - Desejo alterar o timeout de 15 para 5 segundos.
 
-    KBraspag.configuration { |config| config.timeout = 15 }
+    KBraspag.configuration { |config| config.timeout = 5 }
 
 2 - Desejo incluir mais um gerador de boleto
 
@@ -29,10 +33,15 @@ Exemplos:
 3 - Desejo substituir todas operadoras de cartões
 
     kBraspag.configuration do |config|
+
       config.credit_card_providers = {
-                                       :operadora1 => 'Operadora 1',
-                                       :operadora2 => 'Operadora 2'
-                                     }
+
+        :operadora1 => 'Operadora 1',
+
+        :operadora2 => 'Operadora 2'
+
+      }
+
     end
 
 
@@ -40,14 +49,15 @@ Abaixo todas as configurações disponíveis e os valores default
 
 KBraspag.configuration do |config|
 
-  ## FILE PATH TO CA CERTIFICATE (*.pem)
-  config.ca_file_path = "./braspag.pem"
+  *# FILE PATH TO CA CERTIFICATE (*.pem)
 
-  ## PAYMENT METHODS AVAILABLE
-  config.payment_types = {
-                          :credit_card => "CreditCard",
-                          :payment_slip => "Boleto"
-                         }
+        config.ca_file_path = "./braspag.pem"
+
+  ### PAYMENT METHODS AVAILABLE
+      config.payment_types = {
+        :credit_card => "CreditCard",
+        :payment_slip => "Boleto"
+    }
 
   ## AVAILABLE OPTIONS FOR RESPONSIBLE FOR INSTALLMENT SALES MADE BY CREDIT CARD
   config.responsible_for_installment = {
