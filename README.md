@@ -371,6 +371,7 @@ resposta.messages
 
 #Verificar a messagem retornada de maior relevancia (String)
 resposta.messages.first
+```
 
 ## Exemplo consultar transação método 2
 
