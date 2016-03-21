@@ -354,8 +354,23 @@ consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
 consultar.payment_id = "uuid da transação"
 
+#Realiza a consulta
 resposta = consultar.consult
-```
+
+# Verifica se a transação foi criada
+resposta.transaction_created?
+
+#Verificar se a operação foi realizada com sucesso (true|false)
+resposta.success?
+
+#Verifica se a transação teve o pagamento efetuado/efetivado
+resposta.paid?
+
+#Verificar todas as mensagens retornadas pelo gateway (Array)
+resposta.messages
+
+#Verificar a messagem retornada de maior relevancia (String)
+resposta.messages.first
 
 ## Exemplo consultar transação método 2
 
@@ -365,8 +380,14 @@ consultar = KBraspag::Query.new # Ou KBraspag::Q.new
 
 resposta = consultar.consult("uuid da transação")
 
+# Verifica se a transação foi criada
+resposta.transaction_created?
+
 #Verificar se a operação foi realizada com sucesso (true|false)
 resposta.success?
+
+#Verifica se a transação teve o pagamento efetuado/efetivado
+resposta.paid?
 
 #Verificar todas as mensagens retornadas pelo gateway (Array)
 resposta.messages
