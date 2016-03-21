@@ -366,6 +366,9 @@ resposta.success?
 #Verifica se a transação teve o pagamento efetuado/efetivado
 resposta.paid?
 
+#Verifica se a transação foi cancelada
+resposta.canceled?
+
 #Verificar todas as mensagens retornadas pelo gateway (Array)
 resposta.messages
 
@@ -389,6 +392,9 @@ resposta.success?
 
 #Verifica se a transação teve o pagamento efetuado/efetivado
 resposta.paid?
+
+#Verifica se a transação foi cancelada
+resposta.canceled?
 
 #Verificar todas as mensagens retornadas pelo gateway (Array)
 resposta.messages
