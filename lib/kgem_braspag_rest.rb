@@ -158,8 +158,8 @@ module KBraspag
   # define_setting :merchant_id, "d1f105a3-edbf-41e3-bc2e-49c93d2b4b96"
   # define_setting :merchant_key, "JOXEBQTVZGGWKQCOZAEGOXXWCUCYLKOVMPVMOLCB"
 
-  define_setting :merchant_id, "4E9083D8-6584-E311-93FD-000AF7120B63"
-  define_setting :merchant_key, "LRGS34zfF06c8lilS2hJRmJFiMw8fawd0HIIDtHZ"
+  define_setting :merchant_id, nil
+  define_setting :merchant_key, nil
 
   define_setting :connection_attempts, 3
 
