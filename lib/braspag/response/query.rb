@@ -3,9 +3,9 @@ module KBraspag
     class Query
 
       PATTERNS = {
-        :payment_slip => /"Type":"Boleto"/,
-        :credit_card => /"Type":"CreditCard"/,
-        :debit_card => /"Type":"DebitCard"/
+        :payment_slip => /"Type"(| ):(| )"Boleto"/,
+        :credit_card => /"Type"(| ):(| )"CreditCard"/,
+        :debit_card => /"Type"(| ):(| )"DebitCard"/
       }
 
       BUILDERS = {

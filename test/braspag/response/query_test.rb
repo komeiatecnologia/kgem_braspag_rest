@@ -33,15 +33,15 @@ class QueryTest < Test::Unit::TestCase
 
   end
 
-  # def test_should_return_simplified_dedit_card_response_object
-  #
-  #   response = fake_response
-  #
-  #   response.body = ''
-  #
-  #   assert_equal QUERY.build_response(response).class, SIMPLIFIED_DEBIT_CARD
-  #
-  # end
+  def test_should_return_simplified_dedit_card_response_object
+
+    response = fake_response
+
+    response.body = '{ "MerchantOrderId": "2014111703", "Customer": { "Name": "José da Silva", "Address": { "Country": "BRA" }, "DeliveryAddress": { "Country": "BRA" } }, "Payment": { "DebitCard": { "CardNumber": "000000******0006", "Holder": "J Silva", "ExpirationDate": "12/2021", "SaveCard": false, "Brand": "Visa" }, "AuthenticationUrl": "https://ecommerce.cielo.com.br/web/index.cbmp?id=0cc5525b13b1de759e50a4f0faa3e589", "AcquirerTransactionId": "1031068705000000210A", "PaymentId": "dacd5b26-5bb7-41f1-98c3-5de842472659", "Type":"DebitCard", "Amount": 15700, "ReceivedDate": "2015-11-24 14:04:08", "Currency": "BRL", "Country": "BRA", "Provider": "Cielo", "ReturnUrl": "https://subdominio.dominio.com/teste/123", "ReasonCode": 9, "ReasonMessage": "Waiting", "Status": 0, "ProviderReturnCode": "0", "Links": [ { "Method": "GET", "Rel": "self", "Href": "https://apiquery.braspag.com.br/v2/sales/dacd5b26-5bb7-41f1-98c3-5de842472659" } ] } }'
+
+    assert_equal QUERY.build_response(response).class, SIMPLIFIED_DEBIT_CARD
+
+  end
 
   def test_should_return_errors_response_object
 
