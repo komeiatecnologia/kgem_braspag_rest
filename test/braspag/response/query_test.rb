@@ -63,6 +63,7 @@ class QueryTest < Test::Unit::TestCase
 
   end
 
+  private
   def fake_response
     response = "Fake Response"
 

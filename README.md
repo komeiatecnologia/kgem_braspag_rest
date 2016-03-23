@@ -331,6 +331,9 @@ resposta.transaction_created?
 #Verificar se a transação foi realizada com sucesso (true|false)
 resposta.success?
 
+#Atalho para obter a URL de autenticação
+resposta.authentication_url
+
 #Verificar se a transação teve o pagamento confirmado (true| false)
 resposta.paid?
 
@@ -437,4 +440,25 @@ resposta.messages
 
 #Verificar a messagem retornada de maior relevancia (String)
 resposta.messages.first
+```
+
+## Qualquer uma das operação tratadas acima quando falhar, será retornado o objeto de erro abaixo
+```
+#!ruby
+resposta = (.pay, .consult, .cancel)
+
+#Verificar se a transação foi criada com sucesso (false)
+resposta.transaction_created?
+
+#Verificar se a operação foi realizada com sucesso (false)
+resposta.success?
+
+#Verificar todas as mensagens retornadas pelo gateway (Array)
+resposta.messages
+
+#Verificar a messagem retornada de maior relevancia (String)
+resposta.messages.first
+
+#Retorna o ID da requisição, toda vez que é realizado um requisição é gerado um novo request_id
+resposta.request_id
 ```

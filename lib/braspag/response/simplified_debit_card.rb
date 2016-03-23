@@ -12,6 +12,11 @@ module KBraspag
       def paid?
         @paid ||= credit_card_paid?(@payment.status)
       end
+
+      def authentication_url
+        @authentication_url ||= @payment.authentication_url
+      end
+
     end
   end
 end

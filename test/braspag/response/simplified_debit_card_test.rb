@@ -23,6 +23,14 @@ class SimplifiedDebitCardTest < Test::Unit::TestCase
     assert_equal(IGNORED_CLASS[0], pwdc.class)
   end
 
+  def test_should_return_authentication_url
+    pwdc = fake_object.payment
+    assert_equal(
+      pwdc.authentication_url,
+      "https://xxxxxxxxxxxx.xxxxx.xxx.xx/xxx/xxxxx.xxxx?{PaymentId}"
+    )
+  end
+
   def test_should_return_correct_customer_class
     c = fake_object.customer
     assert_equal(IGNORED_CLASS[1], c.class)
