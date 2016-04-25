@@ -5,7 +5,7 @@ module KBraspag
         include KBraspag::Helpers
 
         @@EXPIRATION_DATE_REGEX = /^\d{1,2}\/\d{4}$/.freeze
-        @@VALID_CARD_NUMBER_FORMAT = /^\d{16}$/.freeze
+        @@VALID_CARD_NUMBER_FORMAT = /^(\d{16}|\d{14})$/.freeze
 
         attr_reader :card_number, :holder, :expiration_date, :security_code, :brand
 
@@ -61,7 +61,7 @@ module KBraspag
         end
 
         def valid_card_number_format?(value)
-          raise ArgumentError, "Invalid card number format: #{value}, expected 1111222233334444(16 digits)", "#{self.class}" if value !~ @@VALID_CARD_NUMBER_FORMAT
+          raise ArgumentError, "Invalid card number format: #{value}, expected 11112222333344??(14 or 16 digits)", "#{self.class}" if value !~ @@VALID_CARD_NUMBER_FORMAT
           true
         end
 

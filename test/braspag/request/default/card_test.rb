@@ -22,10 +22,10 @@ class CardTest < Test::Unit::TestCase
   def test_should_throw_exception_when_invalid_card_number_format
     c = new_card
     begin
-      n = "000000001111"
+      n = "0000000011111"
       c.card_number = n
     rescue Exception => e
-      assert_equal "Invalid card number format: #{n}, expected 1111222233334444(16 digits)", e.message
+      assert_equal "Invalid card number format: #{n}, expected 11112222333344??(14 or 16 digits)", e.message
     end
 
     begin
@@ -38,8 +38,16 @@ class CardTest < Test::Unit::TestCase
 
   def test_should_return_card_number_equals_0000111122223333
     c = new_card
+    # 16 digits
     c.card_number = "0000111122223333"
     assert_equal "0000111122223333", c.card_number
+  end
+
+  def test_should_return_card_number_equals_00001111222233
+    c = new_card
+    # 14 digits
+    c.card_number = "00001111222233"
+    assert_equal "00001111222233", c.card_number
   end
 
   def test_should_throw_exception_if_holder_class_different_of_string
@@ -142,4 +150,3 @@ private
     KBraspag::Request::Default::Card.new
   end
 end
-
