@@ -1,5 +1,4 @@
-require 'test/unit'
-
+require 'test/helpers/test_helper'
 
 class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
 
@@ -85,9 +84,9 @@ class PaymentWithCompletePaymentSlipTest < Test::Unit::TestCase
     end
   end
 
-  def test_expiration_date_should_return_2016_10_20
+  def test_expiration_date_should_return_2096_10_20
     p = new_pwps
-    ed = "2016-10-20"
+    ed = "2096-10-20"
     p.expiration_date = ed
     assert_equal ed, p.expiration_date
   end

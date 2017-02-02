@@ -1,8 +1,5 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 require 'test/fake_object/request/fake_cancel'
-
-
-
 
 class PaymentCancelTest < Test::Unit::TestCase
   include KBraspag::Helpers

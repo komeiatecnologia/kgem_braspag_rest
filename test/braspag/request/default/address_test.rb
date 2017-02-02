@@ -1,5 +1,4 @@
-require 'test/unit'
-
+require 'test/helpers/test_helper'
 
 class AddressTest < Test::Unit::TestCase
 

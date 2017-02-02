@@ -1,4 +1,3 @@
-require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_payment_with_debit_card'
 

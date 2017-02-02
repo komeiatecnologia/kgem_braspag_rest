@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 
 class Query < Test::Unit::TestCase
   def test_should_throw_payment_id_can_not_be_empty

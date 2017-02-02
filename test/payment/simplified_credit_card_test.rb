@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 require 'test/fake_object/request/fake_simplified_credit_card'
 
 class SimplifiedCreditCardTest < Test::Unit::TestCase
@@ -53,7 +53,7 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
     assert_equal scc.payment.credit_card.brand, hash['Payment']['CreditCard']['Brand']
   end
 
-    def test_should_throw_can_not_be_empty_if_payment_equal_nil
+  def test_should_throw_can_not_be_empty_if_payment_equal_nil
     scc = fake_obj
     scc.instance_variable_set :@payment, nil
     begin
@@ -104,12 +104,8 @@ class SimplifiedCreditCardTest < Test::Unit::TestCase
   end
 
   private
-  def new_scc
-    KBraspag::Payment::SimplifiedCreditCard.new
-  end
-
   def fake_obj
-    scc = new_scc
+    scc = KBraspag::Payment::SimplifiedCreditCard.new
     FakeSimplifiedCreditCard.default! scc
     scc
   end

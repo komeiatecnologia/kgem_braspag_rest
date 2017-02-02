@@ -1,9 +1,6 @@
-require 'test/unit'
-
-
+require 'test/helpers/test_helper'
 
 class DefaultCustomertTest < Test::Unit::TestCase
-  # include KBraspag::Helpers
 
   def test_should_throw_exception_name_invalid_class_type
     c = new_customer

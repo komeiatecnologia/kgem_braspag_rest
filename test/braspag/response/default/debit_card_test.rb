@@ -1,6 +1,5 @@
-require 'test/unit'
-require 'test/fake_object/response/fake_debit_card'
 require 'test/helpers/test_helper'
+require 'test/fake_object/response/fake_debit_card'
 
 class DebitCardTest < Test::Unit::TestCase
   include TestHelper

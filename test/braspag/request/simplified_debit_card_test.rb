@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 
 class SimplifiedDebitCardTest < Test::Unit::TestCase
 

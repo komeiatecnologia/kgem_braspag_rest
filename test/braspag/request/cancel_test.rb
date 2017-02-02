@@ -1,10 +1,6 @@
-require 'test/unit'
-
-
-
+require 'test/helpers/test_helper'
 
 class RequestCancelTest < Test::Unit::TestCase
-  # include KBraspag::Helpers
 
   def test_should_throw_invalid_payment_id_when_receive_nil
     cancel = new_cancel

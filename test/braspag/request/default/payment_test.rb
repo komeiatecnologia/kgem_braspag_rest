@@ -1,7 +1,6 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 
 class PaymentTest < Test::Unit::TestCase
-  # include KBraspag::Helpers
 
   def test_type_receive_string_should_be_equal_Boleto
     p = new_payment

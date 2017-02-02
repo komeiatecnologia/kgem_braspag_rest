@@ -1,7 +1,6 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 
 class DefaultRequestTest < Test::Unit::TestCase
-  # include KBraspag::Helpers
 
   def test_should_throw_exception_merchant_order_id_invalid_class_type
     r = new_request

@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 
 class CreditCardTest < Test::Unit::TestCase
 
@@ -17,7 +17,7 @@ class CreditCardTest < Test::Unit::TestCase
     begin
       b = :bandeira
       c.brand = b
-    rescue Exception => e
+    rescue Exception
       assert_equal true, true
     end
   end

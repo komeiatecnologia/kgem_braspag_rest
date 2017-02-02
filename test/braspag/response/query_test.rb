@@ -1,5 +1,4 @@
-require 'test/unit'
-# require 'test/helpers/test_helper'
+require 'test/helpers/test_helper'
 
 class QueryTest < Test::Unit::TestCase
 

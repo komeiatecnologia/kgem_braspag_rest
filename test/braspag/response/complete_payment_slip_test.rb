@@ -1,9 +1,6 @@
-require 'test/unit'
 require 'test/helpers/test_helper'
 require 'test/fake_object/response/fake_complete_payment_slip'
 require 'test/fake_object/response/fake_response'
-
-
 
 class CompletePaymentSlipTest < Test::Unit::TestCase
   include TestHelper

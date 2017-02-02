@@ -1,6 +1,5 @@
-require 'helpers/helpers'
+require 'test/unit'
 require 'lib/kgem_braspag_rest'
-
 
 module TestHelper
   include KBraspag::Helpers

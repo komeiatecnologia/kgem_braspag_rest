@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 require 'test/fake_object/request/fake_simplified_debit_card'
 
 class SimplifiedDebitCardTest < Test::Unit::TestCase
@@ -93,12 +93,8 @@ class SimplifiedDebitCardTest < Test::Unit::TestCase
   end
 
   private
-  def new_sdc
-    KBraspag::Payment::SimplifiedDebitCard.new
-  end
-
   def fake_obj
-    sdc = new_sdc
+    sdc = KBraspag::Payment::SimplifiedDebitCard.new
     FakeSimplifiedDebitCard.default! sdc
     sdc
   end

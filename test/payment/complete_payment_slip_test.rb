@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test/helpers/test_helper'
 require 'test/fake_object/request/fake_complete_payment_slip'
 
 class CompletePaymentSlipTest < Test::Unit::TestCase
@@ -83,12 +83,8 @@ class CompletePaymentSlipTest < Test::Unit::TestCase
   end
 
   private
-  def new_cps
-    KBraspag::Payment::CompletePaymentSlip.new
-  end
-
   def fake_obj
-    cps = new_cps
+    cps = KBraspag::Payment::CompletePaymentSlip.new
     FakeCompletePaymentSlip.default! cps
     cps
   end
