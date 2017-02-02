@@ -52,12 +52,7 @@ module KBraspag
         end
 
         def valid_merchant_order_id?(merchant_order_id)
-          valid_class_type_?(:merchant_order_id, merchant_order_id, String) && present_?(merchant_order_id, "merchant_order_id") && valid_merchant_order_id_format?(merchant_order_id)
-        end
-
-        def valid_merchant_order_id_format?(merchant_order_id)
-          raise ArgumentError, "Invalid merchant_order_id: #{merchant_order_id}, expected only numbers" if merchant_order_id !~ @@ONLY_NUMBERS
-          true
+          valid_class_type_?(:merchant_order_id, merchant_order_id, String) && present_?(merchant_order_id, "merchant_order_id")
         end
 
         def customer_class
