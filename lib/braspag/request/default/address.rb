@@ -9,10 +9,10 @@ module KBraspag
         INVALID_STATE = "Invalid state, expected [AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO]"
 
         can_be_nil :street, :number, :complement, :zip_code, :city, :state,
-                   :country
+                   :country, :district
 
         attr_reader :street, :number, :complement, :zip_code, :city, :state,
-                    :country
+                    :country, :district
 
         def initialize
           @street = nil
@@ -22,6 +22,7 @@ module KBraspag
           @city = nil
           @state = nil
           @country = "BRA"
+          @district = nil
         end
 
         def street=(street)
@@ -52,6 +53,10 @@ module KBraspag
           @country = country if valid_country?(country)
         end
 
+        def district=(district)
+          @district = district if valid_district?(district)
+        end
+
         def to_braspag_hash
           {
             "Street" => @street,
@@ -60,7 +65,8 @@ module KBraspag
             "ZipCode" => @zip_code,
             "City" => @city,
             "State" => @state,
-            "Country" => @country
+            "Country" => @country,
+            "District" => @district
           }
         end
 
@@ -103,6 +109,11 @@ module KBraspag
         def valid_country?(country)
           valid_class_type_?(:country, country, String)
           valid_string_size_?(country, :country, 35)
+        end
+
+        def valid_district?(district)
+          valid_class_type_?(:district, district, String)
+          valid_string_size_?(district, :district, 15)
         end
       end
     end

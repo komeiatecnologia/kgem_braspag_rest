@@ -3,7 +3,7 @@ module KBraspag
     module Default
       class Address
         attr_reader :street, :number, :complement, :zip_code, :city, :state,
-                    :country
+                    :country, :district
 
         def initialize(hash)
           @street = hash['Street']
@@ -13,6 +13,7 @@ module KBraspag
           @city = hash['City']
           @state = hash['State']
           @country = hash['Country']
+          @district = hash['District']
         end
       end
     end

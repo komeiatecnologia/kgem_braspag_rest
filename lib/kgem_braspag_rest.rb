@@ -142,7 +142,7 @@ module KBraspag
                                             :itau => "Itau",
                                             :brb => "Brb",
                                             :caixa => "Caixa",
-                                            :santander => "Santander",
+                                            :santander => "Santander2",
                                             :hsbc => "HSBC",
                                             :simulado => "Simulado"
                                           }
