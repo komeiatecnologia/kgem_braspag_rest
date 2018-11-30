@@ -120,7 +120,8 @@ module KBraspag
   define_setting :credit_card_providers, {
                                            :simulado => "Simulado",
                                            :cielo => "Cielo",
-                                           :rede => "Redecard"
+                                           :rede => "Redecard",
+                                           :getnet => "Getnet"
                                          }
 
   ## DEBIT CARD PROVIDERS AVAILABLE
